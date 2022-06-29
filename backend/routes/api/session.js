@@ -21,7 +21,7 @@ router.post(
         return next(err);
       }
 
-      await setTokenCookie(res, user);
+    await setTokenCookie(res, user);
 
       return res.json({
         user
@@ -29,4 +29,12 @@ router.post(
     }
   );
 
+// Log out
+router.delete(
+    '/',
+    (_req, res) => {
+      res.clearCookie('token');
+      return res.json({ message: 'success' });
+    }
+  );
 module.exports = router;
