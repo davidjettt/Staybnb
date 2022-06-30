@@ -732,8 +732,8 @@ Update and return an existing review.
 * Require Authentication: true
 * Require proper authorization: Review must belong to the current user
 * Request
-  * Method: ?
-  * URL: ?
+  * Method: PUT
+  * URL: /reviews/:reviewId
   * Headers:
     * Content-Type: application/json
   * Body:
