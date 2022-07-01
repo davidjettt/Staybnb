@@ -4,6 +4,9 @@
 
 `<insert database schema design here>`
 
+![](../../Documents/Screen%20Shot%202022-06-30%20at%205.03.12%20PM.png)
+
+<!-- ![](../../Downloads/Untitled.png) -->
 ## API Documentation
 
 ## All endpoints that require authentication
