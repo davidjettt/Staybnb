@@ -10,17 +10,10 @@ const router = express.Router();
 
 
   const validateSignup = [
-    // check('email')
-    // .custom(value => {
-    //   return User.findByEmail(value).then(user => {
-    //     if (user) {
-    //       return Promise.reject('E-mail already in use');
-    //     }
-    //   });
-    // }),
+    check('email')
       // .exists({ checkFalsy: true })
-      // .isEmail()
-      // .withMessage('Please provide a valid email.'),
+      .isEmail()
+      .withMessage('Invalid email'),
     // check('username')
     //   .exists({ checkFalsy: true })
     //   .isLength({ min: 4 })
@@ -29,6 +22,12 @@ const router = express.Router();
     //   .not()
     //   .isEmail()
     //   .withMessage('Username cannot be an email.'),
+    check('firstName')
+      .exists({ checkFalsy: true })
+      .withMessage('First Name is required'),
+    check('lastName')
+      .exists({ checkFalsy: true })
+      .withMessage('Last Name is required'),
     check('password')
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
@@ -54,6 +53,13 @@ router.post(
       err.errors = {email: "User with that email already exists"}
       return res.json({message: err.message, statusCode: err.status, errors: err.errors})
     }
+
+    // if (!firstName || !lastName) {
+    //   const err = new Error ('Validation error');
+    //   err.status = 400;
+    //   err.errors = [{email: 'Invalid email', firstName: 'First Name is required', lastName: 'Last Name is required'}]
+    //   return res.json({message: err.message, statusCode: err.status, errors: err.errors})
+    // }
 
     const user = await User.signup({ firstName, lastName, email, password });
 
