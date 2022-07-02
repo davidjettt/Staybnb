@@ -5,7 +5,7 @@ const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-
+const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
@@ -40,8 +40,8 @@ router.delete(
   const validateLogin = [
     check('credential')
       .exists({ checkFalsy: true })
-      .notEmpty()
-      .withMessage('Please provide a valid email or username.'),
+      // .notEmpty()
+      .withMessage('Invalid credentials'),
     check('password')
       .exists({ checkFalsy: true })
       .withMessage('Please provide a password.'),
@@ -61,31 +61,57 @@ router.delete(
 const credentialCheck = async (req, res, next) => {
   const { credential, password } = req.body;
   const user = await User.findOne({
-    where: {username: credential}
+    where: {email: credential}
   })
   if (!user) {
     const err = new Error ('Invalid credentials');
         err.status = 401;
-        // res.json({message: err.message, statusCode: err.status })
-        handleValidationErrors
+        return res.json({message: err.message, statusCode: err.status })
+        // handleValidationErrors
   }
 }
 
   // Log in
 router.post(
-    '/',
+    '/login',
     // bodyValidation,
     // validateLogin,
-    credentialCheck,
+    // credentialCheck,
     async (req, res, next) => {
       const { credential, password } = req.body;
 
-      const user = await User.login({ credential, password });
+      if (!credential || !password) {
+        const err = new Error ('Validation error');
+        err.status = 400;
+        err.errors = {email: 'Email is required', password: 'Password is required'}
+        return res.json({message: err.message, statusCode: err.status, errors: err.errors})
+      }
+
 
       const finduser = await User.findOne({
-        attributes: ['id', 'username', 'email'],
-        where: {username: credential}
+        attributes: ['id', 'firstName', 'lastName', 'email'],
+        where: {email: credential}
       });
+
+      if (!finduser) {
+        const err = new Error ('Invalid credentials');
+        err.status = 401;
+        return res.json({message: err.message, statusCode: err.status })
+      }
+
+      const test = await User.scope('loginUser').findOne({
+        where: {
+            email: credential
+        }
+      });
+
+      if (!bcrypt.compareSync(password, test.dataValues.hashedPassword.toString())) {
+        const err = new Error ('Invalid credentials');
+        err.status = 401;
+        return res.json({message: err.message, statusCode: err.status })
+      }
+
+      const user = await User.login({ credential, password });
 
       // if (!user) {
       //   const err = new Error('Login failed');
@@ -95,12 +121,7 @@ router.post(
       //   return next(err);
       // }
 
-      if (!credential || !password) {
-        const err = new Error ('Validation error');
-        err.status = 400;
-        err.errors = {email: 'Email is required', password: 'Password is required'}
-        return res.json({message: err.message, statusCode: err.status, errors: err.errors})
-      }
+
 
       const token = await setTokenCookie(res, user);
       return res.json({
