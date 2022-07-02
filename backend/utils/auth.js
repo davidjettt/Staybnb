@@ -54,19 +54,20 @@ const restoreUser = (req, res, next) => {
 const requireAuth = function (req, _res, next) {
     if (req.user) return next();
 
-    const err = new Error('Unauthorized');
-    err.title = 'Unauthorized';
-    err.errors = ['Unauthorized'];
+    const err = new Error('Authentication required');
+    // err.title = 'Unauthorized';
+    // err.errors = ['Unauthorized'];
     err.status = 401;
-    return next(err);
+    // return next(err);
+    return _res.json({message: err.message, statusCode: err.status})
   }
 
-const requireAuthentication = (req, res, next) => {
+const correctPermission = (req, res, next) => {
   if (req.user) return next();
 
-  const err = new Error ('Authentication required');
-  err.status = 401;
+  const err = new Error ('Forbidden');
+  err.status = 403;
   return next(err);
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, requireAuthentication }
+module.exports = { setTokenCookie, restoreUser, requireAuth, correctPermission }
