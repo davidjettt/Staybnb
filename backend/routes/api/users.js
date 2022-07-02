@@ -46,7 +46,7 @@ router.post(
   }
 );
 
-router.get('/login',requireAuthentication, async (req, res, next) => {
+router.get('/login', requireAuth, async (req, res, next) => {
   res.json({message: 'test'})
 });
 
