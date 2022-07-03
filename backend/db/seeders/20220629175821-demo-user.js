@@ -14,25 +14,25 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Users', [
       {
-        email: 'demo@user.io',
+        email: 'lebron.james@gmail.com',
         // username: 'Demo-lition',
-        firstName: 'Demo',
-        lastName: 'Smith',
-        hashedPassword: bcrypt.hashSync('password')
+        firstName: 'Lebron',
+        lastName: 'James',
+        hashedPassword: bcrypt.hashSync('lakers')
       },
       {
-        email: 'user1@user.io',
+        email: 'kevin.durant@gmail.com',
         // username: 'FakeUser1',
-        firstName: 'John',
-        lastName: 'Doe',
-        hashedPassword: bcrypt.hashSync('password2')
+        firstName: 'Kevin',
+        lastName: 'Durant',
+        hashedPassword: bcrypt.hashSync('brooklyn')
       },
       {
-        email: 'user2@user.io',
+        email: 'steph.curry@gmail.com',
         // username: 'FakeUser2',
-        firstName: 'Mary',
-        lastName: 'Smith',
-        hashedPassword: bcrypt.hashSync('password3')
+        firstName: 'Steph',
+        lastName: 'Curry',
+        hashedPassword: bcrypt.hashSync('warriors')
       },
       {
         email: 'john.smith@gmail.com',
@@ -54,7 +54,7 @@ module.exports = {
      */
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Users', {
-      email: { [Op.in]: ['demo@user.io', 'user1@user.io', 'user2@user.io', 'john.smith@gmail.com'] }
+      email: { [Op.in]: ['lebron.james@gmail.com', 'kevin.durant@gmail.com', 'steph.curry@gmail.com', 'john.smith@gmail.com'] }
     }, {});
   }
 };

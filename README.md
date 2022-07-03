@@ -349,7 +349,7 @@ Creates and returns a new spot.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /spots/new
+  * URL: /spots
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -424,7 +424,7 @@ Updates and returns an existing spot.
 * Require proper authorization: Spot must belong to the current user
 * Request
   * Method: PUT
-  * URL: /spots/:spotId/edit
+  * URL: /spots/:spotId
   * Headers:
     * Content-Type: application/json
   * Body:

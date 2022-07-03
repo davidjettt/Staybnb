@@ -11,10 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Spot.belongsTo(models.User, {foreignKey: 'ownerId'})
+      Spot.hasMany(models.Booking, {foreignKey: 'spotId'})
+      Spot.hasMany(models.Review, {foreignKey: 'spotId'})
+      Spot.hasMany(models.Image, {foreignKey: 'spotId'})
     }
   }
   Spot.init({
-    hostId: {
+    ownerId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -38,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     latitude: {
       type: DataTypes.FLOAT,
       allowNull: false,
-      // make an index for latitude and longitude b/c combination of them cannot be unique
+
     },
     longitude: {
       type: DataTypes.FLOAT,
@@ -64,6 +68,12 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    indexes: [
+      {
+        unique: true,
+        fields: ['latitude', 'longitude']
+      }
+    ]
   });
   return Spot;
 };
