@@ -1,5 +1,7 @@
 'use strict';
 
+const { Op } = require('sequelize');
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -17,6 +19,12 @@ module.exports = {
         stars: 5,
         userId: 3,
         spotId: 3
+      },
+      {
+        review: 'Good place.',
+        stars: 4,
+        userId: 4,
+        spotId: 1
       },
       {
         review: 'Booked this for a snowboarding trip. Very nearby the slopes. Accomadated everyone.',
@@ -41,7 +49,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Reviews', {
-      id: {[Op.in]: [1, 2, 3]}
+      id: {[Op.in]: [1, 2, 3, 4]}
     })
   }
 };

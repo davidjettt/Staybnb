@@ -22,7 +22,7 @@ module.exports = {
         latitude: 37.7645358,
         longitude: -122.4730327,
         name: 'Luxury Penthouse',
-        description: 'Luxury experience for the curious',
+        description: 'Luxurious penthouse with an amazing view of the strip',
         pricePerNight: 523,
         previewImage: 'image url'
       },

@@ -1,5 +1,7 @@
 'use strict';
 
+const { Op } = require('sequelize');
+
 module.exports = {
   async up (queryInterface, Sequelize) {
     /**
@@ -27,6 +29,11 @@ module.exports = {
         reviewId: null,
         url: 'https://www.las-vegas-penthouses.com/wp-content/uploads/sites/418/2013/02/mandarin-bar-mandarin-oriental-las-vegas.jpg'
       },
+      {
+        spotId: 1,
+        reviewId: null,
+        url: 'http://vegasmagazine.com/get/files/image/galleries/palmsplaceunit59301-138.jpg'
+      },
     ])
   },
 
@@ -38,7 +45,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Images', {
-      id: {[Op.in]: [1, 2, 3]}
+      id: {[Op.in]: [1, 2, 3, 4]}
     })
   }
 };
