@@ -58,25 +58,25 @@ router.get('/:spotId', async (req, res, next) => {
             ],
             // raw: true
         },
-
     });
+
+    // console.log(spotAggData);
 
     const spot = await Spot.findByPk(req.params.spotId, {
         attributes: {exclude: ['previewImage']},
         include: [{ model: Image, attributes: ['url'] },{ model: User, as: 'Owner' }]
     });
 
-    const spotData = spot.toJSON();
-    spotData.avgStarRating = spotAggData.Reviews[0].dataValues.avgStarRating
-    // console.log(spotAggData.Reviews[0].dataValues.avgStarRating)
-    spotData.numReviews = spotAggData.Reviews[0].dataValues.numReviews;
-
     if (!spot) {
         const err = new Error ("Spot couldn't be found");
         err.status = 404;
-        res.status(404);
-        return res.json({message: err.message, statusCode: err.status })
+        return next(err)
     }
+
+    const spotData = spot.toJSON();
+    spotData.avgStarRating = spotAggData.Reviews[0].dataValues.avgStarRating;
+    spotData.numReviews = spotAggData.Reviews[0].dataValues.numReviews;
+    // console.log(spotAggData.Reviews[0].dataValues.avgStarRating)
 
     res.json(spotData)
 });
