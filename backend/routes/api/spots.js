@@ -29,11 +29,13 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .custom(value => {
         if (value % 1 === 0) throw new Error ('Latitude is not valid')
+        return true;
     }),
     check('longitude')
     .exists({ checkFalsy: true })
     .custom(value => {
         if (value % 1 === 0) throw new Error ('Longitude is not valid')
+        return true;
     }),
     check('name')
     .exists({ checkFalsy: true })
@@ -86,6 +88,11 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     if (!spot) {
         const err = new Error ("Spot couldn't be found");
         err.status = 404;
+        return next(err);
+    }
+    if (req.user.id !== spot.ownerId) {
+        const err = new Error ("Forbidden");
+        err.status = 403;
         return next(err);
     }
 
