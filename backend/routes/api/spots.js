@@ -46,4 +46,8 @@ router.get('/', async (req, res, next) => {
     res.json({ spots });
 });
 
+router.post('/spots', async (req, res, next) => {
+
+})
+
 module.exports = router;
