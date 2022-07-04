@@ -63,11 +63,14 @@ const requireAuth = function (req, _res, next) {
   }
 
 const correctPermission = (req, res, next) => {
-  if (req.user) return next();
+  // if (req.user) return next();
 
-  const err = new Error ('Forbidden');
-  err.status = 403;
-  return next(err);
+  // const err = new Error ('Forbidden');
+  // err.status = 403;
+  // return next(err);
+  if (req.user.id !== req.spot.ownerId) {
+    return res.json({message: 'not authorized'})
+  }
 }
 
 module.exports = { setTokenCookie, restoreUser, requireAuth, correctPermission }
