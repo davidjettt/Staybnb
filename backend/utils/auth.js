@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User } = require('../db/models');
+const { User, Spot } = require('../db/models');
+const { Spots } = require('../db/migrations/20220701233427-create-spot');
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -58,19 +59,20 @@ const requireAuth = function (req, _res, next) {
     // err.title = 'Unauthorized';
     // err.errors = ['Unauthorized'];
     err.status = 401;
-    // return next(err);
+    // next(err);
     return _res.json({message: err.message, statusCode: err.status})
   }
 
 const correctPermission = (req, res, next) => {
-  // if (req.user) return next();
+  if (req.user.id === res.ownerId) res.json({message: 'AUTHORIZED'})
 
-  // const err = new Error ('Forbidden');
-  // err.status = 403;
-  // return next(err);
-  if (req.user.id !== req.spot.ownerId) {
-    return res.json({message: 'not authorized'})
-  }
+    console.log(res.spot.ownerId)
+    const err = new Error ('Forbidden');
+    err.status = 403;
+    res.status(403);
+    return res.json({message: err.message, statusCode: err.status})
+    // return next(err)
+
 }
 
 module.exports = { setTokenCookie, restoreUser, requireAuth, correctPermission }

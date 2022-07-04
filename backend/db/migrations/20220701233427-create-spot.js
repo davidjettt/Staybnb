@@ -33,11 +33,11 @@ module.exports = {
         allowNull: false
       },
       latitude: {
-        type: Sequelize.DECIMAL(10, 7),
+        type: Sequelize.FLOAT(10, 7),
         allowNull: false
       },
       longitude: {
-        type: Sequelize.DECIMAL(10, 7),
+        type: Sequelize.FLOAT(10, 7),
         allowNull: false
       },
       name: {

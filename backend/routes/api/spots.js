@@ -77,6 +77,34 @@ router.get('/:spotId', async (req, res, next) => {
     }
 
     res.json(spotData)
+});
+
+
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        const err = new Error ("Spot couldn't be found");
+        err.status = 404;
+        return next(err);
+    }
+
+    const { address, city, state, country, latitude, longitude, name, description, pricePerNight } = req.body;
+
+    const updatedSpot = await spot.update({
+        ownerId: req.user.id,
+        address,
+        city,
+        state,
+        country,
+        latitude,
+        longitude,
+        name,
+        description,
+        pricePerNight
+    });
+
+    res.json(updatedSpot);
 })
 
 router.get('/', async (req, res, next) => {
