@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const { Spot, User, sequelize } = require('../../db/models');
-const { setTokenCookie, requireAuth, correctPermission } = require('../../utils/auth');
+const { Spot, User } = require('../../db/models');
+const {  requireAuth } = require('../../utils/auth');
 
 router.get('/', requireAuth, async (req, res, next) => {
     const spots = await Spot.findAll({
