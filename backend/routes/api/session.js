@@ -25,7 +25,7 @@ router.delete(
 
 // Get the current user
   router.get(
-    '/info',
+    '/',
     requireAuth,
     restoreUser,
     (req, res) => {
@@ -40,7 +40,7 @@ router.delete(
   );
 
   const validateLogin = [
-    check('credential')
+    check('email')
       .exists({ checkFalsy: true })
       // .notEmpty()
       .withMessage('Invalid credentials'),
@@ -61,9 +61,9 @@ router.delete(
   // }
 
 const credentialCheck = async (req, res, next) => {
-  const { credential, password } = req.body;
+  const { email, password } = req.body;
   const user = await User.findOne({
-    where: {email: credential}
+    where: {email: email}
   })
   if (!user) {
     const err = new Error ('Invalid credentials');
@@ -75,15 +75,16 @@ const credentialCheck = async (req, res, next) => {
 
   // Log in
 router.post(
-    '/login',
+    '/',
     // bodyValidation,
     // validateLogin,
     // credentialCheck,
     async (req, res, next) => {
-      const { credential, password } = req.body;
+      const { email, password } = req.body;
 
-      if (!credential || !password) {
+      if (!email || !password) {
         const err = new Error ('Validation error');
+        res.status(400);
         err.status = 400;
         err.errors = {email: 'Email is required', password: 'Password is required'}
         return res.json({message: err.message, statusCode: err.status, errors: err.errors})
@@ -92,7 +93,7 @@ router.post(
 
       const finduser = await User.findOne({
         attributes: ['id', 'firstName', 'lastName', 'email'],
-        where: {email: credential}
+        where: {email: email}
       });
 
       if (!finduser) {
@@ -103,7 +104,7 @@ router.post(
 
       const test = await User.scope('loginUser').findOne({
         where: {
-            email: credential
+            email: email
         }
       });
 
@@ -113,7 +114,7 @@ router.post(
         return res.json({message: err.message, statusCode: err.status })
       }
 
-      const user = await User.login({ credential, password });
+      const user = await User.login({ email, password });
 
       // if (!user) {
       //   const err = new Error('Login failed');

@@ -33,18 +33,20 @@ module.exports = {
         allowNull: false
       },
       latitude: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 7),
         allowNull: false
       },
       longitude: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.DECIMAL(10, 7),
         allowNull: false
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(50),
+        allowNull: false
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false
       },
       pricePerNight: {
         type: Sequelize.INTEGER,
@@ -52,7 +54,7 @@ module.exports = {
       },
       previewImage: {
         type: Sequelize.STRING,
-        allowNull: false
+        // allowNull: false
       },
       createdAt: {
         allowNull: false,

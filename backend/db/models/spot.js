@@ -40,18 +40,27 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     latitude: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(10, 7),
       allowNull: false,
+      validate: {
+        isDecimal: true
+      }
 
     },
     longitude: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.DECIMAL(10, 7),
       allowNull: false,
+      validate: {
+        isDecimal: true
+      }
 
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: [2, 49]
+      }
     },
     description: {
       type: DataTypes.TEXT,
@@ -63,7 +72,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     previewImage: {
       type: DataTypes.STRING,
-      allowNull: false
+      // allowNull: false
+      validate: {
+        isUrl: true
+      }
     },
   }, {
     sequelize,
