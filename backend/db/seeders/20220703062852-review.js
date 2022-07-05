@@ -15,34 +15,34 @@ module.exports = {
     */
     await queryInterface.bulkInsert('Reviews', [
       {
+        userId: 3,
+        spotId: 3,
         review: 'Very nice, luxurious place. Right by the beach. Had a good time. Will book again.',
-        stars: 5,
-        userId: 3,
-        spotId: 3
+        stars: 5
       },
       {
-        review: 'Good place.',
-        stars: 4,
         userId: 4,
-        spotId: 1
+        spotId: 1,
+        review: 'Good place.',
+        stars: 4
       },
       {
-        review: 'Booked this for a snowboarding trip. Very nearby the slopes. Accomadated everyone.',
-        stars: 5,
         userId: 3,
-        spotId: 2
+        spotId: 2,
+        review: 'Booked this for a snowboarding trip. Very nearby the slopes. Accomadated everyone.',
+        stars: 5
       },
       {
+        userId: 2,
+        spotId: 1,
         review: 'Great stay by the strip. Had a great time',
-        stars: 5,
-        userId: 2,
-        spotId: 1
+        stars: 5
       },
       {
-        review: 'Great stay. Very nostalgic',
-        stars: 5,
         userId: 2,
-        spotId: 4
+        spotId: 4,
+        review: 'Great stay. Very nostalgic',
+        stars: 5
       },
       {
         review: 'Okay stay',
