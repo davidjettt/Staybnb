@@ -38,9 +38,9 @@ const router = express.Router();
 
 // Sign up
 router.post(
-  '/signup',
+  '/',
   validateSignup,
-  async (req, res) => {
+  async (req, res, next) => {
     const { firstName, lastName, email, password } = req.body;
 
     const isUser = await User.findOne({
@@ -51,7 +51,8 @@ router.post(
       const err = new Error ('User already exists');
       err.status = 403;
       err.errors = {email: "User with that email already exists"}
-      return res.json({message: err.message, statusCode: err.status, errors: err.errors})
+      // return res.json({message: err.message, statusCode: err.status, errors: err.errors})
+      return next(err)
     }
 
     // if (!firstName || !lastName) {

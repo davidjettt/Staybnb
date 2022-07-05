@@ -44,6 +44,7 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+// Get spot by Id
 router.get('/:spotId', async (req, res, next) => {
     const spotAggData = await Spot.findByPk(req.params.spotId, {
         include:
@@ -82,6 +83,7 @@ router.get('/:spotId', async (req, res, next) => {
 });
 
 
+// Edit spot by Id
 router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
@@ -114,6 +116,8 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     res.json(updatedSpot);
 });
 
+
+// Delete spot by Id
 router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
@@ -140,6 +144,8 @@ router.get('/', async (req, res, next) => {
     res.json({ spots });
 });
 
+
+// Create new spot
 router.post('/',requireAuth, validateSpot, async (req, res, next) => {
     const { address, city, state, country, latitude, longitude, name, description, pricePerNight } = req.body;
 
