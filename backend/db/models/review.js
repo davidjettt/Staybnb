@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     spotId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      onDelete: 'cascade'
     },
     review: {
       type: DataTypes.TEXT,
