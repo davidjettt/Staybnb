@@ -59,8 +59,8 @@ const requireAuth = function (req, _res, next) {
     // err.title = 'Unauthorized';
     // err.errors = ['Unauthorized'];
     err.status = 401;
-    // next(err);
-    return _res.json({message: err.message, statusCode: err.status})
+    return next(err);
+    // return _res.json({message: err.message, statusCode: err.status})
   }
 
 const correctPermission = (req, res, next) => {
