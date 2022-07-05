@@ -44,6 +44,34 @@ const validateSpot = [
     handleValidationErrors
 ];
 
+
+// Get all reviews by Spot id
+router.get('/:spotId/reviews', async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        const err = new Error ("Spot couldn't be found");
+        err.status = 404;
+        return next(err);
+    }
+
+    const reviews = await Review.findAll({
+        include: [
+            {
+                model: User
+            },
+            {
+                model: Image,
+                attributes: ['url']
+            }
+        ],
+        where: {spotId: req.params.spotId}
+    })
+
+    res.json({ reviews });
+})
+
+
 // Get spot by Id
 router.get('/:spotId', async (req, res, next) => {
     const spotAggData = await Spot.findByPk(req.params.spotId, {
