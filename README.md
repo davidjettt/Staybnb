@@ -653,7 +653,7 @@ Create and return a new review for a spot specified by id.
 * Require Authentication: true
 * Request
   * Method: POST
-  * URL: /spots/:spotId/review
+  * URL: /spots/:spotId/reviews
   * Headers:
     * Content-Type: application/json
   * Body:
