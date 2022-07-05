@@ -37,7 +37,25 @@ module.exports = {
         stars: 5,
         userId: 2,
         spotId: 1
-      }
+      },
+      {
+        review: 'Great stay. Very nostalgic',
+        stars: 5,
+        userId: 2,
+        spotId: 4
+      },
+      {
+        review: 'Okay stay',
+        stars: 3,
+        userId: 4,
+        spotId: 4
+      },
+      {
+        review: 'Good stay',
+        stars: 4,
+        userId: 1,
+        spotId: 5
+      },
     ])
   },
 
@@ -49,7 +67,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Reviews', {
-      id: {[Op.in]: [1, 2, 3, 4]}
+      id: {[Op.in]: [1, 2, 3, 4, 5, 6, 7]}
     })
   }
 };

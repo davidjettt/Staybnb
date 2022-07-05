@@ -23,14 +23,26 @@ module.exports = {
         startDate: '2022-12-01',
         endDate: '2022-12-10',
         spotId: 2,
-        userId: 1
+        userId: 3
       },
       {
         startDate: '2022-10-01',
         endDate: '2022-10-10',
         spotId: 1,
         userId: 2
-      }
+      },
+      {
+        startDate: '2022-08-01',
+        endDate: '2022-08-10',
+        spotId: 4,
+        userId: 3
+      },
+      {
+        startDate: '2022-08-01',
+        endDate: '2022-08-10',
+        spotId: 5,
+        userId: 1
+      },
     ])
   },
 
@@ -42,7 +54,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Bookings', {
-      id: {[Op.in]: [1, 2, 3]}
+      id: {[Op.in]: [1, 2, 3, 4, 5]}
     })
   }
 };

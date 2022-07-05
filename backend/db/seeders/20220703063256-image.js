@@ -34,6 +34,16 @@ module.exports = {
         reviewId: null,
         url: 'http://vegasmagazine.com/get/files/image/galleries/palmsplaceunit59301-138.jpg'
       },
+      {
+        spotId: 2,
+        reviewId: null,
+        url: 'https://i.ytimg.com/vi/KLwsKK8qfi0/maxresdefault.jpg'
+      },
+      {
+        spotId: null,
+        reviewId: 1,
+        url: 'https://i.ytimg.com/vi/KLwsKK8qfi0/maxresdefault.jpg'
+      },
     ])
   },
 

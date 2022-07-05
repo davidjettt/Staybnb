@@ -20,7 +20,7 @@ router.get('/', requireAuth, async (req, res, next) => {
             {
                 model: Image,
 
-                attributes: {include: ['url']}
+                attributes: ['url']
             }
         ]
     })

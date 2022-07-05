@@ -51,6 +51,32 @@ module.exports = {
         description: 'Fun stay for large groups who enjoy the Miami life',
         pricePerNight: 647,
         previewImage: 'image url'
+      },
+      {
+        ownerId: 3,
+        address: '123 Ocean Ave',
+        city: 'Huntington Beach',
+        state: 'California',
+        country: 'United States of America',
+        latitude: 60.7645358,
+        longitude: 24.4730327,
+        name: 'Beach House',
+        description: 'There is a place off of Ocean Avenue',
+        pricePerNight: 347,
+        previewImage: 'image url'
+      },
+      {
+        ownerId: 3,
+        address: '123 City Ave',
+        city: 'Los Angeles',
+        state: 'California',
+        country: 'United States of America',
+        latitude: 65.7645358,
+        longitude: 30.4730327,
+        name: 'City House',
+        description: 'Great for those who love the city',
+        pricePerNight: 547,
+        previewImage: 'image url'
       }
     ])
   },
@@ -63,7 +89,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     await queryInterface.bulkDelete('Spots', {
-      address: { [Op.in]: ['123 Luxury Lane', '123 Bear Ave', '123 Beach Ave'] }
+      address: { [Op.in]: ['123 Luxury Lane', '123 Bear Ave', '123 Beach Ave', '123 Ocean Ave', '123 City Ave'] }
     })
   }
 };
