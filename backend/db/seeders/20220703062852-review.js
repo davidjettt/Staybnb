@@ -45,16 +45,16 @@ module.exports = {
         stars: 5
       },
       {
-        review: 'Okay stay',
-        stars: 3,
         userId: 4,
-        spotId: 4
+        spotId: 4,
+        review: 'Okay stay',
+        stars: 3
       },
       {
-        review: 'Good stay',
-        stars: 4,
         userId: 1,
-        spotId: 5
+        spotId: 5,
+        review: 'Good stay',
+        stars: 4
       },
     ])
   },
