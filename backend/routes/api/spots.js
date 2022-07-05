@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { setTokenCookie, requireAuth, correctPermission } = require('../../utils/auth');
+const { setTokenCookie, requireAuth, spotPermission } = require('../../utils/auth');
 const { Spot, User, Review, Image, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -84,7 +84,7 @@ router.get('/:spotId', async (req, res, next) => {
 
 
 // Edit spot by Id
-router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+router.put('/:spotId', requireAuth, spotPermission, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
@@ -92,11 +92,11 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
         err.status = 404;
         return next(err);
     }
-    if (req.user.id !== spot.ownerId) {
-        const err = new Error ("Forbidden");
-        err.status = 403;
-        return next(err);
-    }
+    // if (req.user.id !== spot.ownerId) {
+    //     const err = new Error ("Forbidden");
+    //     err.status = 403;
+    //     return next(err);
+    // }
 
     const { address, city, state, country, latitude, longitude, name, description, pricePerNight } = req.body;
 
@@ -118,14 +118,14 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
 
 
 // Delete spot by Id
-router.delete('/:spotId', requireAuth, async (req, res, next) => {
+router.delete('/:spotId', requireAuth, spotPermission, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
-    if (req.user.id !== spot.ownerId) {
-        const err = new Error ("Forbidden");
-        err.status = 403;
-        return next(err);
-    }
+    // if (req.user.id !== spot.ownerId) {
+    //     const err = new Error ("Forbidden");
+    //     err.status = 403;
+    //     return next(err);
+    // }
 
     if (!spot) {
         const err = new Error ("Spot couldn't be found");

@@ -63,16 +63,20 @@ const requireAuth = function (req, _res, next) {
     // return _res.json({message: err.message, statusCode: err.status})
   }
 
-const correctPermission = (req, res, next) => {
-  if (req.user.id === res.ownerId) res.json({message: 'AUTHORIZED'})
+const spotPermission = async (req, res, next) => {
+    const spot = await Spot.findOne({
+      where: {
+        id: req.params.spotId,
+        ownerId: req.user.id
+      }
+    })
 
-    console.log(res.spot.ownerId)
-    const err = new Error ('Forbidden');
-    err.status = 403;
-    res.status(403);
-    return res.json({message: err.message, statusCode: err.status})
-    // return next(err)
-
+    if (!spot) {
+      const err = new Error ('Forbidden');
+      err.status = 403;
+      return next(err);
+    }
+      next();
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, correctPermission }
+module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission }
