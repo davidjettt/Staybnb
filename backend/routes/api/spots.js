@@ -60,6 +60,21 @@ const validateReview = [
     handleValidationErrors
 ];
 
+const validateBooking = [
+    // check('endDate')
+    // .custom( (req, res)  => {
+    //     // const { startDate, endDate } = req.body;
+    //     if (req.body.endDate < req.body.startDate) throw new Error ('endDate cannot come before startDate')
+    //     return true
+    // }),
+    body('endDate')
+    .custom((value, { req }) => {
+        if (value < req.body.startDate) throw new Error ('endDate cannot come before startDate')
+        return true
+    }),
+    handleValidationErrors
+]
+
 // Middleware that checks if spot exists
 const existsSpot = async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
