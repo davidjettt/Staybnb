@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const { setTokenCookie, requireAuth, spotPermission } = require('../../utils/auth');
-const { Spot, User, Review, Image, sequelize } = require('../../db/models');
+const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -72,7 +72,27 @@ const existsSpot = async (req, res, next) => {
 
 
 // Get all bookings by spot id
-router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+router.get('/:spotId/bookings', existsSpot, requireAuth, async (req, res, next) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (req.user.id !== spot.ownerId) {
+        const bookings = await Booking.findAll({
+            where: {
+                spotId: req.params.spotId
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        return res.json({ bookings });
+    }
+
+    const bookings = await Booking.findAll({
+        include: {
+            model: User
+        },
+        where: { spotId: req.params.spotId },
+    })
+
+    return res.json({ bookings });
 
 });
 
