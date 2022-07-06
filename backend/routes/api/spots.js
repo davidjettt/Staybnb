@@ -58,6 +58,7 @@ const validateReview = [
     handleValidationErrors
 ];
 
+// Middleware that checks if spot exists
 const existsSpot = async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
@@ -69,6 +70,11 @@ const existsSpot = async (req, res, next) => {
     return next();
 }
 
+
+// Get all bookings by spot id
+router.get('/:spotId/bookings', requireAuth, async (req, res, next) => {
+
+});
 
 // Get all reviews by Spot id
 router.get('/:spotId/reviews', existsSpot, async (req, res, next) => {
@@ -86,7 +92,7 @@ router.get('/:spotId/reviews', existsSpot, async (req, res, next) => {
     })
 
     return res.json({ reviews });
-})
+});
 
 
 // Create a review for spot by spot id
@@ -111,7 +117,7 @@ router.post('/:spotId/reviews', existsSpot, requireAuth, validateReview, async (
     });
 
     return res.json(newReview);
-})
+});
 
 // Get spot by Id
 router.get('/:spotId', existsSpot, async (req, res, next) => {
