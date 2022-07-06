@@ -268,7 +268,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
 
     const isExistingLatLng = await Spot.findOne({
         where: {
-            [Op.and]: [{latitude: lat}, {longitude: lng}]
+            [Op.and]: [{address: address}, {city: city}, {state: state}, {latitude: lat}, {longitude: lng}]
         }
     });
     if (isExistingLatLng) {
