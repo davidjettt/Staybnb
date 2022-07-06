@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User, Spot } = require('../db/models');
-const { Spots } = require('../db/migrations/20220701233427-create-spot');
+const { User, Spot, Review } = require('../db/models');
+
 
 const { secret, expiresIn } = jwtConfig;
 
@@ -79,4 +79,21 @@ const spotPermission = async (req, res, next) => {
       return next();
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission }
+const reviewPermission = async (req, res, next) => {
+  const review = await Review.findOne({
+    where: {
+      id: req.params.reviewId,
+      userId: req.user.id
+    }
+  })
+
+  if (!review) {
+    const err = new Error ('Forbidden');
+    err.status = 403;
+    return next(err);
+  }
+
+  return next();
+}
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission }
