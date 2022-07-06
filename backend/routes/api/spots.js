@@ -6,6 +6,8 @@ const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/mode
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
+const { Op } = require('sequelize');
+
 const validateSpot = [
     check('address')
     .exists({ checkFalsy: true })
@@ -237,6 +239,24 @@ router.get('/', async (req, res, next) => {
 // Create new spot
 router.post('/',requireAuth, validateSpot, async (req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    const isExistingAddy = await Spot.findOne({ where: { address: address } });
+    if (isExistingAddy) {
+        const err = new Error ('Address already exists');
+        err.status = 403;
+        return next(err);
+    }
+
+    const isExistingLatLng = await Spot.findOne({
+        where: {
+            [Op.and]: [{latitude: lat}, {longitude: lng}]
+        }
+    });
+    if (isExistingLatLng) {
+        const err = new Error ('Combination of longitude and latitude coordinates already exists');
+        err.status = 403;
+        return next(err)
+    }
 
     const newSpot = await Spot.create({
         ownerId: req.user.id,
