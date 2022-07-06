@@ -118,22 +118,36 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
 
 // Get spot by Id
 router.get('/:spotId', async (req, res, next) => {
-    const spotAggData = await Spot.findByPk(req.params.spotId, {
-        include:
-        {
-            model: Review,
-            attributes: [
-                    [
-                        sequelize.fn("AVG", sequelize.col("Reviews.stars")),
-                        "avgStarRating"
-                    ],
-                    [ sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
-            ],
-            // raw: true
-        },
+    // const spotAggData = await Spot.findByPk(req.params.spotId, {
+    //     include:
+    //     {
+    //         model: Review,
+    //         attributes: [
+    //                 [
+    //                     sequelize.fn("AVG", sequelize.col("Reviews.stars")),
+    //                     "avgStarRating"
+    //                 ],
+    //                 [ sequelize.fn('COUNT', sequelize.col('Reviews.id')), 'numReviews'],
+    //         ],
+    //         // raw: true
+    //     },
+    // });
+
+
+    const countReviews = await Review.count({
+        where: {
+            spotId: req.params.spotId
+        }
     });
 
-    // console.log(spotAggData);
+    const sumReviews = await Review.sum('stars', {
+        where: {
+            spotId: req.params.spotId
+        }
+    })
+
+    // console.log(countReviews);
+    // console.log(sumReviews);
 
     const spot = await Spot.findByPk(req.params.spotId, {
         attributes: {exclude: ['previewImage']},
@@ -147,8 +161,10 @@ router.get('/:spotId', async (req, res, next) => {
     }
 
     const spotData = spot.toJSON();
-    spotData.avgStarRating = spotAggData.Reviews[0].dataValues.avgStarRating;
-    spotData.numReviews = spotAggData.Reviews[0].dataValues.numReviews;
+    // spotData.avgStarRating = spotAggData.Reviews[0].dataValues.avgStarRating;
+    // spotData.numReviews = spotAggData.Reviews[0].dataValues.numReviews;
+    spotData.avgStarRating = sumReviews / countReviews;
+    spotData.numReviews = countReviews;
     // console.log(spotAggData.Reviews[0].dataValues.avgStarRating)
 
     res.json(spotData)
