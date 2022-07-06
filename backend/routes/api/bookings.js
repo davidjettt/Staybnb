@@ -32,7 +32,10 @@ const bookingPastEndDate = async (req, res, next) => {
     const {  startDate, endDate } = req.body;
     const booking = await Booking.findByPk(req.params.bookingId);
 
-    if (endDate > booking.endDate) {
+
+    // console.log(booking.dataValues.endDate);
+    // console.log(new Date());
+    if (new Date() > booking.dataValues.endDate[0]) {
         const err = new Error ("Past bookings can't be modified");
         err.status = 400;
         return next(err);
@@ -92,7 +95,7 @@ const bookingConflictErr = async (req, res, next) => {
 }
 
 
-router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, validateBooking, bookingConflictErr, async (req, res, next) => {
+router.put('/:bookingId', existsBooking, bookingPastEndDate,requireAuth, bookingBelongsPermission, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findByPk(req.params.bookingId);
