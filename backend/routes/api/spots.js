@@ -3,7 +3,7 @@ const router = express.Router();
 
 const { setTokenCookie, requireAuth, spotPermission, bookingPermission } = require('../../utils/auth');
 const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
-const { check } = require('express-validator');
+const { check, body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { Op } = require('sequelize');
@@ -127,18 +127,36 @@ const bookingConflictErr = async (req, res, next) => {
             startDate: endDate
         },
     });
+    const bookingStartEnd = await Booking.findOne({
+        where: {
+            spotId: req.params.spotId,
+            [Op.and]: [{ startDate: startDate}, {endDate: endDate}]
+        },
+    });
 
+    if (bookingStartEnd) {
+        const err = new Error ('Sorry, this spot is already booked for the specifed dates');
+        err.status = 403;
+        err.errors = {startDate: 'Start date conflicts with an exiting booking',endDate: 'End date conflicts with an existing booking'};
+        return next(err);
+    }
     if (bookingStart) {
         const err = new Error ('Sorry, this spot is already booked for the specifed dates');
         err.status = 403;
         err.errors = {startDate: 'Start date conflicts with an existing booking'};
         return next(err);
     }
-
+    if (bookingEnd) {
+        const err = new Error ('Sorry, this spot is already booked for the specifed dates');
+        err.status = 403;
+        err.errors = {endDate: 'End date conflicts with an existing booking'};
+        return next(err);
+    }
+    return next()
 }
 
 // Create booking by spot id
-router.post('/:spotId/bookings', existsSpot, requireAuth, bookingPermission, validateBooking, async (req, res, next) => {
+router.post('/:spotId/bookings', existsSpot, requireAuth, bookingPermission, validateBooking, bookingConflictErr, async (req, res, next) => {
     // const spot = await Spot.findByPk(req.params.spotId);
 
     const { startDate, endDate } = req.body;
