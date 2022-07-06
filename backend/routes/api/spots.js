@@ -61,12 +61,6 @@ const validateReview = [
 ];
 
 const validateBooking = [
-    // check('endDate')
-    // .custom( (req, res)  => {
-    //     // const { startDate, endDate } = req.body;
-    //     if (req.body.endDate < req.body.startDate) throw new Error ('endDate cannot come before startDate')
-    //     return true
-    // }),
     body('endDate')
     .custom((value, { req }) => {
         if (value < req.body.startDate) throw new Error ('endDate cannot come before startDate')
@@ -113,6 +107,7 @@ router.get('/:spotId/bookings', existsSpot, requireAuth, async (req, res, next) 
 
 });
 
+// Booking conflict middleware (NEED TO REFACTOR THIS LATER MAYBE USE "check" or "body")
 const bookingConflictErr = async (req, res, next) => {
     const { startDate, endDate } = req.body;
     const bookingStart = await Booking.findOne({
