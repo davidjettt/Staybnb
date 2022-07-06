@@ -1034,7 +1034,7 @@ Update and return an existing booking.
 * Require proper authorization: Booking must belong to the current user
 * Request
   * Method: PUT
-  * URL: /your-bookings/:bookingId
+  * URL: /bookings/:bookingId
   * Headers:
     * Content-Type: application/json
   * Body:
@@ -1132,7 +1132,7 @@ Delete an existing booking.
   Spot must belong to the current user
 * Request
   * Method: DELETE
-  * URL: /your-bookings/:bookingId
+  * URL: /bookings/:bookingId
   * Body: none
 
 * Successful Response
