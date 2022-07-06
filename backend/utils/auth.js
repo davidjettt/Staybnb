@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtConfig } = require('../config');
-const { User, Spot, Review } = require('../db/models');
+const { User, Spot, Review, Booking } = require('../db/models');
 
 
 const { secret, expiresIn } = jwtConfig;
@@ -113,14 +113,13 @@ const bookingPermission = async (req, res, next) => {
   return next();
 }
 const bookingBelongsPermission = async (req, res, next) => {
-  const spot = await Spot.findOne({
+  const booking = await Booking.findOne({
     where: {
-      id: req.params.spotId,
-      ownerId: req.user.id
+      userId: req.user.id
     }
   })
 
-  if (!spot) {
+  if (!booking) {
     const err = new Error ('Forbidden');
     err.status = 403;
     return next(err);
@@ -129,4 +128,4 @@ const bookingBelongsPermission = async (req, res, next) => {
   return next();
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission, bookingPermission }
+module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission, bookingPermission, bookingBelongsPermission }
