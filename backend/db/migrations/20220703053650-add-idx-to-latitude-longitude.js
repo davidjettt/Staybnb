@@ -8,7 +8,7 @@ module.exports = {
      * Example:
      * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
      */
-    await queryInterface.addIndex('Spots', ['latitude', 'longitude'], {unique: true});
+    await queryInterface.addIndex('Spots',  ['address', 'city', 'state', 'latitude', 'longitude'], {unique: true});
   },
 
   async down (queryInterface, Sequelize) {
@@ -18,6 +18,6 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('users');
      */
-    await queryInterface.removeIndex('Spots', ['latitude', 'longitude']);
+    await queryInterface.removeIndex('Spots',  ['address', 'city', 'state', 'latitude', 'longitude']);
   }
 };

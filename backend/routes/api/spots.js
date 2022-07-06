@@ -323,11 +323,11 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
 
     const isExistingLatLng = await Spot.findOne({
         where: {
-            [Op.and]: [{latitude: lat}, {longitude: lng}]
+            [Op.and]: [{address: address}, {city: city}, {state: state}, {latitude: lat}, {longitude: lng}]
         }
     });
     if (isExistingLatLng) {
-        const err = new Error ('Combination of longitude and latitude coordinates already exists');
+        const err = new Error ('Combination of address, city, state, longitude, latitude coordinates already exists');
         err.status = 403;
         return next(err)
     }

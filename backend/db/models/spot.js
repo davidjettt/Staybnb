@@ -82,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
     indexes: [
       {
         unique: true,
-        fields: ['latitude', 'longitude']
+        fields: ['address', 'city', 'state', 'latitude', 'longitude']
       }
     ]
   });
