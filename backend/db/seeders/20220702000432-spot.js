@@ -15,12 +15,12 @@ module.exports = {
     await queryInterface.bulkInsert('Spots', [
       {
         ownerId: 1,
-        address: '123 Luxury Lane',
+        address: '123 Luxury Ave',
         city: 'Las Vegas',
         state: 'Nevada',
         country: 'United States of America',
-        latitude: 37.7645358,
-        longitude: -122.4730327,
+        latitude: 65.7640058,
+        longitude: -456.4000327,
         name: 'Luxury Penthouse',
         description: 'Luxurious penthouse with an amazing view of the strip',
         pricePerNight: 523,
