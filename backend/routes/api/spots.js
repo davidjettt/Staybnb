@@ -22,16 +22,16 @@ const validateSpot = [
     check('description')
     .exists({ checkFalsy: true })
     .withMessage('Description is required'),
-    check('pricePerNight')
+    check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required'),
-    check('latitude')
+    check('lat')
     .exists({ checkFalsy: true })
     .custom(value => {
         if (value % 1 === 0 || isNaN(value)) throw new Error ('Latitude is not valid')
         return true;
     }),
-    check('longitude')
+    check('lng')
     .exists({ checkFalsy: true })
     .custom(value => {
         if (value % 1 === 0 || isNaN(value)) throw new Error ('Longitude is not valid')
@@ -193,7 +193,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
     //     return next(err);
     // }
 
-    const { address, city, state, country, latitude, longitude, name, description, pricePerNight } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     const updatedSpot = await spot.update({
         ownerId: req.user.id,
@@ -201,14 +201,14 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         city,
         state,
         country,
-        latitude,
-        longitude,
+        latitude: lat,
+        longitude: lng,
         name,
         description,
-        pricePerNight
+        pricePerNight: price
     });
-
-    return res.json(updatedSpot);
+    const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
+    return res.json(updatedSpot2);
 });
 
 
@@ -236,7 +236,7 @@ router.get('/', async (req, res, next) => {
 
 // Create new spot
 router.post('/',requireAuth, validateSpot, async (req, res, next) => {
-    const { address, city, state, country, latitude, longitude, name, description, pricePerNight } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
     const newSpot = await Spot.create({
         ownerId: req.user.id,
@@ -244,14 +244,16 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
         city,
         state,
         country,
-        latitude,
-        longitude,
+        latitude: lat,
+        longitude: lng,
         name,
         description,
-        pricePerNight
+        pricePerNight: price
     })
+
+    const newSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
     res.status(201);
-    return res.json(newSpot);
+    return res.json(newSpot2);
 })
 
 module.exports = router;
