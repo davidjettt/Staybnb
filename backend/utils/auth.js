@@ -96,4 +96,21 @@ const reviewPermission = async (req, res, next) => {
   return next();
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission }
+const bookingPermission = async (req, res, next) => {
+  const spot = await Spot.findOne({
+    where: {
+      id: req.params.spotId,
+      ownerId: req.user.id
+    }
+  })
+
+  if (spot) {
+    const err = new Error ('Forbidden');
+    err.status = 403;
+    return next(err);
+  }
+
+  return next();
+}
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission, bookingPermission }
