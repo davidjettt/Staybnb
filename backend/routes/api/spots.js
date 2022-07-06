@@ -113,6 +113,22 @@ router.get('/:spotId/bookings', existsSpot, requireAuth, async (req, res, next) 
 
 });
 
+// Create booking by spot id
+router.post('/:spotId/bookings', existsSpot, requireAuth, bookingPermission, validateBooking, async (req, res, next) => {
+    // const spot = await Spot.findByPk(req.params.spotId);
+
+    const { startDate, endDate } = req.body;
+
+    const newBooking = await Booking.create({
+        userId: req.user.id,
+        spotId: Number(req.params.spotId),
+        startDate,
+        endDate
+    });
+
+    return res.json(newBooking);
+});
+
 // Get all reviews by Spot id
 router.get('/:spotId/reviews', existsSpot, async (req, res, next) => {
     const reviews = await Review.findAll({
