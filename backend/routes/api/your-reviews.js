@@ -25,7 +25,7 @@ router.get('/', requireAuth, async (req, res, next) => {
         ]
     })
 
-    res.json({reviews});
+    return res.json({reviews});
 })
 
 module.exports = router;

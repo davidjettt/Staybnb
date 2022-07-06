@@ -56,9 +56,7 @@ const validateReview = [
     handleValidationErrors
 ];
 
-
-// Get all reviews by Spot id
-router.get('/:spotId/reviews', async (req, res, next) => {
+const existsSpot = async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     if (!spot) {
@@ -66,7 +64,12 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         err.status = 404;
         return next(err);
     }
+    return next();
+}
 
+
+// Get all reviews by Spot id
+router.get('/:spotId/reviews', existsSpot, async (req, res, next) => {
     const reviews = await Review.findAll({
         include: [
             {
@@ -80,20 +83,12 @@ router.get('/:spotId/reviews', async (req, res, next) => {
         where: {spotId: req.params.spotId}
     })
 
-    res.json({ reviews });
+    return res.json({ reviews });
 })
 
 
 // Create a review for spot by spot id
-router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId);
-
-    if (!spot) {
-        const err = new Error ("Spot couldn't be found");
-        err.status = 404;
-        return next(err);
-    }
-
+router.post('/:spotId/reviews', existsSpot, requireAuth, validateReview, async (req, res, next) => {
     const existingReview = await Review.findOne({
         where: {spotId: req.params.spotId, userId: req.user.id}
     });
@@ -113,11 +108,11 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res, ne
         stars
     });
 
-    res.json(newReview);
+    return res.json(newReview);
 })
 
 // Get spot by Id
-router.get('/:spotId', async (req, res, next) => {
+router.get('/:spotId', existsSpot, async (req, res, next) => {
     // const spotAggData = await Spot.findByPk(req.params.spotId, {
     //     include:
     //     {
@@ -133,7 +128,6 @@ router.get('/:spotId', async (req, res, next) => {
     //     },
     // });
 
-
     const countReviews = await Review.count({
         where: {
             spotId: req.params.spotId
@@ -146,19 +140,10 @@ router.get('/:spotId', async (req, res, next) => {
         }
     })
 
-    // console.log(countReviews);
-    // console.log(sumReviews);
-
     const spot = await Spot.findByPk(req.params.spotId, {
         attributes: {exclude: ['previewImage']},
         include: [{ model: Image, attributes: ['url'] },{ model: User, as: 'Owner' }]
     });
-
-    if (!spot) {
-        const err = new Error ("Spot couldn't be found");
-        err.status = 404;
-        return next(err)
-    }
 
     const spotData = spot.toJSON();
     // spotData.avgStarRating = spotAggData.Reviews[0].dataValues.avgStarRating;
@@ -167,19 +152,13 @@ router.get('/:spotId', async (req, res, next) => {
     spotData.numReviews = countReviews;
     // console.log(spotAggData.Reviews[0].dataValues.avgStarRating)
 
-    res.json(spotData)
+    return res.json(spotData)
 });
 
-
 // Edit spot by Id
-router.put('/:spotId', requireAuth, spotPermission, validateSpot, async (req, res, next) => {
+router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
-    if (!spot) {
-        const err = new Error ("Spot couldn't be found");
-        err.status = 404;
-        return next(err);
-    }
     // if (req.user.id !== spot.ownerId) {
     //     const err = new Error ("Forbidden");
     //     err.status = 403;
@@ -201,12 +180,12 @@ router.put('/:spotId', requireAuth, spotPermission, validateSpot, async (req, re
         pricePerNight
     });
 
-    res.json(updatedSpot);
+    return res.json(updatedSpot);
 });
 
 
 // Delete spot by Id
-router.delete('/:spotId', requireAuth, spotPermission, async (req, res, next) => {
+router.delete('/:spotId', existsSpot, requireAuth, spotPermission, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
     // if (req.user.id !== spot.ownerId) {
@@ -215,21 +194,15 @@ router.delete('/:spotId', requireAuth, spotPermission, async (req, res, next) =>
     //     return next(err);
     // }
 
-    if (!spot) {
-        const err = new Error ("Spot couldn't be found");
-        err.status = 404;
-        return next(err);
-    }
-
     await spot.destroy();
 
-    res.json({message: "Successfuly deleted", statusCode: 200});
+    return res.json({message: "Successfuly deleted", statusCode: 200});
 })
 
 router.get('/', async (req, res, next) => {
     const spots = await Spot.findAll();
 
-    res.json({ spots });
+    return res.json({ spots });
 });
 
 
@@ -250,7 +223,7 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
         pricePerNight
     })
     res.status(201);
-    res.json(newSpot);
+    return res.json(newSpot);
 })
 
 module.exports = router;

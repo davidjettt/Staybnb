@@ -76,7 +76,7 @@ const spotPermission = async (req, res, next) => {
       err.status = 403;
       return next(err);
     }
-      next();
+      return next();
 }
 
 module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission }

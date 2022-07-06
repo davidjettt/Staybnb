@@ -11,7 +11,7 @@ router.get('/', requireAuth, async (req, res, next) => {
         where: {ownerId: req.user.id}
     })
 
-    res.json({spots});
+    return res.json({spots});
 })
 
 module.exports = router;
