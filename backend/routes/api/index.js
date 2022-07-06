@@ -5,6 +5,7 @@ const SpotsRouter = require('./spots.js');
 const yourSpotsRouter = require('./your-spots.js');
 const yourReviewsRouter = require('./your-reviews.js');
 const reviewsRouter = require('./reviews.js');
+const yourBookingsRouter = require('./your-bookings.js');
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
 
@@ -34,6 +35,7 @@ router.use('/spots', SpotsRouter);
 router.use('/your-spots', yourSpotsRouter);
 router.use('/your-reviews', yourReviewsRouter);
 router.use('/reviews', reviewsRouter);
+router.use('/your-bookings', yourBookingsRouter);
 
 router.post('/test', (req, res) => {
     res.json({ requestBody: req.body });
