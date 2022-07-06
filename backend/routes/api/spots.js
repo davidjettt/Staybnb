@@ -28,19 +28,21 @@ const validateSpot = [
     check('latitude')
     .exists({ checkFalsy: true })
     .custom(value => {
-        if (value % 1 === 0) throw new Error ('Latitude is not valid')
+        if (value % 1 === 0 || isNaN(value)) throw new Error ('Latitude is not valid')
         return true;
     }),
     check('longitude')
     .exists({ checkFalsy: true })
     .custom(value => {
-        if (value % 1 === 0) throw new Error ('Longitude is not valid')
+        if (value % 1 === 0 || isNaN(value)) throw new Error ('Longitude is not valid')
         return true;
     }),
     check('name')
-    .exists({ checkFalsy: true })
-    .isLength({ min: 2, max: 49 })
-    .withMessage('Name must be less than 50 characters'),
+    .custom(value => {
+        if (!value) throw new Error ('Name is required')
+        else if (value.length >= 50) throw new Error ('Name must be less than 50 characters')
+        return true
+    }),
     handleValidationErrors
 ];
 
