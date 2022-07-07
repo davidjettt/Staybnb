@@ -37,7 +37,7 @@ const bookingPastEndDate = async (req, res, next) => {
     // const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
 
-    const testDate = new Date(booking.endDate)
+    const bookingEndDate = new Date(booking.endDate)
 
     // console.log('TEST', booking.endDate);
     // console.log('TODAYS DATE', date);
@@ -47,7 +47,7 @@ const bookingPastEndDate = async (req, res, next) => {
     //     err.status = 400;
     //     return next(err);
     // }
-    if (today.getTime() > testDate.getTime()) {
+    if (today.getTime() > bookingEndDate.getTime()) {
         const err = new Error ("Past bookings can't be modified");
         err.status = 400;
         return next(err);
@@ -120,7 +120,7 @@ const pastStartDate = async (req, res, next) => {
     // const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
 
-    const testDate = new Date(booking.startDate)
+    const bookingStartDate = new Date(booking.startDate)
 
     // console.log('TEST', booking.startDate);
     // console.log('TEST2', testDate);
@@ -132,7 +132,7 @@ const pastStartDate = async (req, res, next) => {
     //     return next(err);
     // }
     // console.log(today.getTime() > testDate.getTime())
-    if (today.getTime() > testDate.getTime()) {
+    if (today.getTime() > bookingStartDate.getTime()) {
         const err = new Error ("Bookings that have been started can't be deleted");
         err.status = 400;
         return next(err);

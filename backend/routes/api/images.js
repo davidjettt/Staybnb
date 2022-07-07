@@ -91,7 +91,7 @@ const imagePer = async (req, res, next) => {
 
 
 
-router.delete('/:imageId', existsImage, requireAuth, imagePer, async (req, res, next) => {
+router.delete('/:imageId', existsImage, requireAuth, imagePermission, async (req, res, next) => {
     const image = await Image.findByPk(req.params.imageId);
 
     await image.destroy();
