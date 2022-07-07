@@ -63,32 +63,11 @@ router.post('/:reviewId/images', existsReview, requireAuth, reviewPermission, re
 
     const findImage = await Image.findOne({
         where: {
+            id: image.id,
             reviewId: req.params.reviewId,
             url: url
         }
     })
-
-    // const test = await Image.build({
-    //     reviewId: Number(req.params.reviewId),
-    //     url
-    // })
-    // // const result = test.toJSON();
-    // test.imageableId = Number(req.params.reviewId);
-    // test.imageableType = 'Review';
-    // await test.save()
-
-    // const findImage = await Image.findOne({
-    //     include: {
-    //         model: Review,
-    //         where: {
-    //             id: req.params.reviewId
-    //         },
-    //         attributes: []
-    //     },
-    //     where: {
-    //         url: url
-    //     }
-    // })
 
     const result = findImage.toJSON();
     result.imageableId = Number(req.params.reviewId);
