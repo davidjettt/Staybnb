@@ -393,6 +393,8 @@ const validateQueryFilters = [
 router.get('/', validateQueryFilters, async (req, res, next) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
+    let where = {};
+
     if (minLat && maxLat) {
         var latQuery = {
             latitude: {
@@ -404,7 +406,7 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
 
     if (minLng && maxLng) {
         var lngQuery = {
-            latitude: {
+            longitude: {
                 [Op.gte]: minLng,
                 [Op.lte]: maxLng
             }
@@ -429,12 +431,12 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
     if (size > 20) size = 20;
     if (page > 10) page = 10;
 
-    let where = {
+    where = {
         ...latQuery,
         ...lngQuery,
         ...priceQuery
     };
-
+    // console.log(where)
     const spots = await Spot.findAll({
         where,
         limit: size,
@@ -443,8 +445,8 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
 
     return res.json({
         spots,
-        page,
-        size
+        page: page,
+        size: size
     });
 });
 

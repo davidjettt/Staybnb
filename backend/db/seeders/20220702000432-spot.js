@@ -75,7 +75,7 @@ module.exports = {
         longitude: 30.4730327,
         name: 'City House',
         description: 'Great for those who love the city',
-        pricePerNight: 547,
+        pricePerNight: 143,
         previewImage: 'image url'
       },
       {
@@ -88,7 +88,7 @@ module.exports = {
         longitude: 39.4730327,
         name: 'Forest House',
         description: 'Tree Huggers',
-        pricePerNight: 547,
+        pricePerNight: 143,
         previewImage: 'image url'
       },
       {
@@ -101,7 +101,7 @@ module.exports = {
         longitude: 50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 142,
         previewImage: 'image url'
       },
       {
@@ -114,7 +114,7 @@ module.exports = {
         longitude: 50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 333,
         previewImage: 'image url'
       },
       {
@@ -127,7 +127,7 @@ module.exports = {
         longitude: 50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 654,
         previewImage: 'image url'
       },
       {
@@ -140,7 +140,7 @@ module.exports = {
         longitude: 50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 332,
         previewImage: 'image url'
       },
       {
@@ -153,7 +153,7 @@ module.exports = {
         longitude: 50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 444,
         previewImage: 'image url'
       },
       {
@@ -162,8 +162,8 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 10.7645358,
+        longitude: 20.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 547,
@@ -175,11 +175,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: -79.7645358,
+        longitude: -50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 88,
         previewImage: 'image url'
       },
       {
@@ -188,11 +188,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 100.7645358,
+        longitude: 162.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 953,
         previewImage: 'image url'
       },
       {
@@ -201,11 +201,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 2.7645358,
+        longitude: 41.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 375,
         previewImage: 'image url'
       },
       {
@@ -214,11 +214,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 10.7645358,
+        longitude: 99.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 234,
         previewImage: 'image url'
       },
       {
@@ -227,11 +227,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 132.7645358,
+        longitude: 23.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 532,
         previewImage: 'image url'
       },
       {
@@ -240,11 +240,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: -79.7645358,
+        longitude: 100.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 321,
         previewImage: 'image url'
       },
       {
@@ -253,11 +253,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: -123.7645358,
+        longitude: 32.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 60,
         previewImage: 'image url'
       },
       {
@@ -266,8 +266,8 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 22.7645358,
+        longitude: -52.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 547,
@@ -279,11 +279,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 32.7645358,
+        longitude: -99.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 90,
         previewImage: 'image url'
       },
       {
@@ -292,11 +292,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: -179.7645358,
+        longitude: -150.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 666,
         previewImage: 'image url'
       },
       {
@@ -305,11 +305,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 89.7645358,
+        longitude: 10.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 888,
         previewImage: 'image url'
       },
       {
@@ -318,11 +318,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 7.7645358,
+        longitude: 5.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 321,
         previewImage: 'image url'
       },
       {
@@ -331,11 +331,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 90.7645358,
+        longitude: 230.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 500,
         previewImage: 'image url'
       },
       {
@@ -344,11 +344,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: -239.7645358,
+        longitude: -520.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 100,
         previewImage: 'image url'
       },
       {
@@ -357,11 +357,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 19.7645358,
+        longitude: 70.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 124,
         previewImage: 'image url'
       },
       {
@@ -370,11 +370,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 98.7645358,
+        longitude: 4.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 947,
         previewImage: 'image url'
       },
       {
@@ -383,11 +383,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 7.7645358,
+        longitude: -5.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 147,
         previewImage: 'image url'
       },
       {
@@ -396,11 +396,11 @@ module.exports = {
         city: 'Tampa',
         state: 'Florida',
         country: 'United States of America',
-        latitude: 79.7645358,
-        longitude: 50.4730327,
+        latitude: 49.7645358,
+        longitude: -40.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
-        pricePerNight: 547,
+        pricePerNight: 1547,
         previewImage: 'image url'
       },
     ])
