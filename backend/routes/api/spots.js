@@ -155,12 +155,28 @@ router.post('/:spotId/images', existsSpot, requireAuth, spotPermission, async (r
     const { url } = req.body;
 
     const image = await Image.create({
-        imageableId: req.params.spotId,
-        imageableType: "Spot",
+        spotId: req.params.spotId,
         url
     });
+    // const image2 = image.toJSON();
+    // image2.imageableId = req.params.spotId;
+    // image2.imageableType = 'Spot';
 
-    return res.json(image)
+    // const find = await Image.findByPk(req.params.spotId, {
+    //     attributes: []
+    // })
+    const findImage = await Image.findOne({
+        where: {
+            spotId: req.params.spotId,
+            url: url
+        }
+    })
+
+    const result = findImage.toJSON();
+    result.imageableId = Number(req.params.spotId);
+    result.imageableType = 'Spot';
+
+    return res.json(result)
 })
 
 
