@@ -406,8 +406,10 @@ const validateQueryFilters = [
 
 // Get all spots & Query Filters
 router.get('/', validateQueryFilters, async (req, res, next) => {
-    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    let { page, size, minLat, maxLat, minLng, maxLng } = req.query;
 
+    let minPrice2 = Number(req.query.minPrice)
+    let maxPrice2 = Number(req.query.maxPrice)
     let where = {};
 
     // let pagination = {};
@@ -430,11 +432,11 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
         }
     }
 
-    if (minPrice && maxPrice) {
+    if (minPrice2 && maxPrice2) {
         var priceQuery = {
             pricePerNight: {
-                [Op.gte]: Number(minPrice),
-                [Op.lte]: Number(maxPrice)
+                [Op.gte]: Number(minPrice2),
+                [Op.lte]: Number(maxPrice2)
 
             }
         }
