@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { requireAuth, reviewPermission, bookingBelongsPermission } = require('../../utils/auth');
+const { requireAuth, reviewPermission, bookingBelongsPermission, spotOwnerOrBookingOwnerPermission } = require('../../utils/auth');
 const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
 const { check, body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -29,13 +29,25 @@ const existsBooking = async (req, res, next) => {
 
 // Can't edit a booking that is in the past aka already happened
 const bookingPastEndDate = async (req, res, next) => {
-    const {  startDate, endDate } = req.body;
-    const booking = await Booking.findByPk(req.params.bookingId);
+
+    const booking = await Booking.findByPk(req.params.bookingId, {
+        attributes: ['endDate']
+    });
+    const today = new Date();
+    // const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 
 
-    // console.log(booking.dataValues.endDate);
+    const testDate = new Date(booking.endDate)
+
+    // console.log('TEST', booking.endDate);
+    // console.log('TODAYS DATE', date);
     // console.log(new Date());
-    if (new Date() > booking.dataValues.endDate[0]) {
+    // if (date > booking.dataValues.endDate[0]) {
+    //     const err = new Error ("Past bookings can't be modified");
+    //     err.status = 400;
+    //     return next(err);
+    // }
+    if (today.getTime() > testDate.getTime()) {
         const err = new Error ("Past bookings can't be modified");
         err.status = 400;
         return next(err);
@@ -95,7 +107,42 @@ const bookingConflictErr = async (req, res, next) => {
 }
 
 
-router.put('/:bookingId', existsBooking, bookingPastEndDate,requireAuth, bookingBelongsPermission, validateBooking, bookingConflictErr,  async (req, res, next) => {
+
+
+
+
+const pastStartDate = async (req, res, next) => {
+
+    const booking = await Booking.findByPk(req.params.bookingId, {
+        attributes: ['startDate']
+    });
+    const today = new Date();
+    // const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+
+
+    const testDate = new Date(booking.startDate)
+
+    // console.log('TEST', booking.startDate);
+    // console.log('TEST2', testDate);
+    // console.log('TODAYS DATE', date);
+    // console.log(new Date());
+    // if (date > booking.dataValues.endDate[0]) {
+    //     const err = new Error ("Past bookings can't be modified");
+    //     err.status = 400;
+    //     return next(err);
+    // }
+    // console.log(today.getTime() > testDate.getTime())
+    if (today.getTime() > testDate.getTime()) {
+        const err = new Error ("Bookings that have been started can't be deleted");
+        err.status = 400;
+        return next(err);
+    }
+    return next();
+}
+
+
+// Edit a booking
+router.put('/:bookingId', existsBooking, bookingPastEndDate, requireAuth, bookingBelongsPermission, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findByPk(req.params.bookingId);
@@ -108,5 +155,16 @@ router.put('/:bookingId', existsBooking, bookingPastEndDate,requireAuth, booking
 
     return res.json(editBooking);
 });
+
+
+// Delete a booking
+router.delete('/:bookingId', existsBooking, requireAuth, spotOwnerOrBookingOwnerPermission, pastStartDate, async (req, res, next) => {
+    const booking = await Booking.findByPk(req.params.bookingId);
+
+    await booking.destroy();
+
+    return res.json({ message: 'Successfully deleted', statusCode: 200 });
+});
+
 
 module.exports = router;

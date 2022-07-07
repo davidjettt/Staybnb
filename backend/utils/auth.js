@@ -115,6 +115,7 @@ const bookingPermission = async (req, res, next) => {
 const bookingBelongsPermission = async (req, res, next) => {
   const booking = await Booking.findOne({
     where: {
+      id: req.params.bookingId,
       userId: req.user.id
     }
   })
@@ -128,4 +129,39 @@ const bookingBelongsPermission = async (req, res, next) => {
   return next();
 }
 
-module.exports = { setTokenCookie, restoreUser, requireAuth, spotPermission, reviewPermission, bookingPermission, bookingBelongsPermission }
+const spotOwnerOrBookingOwnerPermission = async (req, res, next) => {
+  const spot = await Spot.findOne({
+      include: {
+          model: Booking,
+          where: {
+              id: req.params.bookingId
+          }
+      },
+      where: {
+          ownerId: req.user.id
+      }
+  })
+
+  const booking = await Booking.findOne({
+      where: {
+          id: req.params.bookingId,
+          userId: req.user.id
+      }
+  });
+
+  if (!booking && !spot) {
+      const err = new Error ('Forbidden');
+      err.status = 403;
+      return next(err);
+  }
+  return next();
+};
+
+module.exports = {
+  setTokenCookie,
+  restoreUser, requireAuth,
+  spotPermission, reviewPermission,
+  bookingPermission,
+  bookingBelongsPermission,
+  spotOwnerOrBookingOwnerPermission
+}
