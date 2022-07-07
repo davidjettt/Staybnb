@@ -142,7 +142,7 @@ const pastStartDate = async (req, res, next) => {
 
 
 // Edit a booking
-router.put('/:bookingId', existsBooking, bookingPastEndDate, requireAuth, bookingBelongsPermission, validateBooking, bookingConflictErr,  async (req, res, next) => {
+router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, bookingPastEndDate, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findByPk(req.params.bookingId);
