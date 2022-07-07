@@ -57,40 +57,39 @@ const imagePermission = async (req, res, next) => {
     return next();
 }
 
-const imagePer = async (req, res, next) => {
-    const spot = await Spot.findOne({
-        where: {
-          ownerId: req.user.id
-        },
-        include: {
-            model: Image,
-            where: {
-                id: req.params.imageId
-            }
-        }
-      })
+// const imagePer = async (req, res, next) => {
+//     const spot = await Spot.findOne({
+//         where: {
+//           ownerId: req.user.id
+//         },
+//         include: {
+//             model: Image,
+//             where: {
+//                 id: req.params.imageId
+//             }
+//         }
+//       })
 
-      const review = await Review.findOne({
-        where: {
-          userId: req.user.id
-        },
-        include: {
-            model: Image,
-            where: {
-                id: req.params.imageId
-            }
-        }
-      })
-      if (!spot && !review) {
-        const err = new Error ('Forbidden');
-        err.status = 403;
-        return next(err);
-      }
-        return next();
-}
+//       const review = await Review.findOne({
+//         where: {
+//           userId: req.user.id
+//         },
+//         include: {
+//             model: Image,
+//             where: {
+//                 id: req.params.imageId
+//             }
+//         }
+//       })
+//       if (!spot && !review) {
+//         const err = new Error ('Forbidden');
+//         err.status = 403;
+//         return next(err);
+//       }
+//         return next();
+// }
 
-
-
+// Delete an Image
 router.delete('/:imageId', existsImage, requireAuth, imagePermission, async (req, res, next) => {
     const image = await Image.findByPk(req.params.imageId);
 

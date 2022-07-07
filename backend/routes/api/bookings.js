@@ -16,6 +16,7 @@ const validateBooking = [
     handleValidationErrors
 ]
 
+// Middleware that checks if booking exists
 const existsBooking = async (req, res, next) => {
     const booking = await Booking.findByPk(req.params.bookingId);
 

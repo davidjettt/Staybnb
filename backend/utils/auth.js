@@ -63,6 +63,8 @@ const requireAuth = function (req, _res, next) {
     // return _res.json({message: err.message, statusCode: err.status})
   }
 
+
+// If current user isn't the owner of the spot, return an error
 const spotPermission = async (req, res, next) => {
     const spot = await Spot.findOne({
       where: {
@@ -79,7 +81,7 @@ const spotPermission = async (req, res, next) => {
       return next();
 }
 
-
+// If current user isn't the owner of the review, return an error
 const reviewPermission = async (req, res, next) => {
   const review = await Review.findOne({
     where: {
@@ -97,6 +99,7 @@ const reviewPermission = async (req, res, next) => {
   return next();
 }
 
+// Middleware that forbids current user from making a booking if they are the onwer of the spot
 const bookingPermission = async (req, res, next) => {
   const spot = await Spot.findOne({
     where: {
@@ -113,6 +116,8 @@ const bookingPermission = async (req, res, next) => {
 
   return next();
 }
+
+// Forbids the current user from editing a booking that isn't theirs
 const bookingBelongsPermission = async (req, res, next) => {
   const booking = await Booking.findOne({
     where: {
@@ -130,6 +135,7 @@ const bookingBelongsPermission = async (req, res, next) => {
   return next();
 }
 
+// Forbids the current user from deleted a booking if they are not the owner of the spot or booking
 const spotOwnerOrBookingOwnerPermission = async (req, res, next) => {
   const spot = await Spot.findOne({
       include: {
