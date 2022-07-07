@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { setTokenCookie, requireAuth, spotPermission, bookingPermission } = require('../../utils/auth');
+const { requireAuth, spotPermission, bookingPermission } = require('../../utils/auth');
 const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
 const { check, body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');

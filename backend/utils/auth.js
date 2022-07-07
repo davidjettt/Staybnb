@@ -79,6 +79,7 @@ const spotPermission = async (req, res, next) => {
       return next();
 }
 
+
 const reviewPermission = async (req, res, next) => {
   const review = await Review.findOne({
     where: {
@@ -163,5 +164,5 @@ module.exports = {
   spotPermission, reviewPermission,
   bookingPermission,
   bookingBelongsPermission,
-  spotOwnerOrBookingOwnerPermission
+  spotOwnerOrBookingOwnerPermission,
 }
