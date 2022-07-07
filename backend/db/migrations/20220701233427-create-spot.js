@@ -48,7 +48,7 @@ module.exports = {
         allowNull: false
       },
       pricePerNight: {
-        type: Sequelize.FLOAT,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       previewImage: {
