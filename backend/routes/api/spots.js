@@ -346,14 +346,19 @@ const validateQueryFilters = [
     //     if (value < 0) throw new Error ('Page must be greater than or equal to 0')
     //     return true;
     // }),
-    check('size')
-    .custom(value => {
-        if (value < 0) throw new Error ('Size must be greater than or equal to 0')
-        return true;
-    }),
+    // check('size')
+    // .custom(value => {
+    //     if (value < 0) throw new Error ('Size must be greater than or equal to 0')
+    //     return true;
+    // }),
     body('page')
     .custom((value, { req }) => {
         if (req.query.page < 0) throw new Error ('Page must be greater than or equal to 0')
+        return true
+    }),
+    body('size')
+    .custom((value, { req }) => {
+        if (req.query.size < 0) throw new Error ('Size must be greater than or equal to 0')
         return true
     }),
     body('minLat')
@@ -378,6 +383,7 @@ const validateQueryFilters = [
     }),
     body('minPrice')
     .custom((value, { req }) => {
+        // if (req.query.minPrice % 1 === 0 ) throw new Error ('Minimum price is invalid')
         if (req.query.minPrice < 0 ) throw new Error ('Minimum price must be greater than 0')
         return true
     })
@@ -387,6 +393,7 @@ const validateQueryFilters = [
     }),
     body('maxPrice')
     .custom((value, { req }) => {
+        // if (req.query.maxPrice % 1 === 0 ) throw new Error ('Maximum price is invalid')
         if (req.query.maxPrice < 0 ) throw new Error ('Maximum price must be greater than 0')
         return true
     })
@@ -397,13 +404,13 @@ const validateQueryFilters = [
     handleValidationErrors
 ]
 
-
+// Get all spots & Query Filters
 router.get('/', validateQueryFilters, async (req, res, next) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
 
     let where = {};
 
-    let pagination = {};
+    // let pagination = {};
 
     if (minLat && maxLat) {
         var latQuery = {
@@ -428,6 +435,7 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
             pricePerNight: {
                 [Op.gte]: minPrice,
                 [Op.lte]: maxPrice
+
             }
         }
     }

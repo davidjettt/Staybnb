@@ -66,7 +66,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     pricePerNight: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: false
     },
     previewImage: {
