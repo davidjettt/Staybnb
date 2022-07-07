@@ -340,10 +340,112 @@ router.delete('/:spotId', existsSpot, requireAuth, spotPermission, async (req, r
     return res.json({message: "Successfuly deleted", statusCode: 200});
 })
 
-router.get('/', async (req, res, next) => {
-    const spots = await Spot.findAll();
+const validateQueryFilters = [
+    // check('page')
+    // .custom(value => {
+    //     if (value < 0) throw new Error ('Page must be greater than or equal to 0')
+    //     return true;
+    // }),
+    check('size')
+    .custom(value => {
+        if (value < 0) throw new Error ('Size must be greater than or equal to 0')
+        return true;
+    }),
+    body('page')
+    .custom((value, { req }) => {
+        if (req.query.page < 0) throw new Error ('Page must be greater than or equal to 0')
+        return true
+    }),
+    body('minLat')
+    .custom((value, { req }) => {
+        if (req.query.minLat % 1 === 0 ) throw new Error ('Minimum latitude is invalid')
+        return true
+    }),
+    body('maxLat')
+    .custom((value, { req }) => {
+        if (req.query.maxLat % 1 === 0 ) throw new Error ('Maximum latitude is invalid')
+        return true
+    }),
+    body('minLng')
+    .custom((value, { req }) => {
+        if (req.query.minLng % 1 === 0 ) throw new Error ('Minimum longitude is invalid')
+        return true
+    }),
+    body('maxLng')
+    .custom((value, { req }) => {
+        if (req.query.maxLng % 1 === 0 ) throw new Error ('Maximum longitude is invalid')
+        return true
+    }),
+    body('minPrice')
+    .custom((value, { req }) => {
+        if (req.query.minPrice < 0 ) throw new Error ('Minimum price must be greater than 0')
+        return true
+    }),
+    body('maxPrice')
+    .custom((value, { req }) => {
+        if (req.query.maxPrice < 0 ) throw new Error ('Maximum price must be greater than 0')
+        return true
+    }),
+    handleValidationErrors
+]
 
-    return res.json({ spots });
+
+router.get('/', validateQueryFilters, async (req, res, next) => {
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    if (minLat && maxLat) {
+        var latQuery = {
+            latitude: {
+                [Op.gte]: minLat,
+                [Op.lte]: maxLat
+            }
+        }
+    }
+
+    if (minLng && maxLng) {
+        var lngQuery = {
+            latitude: {
+                [Op.gte]: minLng,
+                [Op.lte]: maxLng
+            }
+        }
+    }
+
+    if (minPrice && maxPrice) {
+        var priceQuery = {
+            pricePerNight: {
+                [Op.gte]: minPrice,
+                [Op.lte]: maxPrice
+            }
+        }
+    }
+
+    page = parseInt(page);
+    size = parseInt(size);
+
+    if (isNaN(page)) page = 0;
+    if (isNaN(size)) size = 20;
+
+    if (size > 20) size = 20;
+    if (page > 10) page = 10;
+
+    let where = {
+        ...latQuery,
+        ...lngQuery,
+        ...priceQuery
+    };
+
+    const spots = await Spot.findAll({
+        where,
+        limit: size,
+        offset: size * (page - 1)
+    });
+
+    return res.json({
+        spots,
+        page,
+        size
+    });
 });
 
 
