@@ -29,6 +29,75 @@ const existsReview = async (req, res, next) => {
     return next();
 }
 
+
+const reviewImagesCount = async (req, res, next) => {
+    const imageCount = await Image.count({
+        where: {
+            reviewId: req.params.reviewId
+        },
+        // include: {
+        //     model: Review,
+        //     where: {
+        //         reviewId: req.params.reviewId
+        //     }
+        // }
+    })
+
+    if (imageCount > 10) {
+        const err = new Error ('Maximum number of images for this resource was reached');
+        err.status = 400;
+        return next(err);
+    }
+
+    return next();
+}
+
+// Create image by review id
+router.post('/:reviewId/images', existsReview, requireAuth, reviewPermission, reviewImagesCount, async (req, res, next) => {
+    const { url } = req.body;
+
+    const image = await Image.create({
+        reviewId: req.params.reviewId,
+        url
+    });
+
+    const findImage = await Image.findOne({
+        where: {
+            reviewId: req.params.reviewId,
+            url: url
+        }
+    })
+
+    // const test = await Image.build({
+    //     reviewId: Number(req.params.reviewId),
+    //     url
+    // })
+    // // const result = test.toJSON();
+    // test.imageableId = Number(req.params.reviewId);
+    // test.imageableType = 'Review';
+    // await test.save()
+
+    // const findImage = await Image.findOne({
+    //     include: {
+    //         model: Review,
+    //         where: {
+    //             id: req.params.reviewId
+    //         },
+    //         attributes: []
+    //     },
+    //     where: {
+    //         url: url
+    //     }
+    // })
+
+    const result = findImage.toJSON();
+    result.imageableId = Number(req.params.reviewId);
+    result.imageableType = 'Review';
+
+    return res.json(result)
+});
+
+
 // Edit a review
 router.put('/:reviewId', existsReview, requireAuth, reviewPermission, validateReview, async (req, res, next) => {
     const oldReview = await Review.findByPk(req.params.reviewId);

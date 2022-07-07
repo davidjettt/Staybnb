@@ -150,7 +150,7 @@ const bookingConflictErr = async (req, res, next) => {
     return next()
 }
 
-
+// Create an image by spot id
 router.post('/:spotId/images', existsSpot, requireAuth, spotPermission, async (req, res, next) => {
     const { url } = req.body;
 
