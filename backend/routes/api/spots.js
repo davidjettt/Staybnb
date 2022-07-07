@@ -433,8 +433,8 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
     if (minPrice && maxPrice) {
         var priceQuery = {
             pricePerNight: {
-                [Op.gte]: minPrice,
-                [Op.lte]: maxPrice
+                [Op.gte]: Number(minPrice),
+                [Op.lte]: Number(maxPrice)
 
             }
         }
