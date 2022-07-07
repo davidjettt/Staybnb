@@ -384,21 +384,21 @@ const validateQueryFilters = [
     body('minPrice')
     .custom((value, { req }) => {
         // if (req.query.minPrice % 1 === 0 ) throw new Error ('Minimum price is invalid')
-        if (req.query.minPrice < 0 ) throw new Error ('Minimum price must be greater than 0')
+        if (Number(req.query.minPrice) < 0 ) throw new Error ('Minimum price must be greater than 0')
         return true
     })
     .custom((value, { req }) => {
-        if (req.query.minPrice % 1 === 0 ) throw new Error ('Minimum price is invalid')
+        if (Number(req.query.minPrice) % 1 === 0 ) throw new Error ('Minimum price is invalid')
         return true
     }),
     body('maxPrice')
     .custom((value, { req }) => {
         // if (req.query.maxPrice % 1 === 0 ) throw new Error ('Maximum price is invalid')
-        if (req.query.maxPrice < 0 ) throw new Error ('Maximum price must be greater than 0')
+        if (Number(req.query.maxPrice) < 0 ) throw new Error ('Maximum price must be greater than 0')
         return true
     })
     .custom((value, { req }) => {
-        if (req.query.maxPrice % 1 === 0 ) throw new Error ('Maximum price is invalid')
+        if (Number(req.query.maxPrice) % 1 === 0 ) throw new Error ('Maximum price is invalid')
         return true
     }),
     handleValidationErrors
