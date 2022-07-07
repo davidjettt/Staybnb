@@ -167,6 +167,7 @@ router.post('/:spotId/images', existsSpot, requireAuth, spotPermission, async (r
     // })
     const findImage = await Image.findOne({
         where: {
+            id: image.id,
             spotId: req.params.spotId,
             url: url
         }
