@@ -395,6 +395,8 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
 
     let where = {};
 
+    let pagination = {};
+
     if (minLat && maxLat) {
         var latQuery = {
             latitude: {
@@ -428,9 +430,13 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
     if (isNaN(page)) page = 0;
     if (isNaN(size)) size = 20;
 
-    if (page = 0) page = 1;
+    if (page === 0) page = 1;
     if (size > 20) size = 20;
     if (page > 10) page = 10;
+
+    // if (page >= 0) {
+
+    // }
 
     where = {
         ...latQuery,
