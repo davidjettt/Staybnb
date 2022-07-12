@@ -4,6 +4,12 @@
 
 ![](airbnb-clone-db-schema-2.png)
 
+## Notes
+
+1. The most challenging part of the project was comparing dates to see which one is starts before the other one. Also adjusting to the flow of this project at the very beginning was a challenge.
+2. I am most proud of the validation error messages that appear when a user inputs an invalid request. If multiple fields are invalid then an error message for each invalid request would be the response.
+3. I would like to go back and clean up my code. Perhaps making another file to store all my middleware functions so the routes files aren't so cluttered and will only contain the routes themselves. I would also like to go back and try to re create the bookingConflictErr middleware function so that in achieves the same thing with less code.
+
 
 ## API Documentation
 
