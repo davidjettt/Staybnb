@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
-const SIGNUP_USER = 'session/signupUser';
+
 
 
 export const setUser = (user) => {
@@ -35,7 +35,7 @@ export const login = (user) => async (dispatch) => {
 }
 
 // Restore session user thunk -- GET
-export const restoreUserThunk = () => async (dispatch) => {
+export const restoreUser = () => async (dispatch) => {
     const response = await csrfFetch('/api/session');
 
     const data = await response.json();
@@ -44,7 +44,7 @@ export const restoreUserThunk = () => async (dispatch) => {
 }
 
 // Sign up user thunk
-export const signupThunk = (user) => async (dispatch) => {
+export const signup = (user) => async (dispatch) => {
     const { firstName, lastName, email, password } = user;
     // console.log(user);
     const response = await csrfFetch('/api/users', {
@@ -64,7 +64,7 @@ export const signupThunk = (user) => async (dispatch) => {
 }
 
 // Logout user thunk
-export const logoutThunk = () => async (dispatch) => {
+export const logout = () => async (dispatch) => {
     const response = await csrfFetch('/api/session', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' }

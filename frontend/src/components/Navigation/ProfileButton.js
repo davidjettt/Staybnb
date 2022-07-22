@@ -28,13 +28,15 @@ export default function ProfileButton({ user }) {
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logoutThunk());
+        dispatch(sessionActions.logout());
     };
     return (
         <>
             <button className="profile-button" onClick={openMenu}>
                 <i className="fa-solid fa-circle-user"></i>
             </button>
+
+
         {showMenu && (
             <ul className='profile-dropdown'>
                 <li>{user.email}</li>
