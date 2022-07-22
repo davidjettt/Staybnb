@@ -9,10 +9,6 @@ const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
-
-
-
-
 // Log out
 router.delete(
     '/',
