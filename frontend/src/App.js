@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
+import SignupFormPage from './components/SignUpFormPage';
+import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 
 function App() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
     dispatch(sessionActions.restoreUserThunk()).then(() => setIsLoaded(true));
   }, [dispatch])
 
-  const logoutHandler = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.removeUser());
-    history.push('/login');
-  }
 
-  return isLoaded && (
-    <Switch>
-      <Route exact path='/'>
-        <button onClick={logoutHandler}>LOG OUT</button>
-      </Route>
-      <Route path='/login'>
-        <LoginFormPage />
-      </Route>
-    </Switch>
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+
+      <Switch>
+        <Route path='/login'>
+          <LoginFormPage />
+        </Route>
+        <Route path='/signup'>
+          <SignupFormPage />
+        </Route>
+      </Switch>
+
+    </>
   );
 }
 

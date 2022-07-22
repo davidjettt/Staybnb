@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const SIGNUP_USER = 'session/signupUser';
 
 
 export const setUser = (user) => {
@@ -28,8 +29,8 @@ export const login = (user) => async (dispatch) => {
     })
 
     const data = await response.json();
+    // console.log(data.user)
     dispatch(setUser(data));
-    // console.log(response)
     return response;
 }
 
@@ -39,6 +40,38 @@ export const restoreUserThunk = () => async (dispatch) => {
 
     const data = await response.json();
     dispatch(setUser(data));
+    return response;
+}
+
+// Sign up user thunk
+export const signupThunk = (user) => async (dispatch) => {
+    const { firstName, lastName, email, password } = user;
+    // console.log(user);
+    const response = await csrfFetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            password
+        })
+    })
+    // console.log(response)
+    const data = await response.json();
+    dispatch(setUser(data))
+    return response;
+}
+
+// Logout user thunk
+export const logoutThunk = () => async (dispatch) => {
+    const response = await csrfFetch('/api/session', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+    })
+
+    // const data = await response.json();
+    dispatch(removeUser());
     return response;
 }
 
