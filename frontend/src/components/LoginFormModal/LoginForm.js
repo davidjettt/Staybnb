@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import './LoginForm.css';
 
 export default function LoginForm() {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export default function LoginForm() {
         return dispatch(sessionActions.login({ email, password })).catch(
             async (res) => {
             const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
+            if (data && data.message) setErrors([data.message]);
             }
             );
         };
@@ -24,7 +25,7 @@ export default function LoginForm() {
             <h3 className='login-page-title'>Welcome to Airbnb</h3>
             <form className='login-form' onSubmit={handleSubmit}>
                 <div className='errors'>
-                    <ul>
+                    <ul className="errors-list">
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                 </div>

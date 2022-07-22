@@ -35,7 +35,7 @@ export default function SignupFormPage() {
             <h3 className='login-page-title'>Sign Up</h3>
             <form className='login-form' onSubmit={handleSubmit}>
                 <div className='errors'>
-                    <ul>
+                    <ul className='errors'>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
                 </div>
