@@ -9,5 +9,25 @@
 
 
 .profile-button {
-    border-radius: 20px;
+    border: 1px solid #717171;
+    border-radius: 10px;
+    display: inline;
+    padding: 5px 5px 5px 12px;
+
+}
+
+.sign-in-container {
+    display: flex;
+}
+
+.profile-icon {
+    color: #717171;
+}
+
+.three-lines-icon {
+    color: #717171;
+}
+
+.logo {
+    color: coral;
 }
