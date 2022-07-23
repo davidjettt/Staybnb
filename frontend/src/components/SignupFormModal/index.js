@@ -8,8 +8,8 @@ export default function SignUpFormModal() {
 
     return (
         <>
-            {/* <button onClick={() => setShowModal(true)}>Sign Up</button> */}
-            <Link onClick={() => setShowModal(true)}>Sign Up</Link>
+            <button style={{ background: 'transparent', borderColor: 'white' }} onClick={() => setShowModal(true)}>Sign Up</button>
+            {/* <Link onClick={() => setShowModal(true)}>Sign Up</Link> */}
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <SignupForm />
