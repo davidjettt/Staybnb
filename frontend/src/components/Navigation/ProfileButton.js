@@ -2,31 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import LoginFormModal from "../LoginFormModal";
-
+import ProfileIconDropdown from "../ProfileIconDropdown";
 import SignUpFormModal from "../SignupFormModal";
 import './Navigation.css'
 
 
-
 export default function ProfileButton({ user }) {
+    console.log('I RERENDERED')
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log(showMenu)
-    let modalComp;
 
     const openMenu = () => {
         if (showMenu) return;
         setShowMenu(true);
-            // console.log('TEST')
-            modalComp = (
-                <>
-                    <LoginFormModal />
-                    <SignUpFormModal />
-                </>
-            )
-
     };
 
     useEffect(() => {
@@ -38,19 +28,43 @@ export default function ProfileButton({ user }) {
 
         document.addEventListener('click', closeMenu);
 
-        return () => document.removeEventListener("click", closeMenu);
+        return () => {
+            document.removeEventListener("click", closeMenu)};
     }, [showMenu]);
 
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
     };
+
+    // const test = (e) => {
+    //     const ele = document.getElementsByClassName('test')[0]
+    //     ele.addEventListener('focus', e => {
+    //         console.log('test')
+    //     })
+    // }
+
+    useEffect(() => {
+        const listener = () => {
+            console.log('test');
+            setShowMenu(true)
+            return (
+                <LoginFormModal />
+            )
+        }
+        if (showMenu) {
+                const ele = document.getElementById('test')
+                console.log(ele)
+                ele.addEventListener('click', listener)
+        }
+    }, [showMenu])
+
+
     return (
         <>
             <button className="profile-button" onClick={openMenu}>
                 <div className="sign-in-container">
 
-                        {/* <i className="fa-solid fa-circle-user"></i> */}
                         <div className="three-lines-icon">
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><g fill="none" fillRule="nonzero"><path d="m2 16h28"></path><path d="m2 24h28"></path><path d="m2 8h28"></path></g></svg>
                         </div>
@@ -60,22 +74,28 @@ export default function ProfileButton({ user }) {
                     </div>
                 </div>
             </button>
-            {/* {showMenu && <LoginFormModal />} */}
-        {showMenu && (
-            <ul className='profile-dropdown'>
-                {sessionUser ? <li>{user.email}</li> : null}
-                {/* <li>
-                    <LoginFormModal />
-                </li>
-                <li>
-                    <SignUpFormModal />
-                </li> */}
-                <li>
-                {sessionUser ? <button onClick={logout}>Log Out</button> : null}
-                </li>
-            </ul>
-        )}
-        {console.log(modalComp)}
+
+            <div className="main-dropdown-container">
+                {console.log('show menu', showMenu)}
+                {showMenu && (
+                    <div className="dropdown-menu">
+                        <div className='profile-dropdown'>
+                            {sessionUser ? <div>{user.email}</div> : null}
+                            <div >
+                                <LoginFormModal onClick={() => setShowMenu(true)} showMenu={showMenu} />
+                            </div>
+                            <div>
+                                <SignUpFormModal />
+                            </div>
+                            <div>
+                            {sessionUser ? <button onClick={logout}>Log Out</button> : null}
+                            </div>
+                        </div>
+                    </div>
+                    // <ProfileIconDropdown />
+
+                )}
+            </div>
         </>
     )
 }
