@@ -44,6 +44,10 @@ export default function LoginFormModal() {
         dispatch(sessionActions.logout());
     };
 
+    const submit = (e) => {
+        e.preventDefault();
+        setShowModal(false)
+    }
 
 
     return (
@@ -60,7 +64,7 @@ export default function LoginFormModal() {
                     </div>
                 </div>
             </button>
-
+            {console.log('modal', showModal)}
             <div className='main-dropdown-container'>
                 <div className='dropdown-menu'>
                     {showMenu && <div>
@@ -75,8 +79,8 @@ export default function LoginFormModal() {
                             setShowModal2(true)}}>Sign Up</button>}
                     </div>}
                     {showModal && (
-                        <Modal onClose={() => setShowModal(false)}>
-                            <LoginForm />
+                        <Modal  onClose={() => setShowModal(false)}>
+                            <LoginForm  />
                         </Modal>
                     )}
                     {showModal2 && (

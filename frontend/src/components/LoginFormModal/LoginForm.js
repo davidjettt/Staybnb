@@ -5,27 +5,36 @@ import './LoginForm.css';
 
 import { Redirect } from "react-router-dom";
 
+import { useModalContext } from "../../context/Modal";
+
 export default function LoginForm() {
+
+    // const { showModal, setShowModal } = useModalContext();
+
+
     const dispatch = useDispatch();
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [errors, setErrors] = useState([]);
 
+
     const sessionUser = useSelector(state => state.session.user);
 
-    if (sessionUser) return (
-            <Redirect to='/' />
-    )
+    // if (sessionUser) return (
+    //         <Redirect to='/' />
+    // )
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ email, password })).catch(
+
+        dispatch(sessionActions.login({ email, password })).catch(
             async (res) => {
-            const data = await res.json();
-            if (data && data.message) setErrors([data.message]);
+                const data = await res.json();
+                if (data && data.message) setErrors([data.message]);
             }
-            );
+        );
+
         };
 
     return (
