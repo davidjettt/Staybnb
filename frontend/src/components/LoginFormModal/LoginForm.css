@@ -208,3 +208,9 @@ input {
 .profile-button {
     cursor: pointer;
 }
+
+.x-button-login {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}

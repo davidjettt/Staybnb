@@ -36,8 +36,8 @@ export default function LoginForm() {
     return (
         <div>
             <header className="login-form-header">
-                <div className="X-button-container">
-                    <button style={{background: 'transparent', borderColor: 'white', appearance: 'none'}}>
+                <div className="x-button-container">
+                    <button className="x-button-login" >
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
                     </button>
                 </div>
