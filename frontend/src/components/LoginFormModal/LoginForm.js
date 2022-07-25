@@ -62,7 +62,6 @@ export default function LoginForm() {
                             <div className='input-container-sub'>
                                 <div className="email-input-container">
                                     <label htmlFor='box'>
-
                                         <input
                                             className='email-input-field email'
                                             id='box'
