@@ -112,45 +112,65 @@ module.exports = {
       {
         spotId: 6,
         reviewId: null,
-        url: 'https://www.brandonarchitects.com/content/6RJazue1ySQv_l.jpg'
+        url: 'https://www.brandonarchitects.com/content/EP1Jx_4KFZpN_l.jpg'
       },
       {
         spotId: 6,
+        reviewId: null,
+        url: 'https://www.brandonarchitects.com/content/14s9ZXuJfIxc_l.jpg'
+      },
+      {
+        spotId: 6,
+        reviewId: null,
+        url: 'https://www.brandonarchitects.com/content/hLZfmUqi_oRy_l.jpg'
+      },
+      {
+        spotId: 6,
+        reviewId: null,
+        url: 'https://www.brandonarchitects.com/content/gvQEkqcStMzV_l.jpg'
+      },
+      {
+        spotId: 7,
+        reviewId: null,
+        url: 'https://www.brandonarchitects.com/content/6RJazue1ySQv_l.jpg'
+      },
+      {
+        spotId: 7,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/mLbrxkj9JotQ_l.jpg'
       },
       {
-        spotId: 6,
+        spotId: 7,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/y_KNH3MQgOYX_l.jpg'
       },
       {
-        spotId: 7,
+        spotId: 8,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/lygTb82KRoOB_l.jpg'
       },
       {
-        spotId: 7,
+        spotId: 8,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/YI91cLaCxFfw_l.jpg'
       },
       {
-        spotId: 7,
+        spotId: 8,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/fhuJHxUnFVWz_l.jpg'
       },
       {
-        spotId: 8,
+        spotId: 9,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/p7Tk4nRMwsUy_l.jpg'
       },
       {
-        spotId: 8,
+        spotId: 9,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/nCTJDgdzsxGF_l.jpg'
       },
       {
-        spotId: 8,
+        spotId: 9,
         reviewId: null,
         url: 'https://www.brandonarchitects.com/content/GHtRbs_4PzAS_l.jpg'
       },

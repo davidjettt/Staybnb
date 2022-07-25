@@ -24,8 +24,8 @@ export default function Spots() {
     return (
         <>
             <div className='main-content-container'>
-                {spots.map((spot) => (
-                    <div className='card-spot'>
+                {spots.map((spot, idx) => (
+                    <div key={idx} className='card-spot'>
                         <Link to={`/spots/${spot.id}`}>
                             <img style={{width: 277, height: 263}} src={spot.previewImage}/>
                             <h4>{`${spot.city}, ${spot.state}`}</h4>

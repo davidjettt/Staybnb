@@ -36,19 +36,18 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <CategoryButtons />
       <Route exact path='/'>
+        <CategoryButtons />
         <Spots />
       </Route>
       <Route path='/your-spots'>
         <YourSpots />
       </Route>
-      <Route path='/spots/:spotId'>
+      <Route exact path='/spots/:spotId'>
         <SpotDetail />
       </Route>
       {isLoaded && (
       <Switch>
-
         <Route path='/login'>
           <LoginFormPage />
         </Route>
@@ -57,14 +56,6 @@ function App() {
         </Route>
       </Switch>
       )}
-      {/* <Switch>
-        <Route path='/'>
-          <h1>Spots will go here</h1>
-        </Route>
-        <Route>
-          <h1>Page Not Found</h1>
-        </Route>
-      </Switch> */}
     </>
   );
 }

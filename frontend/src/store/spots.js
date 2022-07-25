@@ -1,6 +1,7 @@
 
 const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_SPOTS_BY_USER = 'spots/getSpotsByUser';
+const GET_SPOT_DETAILS = 'spots/getSpotDetails';
 
 export const getAllSpots = (spots) => {
     return {
@@ -14,7 +15,14 @@ export const getSpotsByUser = (spots) => {
         payload: spots
     }
 }
+export const getSpotDetails = (spot) => {
+    return {
+        type: GET_SPOT_DETAILS,
+        payload: spot
+    }
+}
 
+// GET ALL SPOTS THUNK
 export const getAllSpotsThunk = () => async (dispatch) => {
     const response = await fetch('/api/spots');
 
@@ -25,14 +33,28 @@ export const getAllSpotsThunk = () => async (dispatch) => {
     }
 }
 
+// GET ALL SPOTS THAT BELONG TO CURRENT USER
 export const getSpotsByUserThunk = () => async (dispatch) => {
     const response = await fetch('/api/your-spots');
-    console.log('response', response)
+    // console.log('response', response)
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data', data)
+        // console.log('data', data)
         dispatch(getSpotsByUser(data));
+    }
+}
+
+// GET DETAILS OF A SPOT BY ID
+export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
+    const response = await fetch(`/api/spots/${spotId}`)
+        .catch(err => console.log(err))
+
+    console.log('RESPONSE', response);
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getSpotDetails(data));
     }
 }
 
@@ -52,24 +74,29 @@ export const getSpotsByUserThunk = () => async (dispatch) => {
 const initialState = {};
 
 export default function spotsReducer(state = initialState, action) {
-    let newState;
-    // console.log(action)
+    console.log('ACTION', action)
     switch(action.type) {
         case GET_ALL_SPOTS: {
-            newState = {...state};
+            let newState = {...state};
             action.payload.spots.forEach((spot) => {
                 newState[spot.id] = spot;
             })
             return newState;
         }
         case GET_SPOTS_BY_USER: {
-            console.log('PAYLOAD', action.payload)
+            // console.log('PAYLOAD', action.payload)
             let newState2 = {}
             action.payload.spots.forEach((spot) => {
                 newState2[spot.id] = spot;
             })
-            console.log('NEW STATE', newState2)
+            // console.log('NEW STATE', newState2)
             return newState2;
+        }
+        case GET_SPOT_DETAILS: {
+            console.log('payload', action.payload)
+            let newState = {};
+            newState[action.payload.id] = action.payload;
+            return newState;
         }
         default:
             return state
