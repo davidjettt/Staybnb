@@ -7,6 +7,8 @@ import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import LoginFormModal from './components/LoginFormModal';
 import LoginForm from './components/LoginFormModal/LoginForm';
+import Spots from './components/Spots/Spots';
+import CategoryButtons from './components/CategoryButtons/CategoryButtons';
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +34,10 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <Route exact path='/'>Spots will go here</Route>
+      <CategoryButtons />
+      <Route exact path='/'>
+        <Spots />
+      </Route>
       {isLoaded && (
       <Switch>
 

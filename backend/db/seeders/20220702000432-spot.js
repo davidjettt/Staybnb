@@ -24,7 +24,7 @@ module.exports = {
         name: 'Luxury Penthouse',
         description: 'Luxurious penthouse with an amazing view of the strip',
         pricePerNight: 523,
-        previewImage: 'image url'
+        previewImage: 'https://cdn.tatlerasia.com/asiatatler/i/ph/2019/07/18161159-3-super-penthouse_cover_2000x1168.jpg'
       },
       {
         ownerId: 1,
@@ -37,7 +37,7 @@ module.exports = {
         name: 'Big Bear Mansion',
         description: 'Stay for large groups who like to enjoy the snow',
         pricePerNight: 523,
-        previewImage: 'image url'
+        previewImage: 'https://www.sbsun.com/wp-content/uploads/2020/06/SBS-L-AURORA-0615-07-1.jpg?w=620'
       },
       {
         ownerId: 2,
@@ -50,7 +50,7 @@ module.exports = {
         name: 'Party Sanctuary',
         description: 'Fun stay for large groups who enjoy the Miami life',
         pricePerNight: 647,
-        previewImage: 'image url'
+        previewImage: 'https://en.mansionesmiami.com/wp-content/uploads/2020/07/espectacular-mansion-en-miami-beach-con-luces-de-noche.jpg'
       },
       {
         ownerId: 3,
@@ -63,7 +63,7 @@ module.exports = {
         name: 'Beach House',
         description: 'There is a place off of Ocean Avenue',
         pricePerNight: 347,
-        previewImage: 'image url'
+        previewImage: 'https://media.vrbo.com/lodging/28000000/27320000/27314000/27313935/e7c3076b.c10.jpg'
       },
       {
         ownerId: 3,
@@ -76,7 +76,7 @@ module.exports = {
         name: 'City House',
         description: 'Great for those who love the city',
         pricePerNight: 143,
-        previewImage: 'image url'
+        previewImage: 'https://architecturesstyle.com/wp-content/uploads/2021/01/modern-beach-house-3.jpg'
       },
       {
         ownerId: 1,
@@ -86,23 +86,23 @@ module.exports = {
         country: 'United States of America',
         latitude: 69.7645358,
         longitude: 39.4730327,
-        name: 'Forest House',
-        description: 'Tree Huggers',
+        name: 'Vail',
+        description: 'Modern home',
         pricePerNight: 143,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/EP1Jx_4KFZpN_l.jpg'
       },
       {
         ownerId: 3,
         address: '123 Maple Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: 79.7645358,
         longitude: 50.4730327,
-        name: 'Great House',
+        name: 'River',
         description: 'Nearby downtown',
         pricePerNight: 142,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/QuoFlAhpwCTJ_l.jpg'
       },
       {
         ownerId: 1,
@@ -115,7 +115,7 @@ module.exports = {
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 333,
-        previewImage: 'image url'
+        previewImage: 'https://i.pinimg.com/originals/85/63/a6/8563a69c15278578ee1eead136d33e72.jpg'
       },
       {
         ownerId: 1,
@@ -128,7 +128,7 @@ module.exports = {
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 654,
-        previewImage: 'image url'
+        previewImage: 'https://cdn.onekindesign.com/wp-content/uploads/2015/07/Manhattan-Beach-House-DISC-Interiors-01-1-Kindesign-600x397.jpg'
       },
       {
         ownerId: 1,
@@ -141,7 +141,7 @@ module.exports = {
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 332,
-        previewImage: 'image url'
+        previewImage: 'https://cdn.onekindesign.com/wp-content/uploads/2020/03/Modern-Zen-House-Brandon-Architects-01-1-Kindesign.jpg'
       },
       {
         ownerId: 1,
@@ -154,7 +154,7 @@ module.exports = {
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 444,
-        previewImage: 'image url'
+        previewImage: 'https://cdn.onekindesign.com/wp-content/uploads/2021/06/Midcentury-Modern-Custom-Home-Brandon-Architects-01-1-Kindesign.jpg'
       },
       {
         ownerId: 1,
@@ -167,241 +167,124 @@ module.exports = {
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 547,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/JD6lXNLjaxFf_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test6 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Costa Mesa',
+        state: 'California',
         country: 'United States of America',
         latitude: -79.7645358,
         longitude: -50.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 88,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/r72VvzpIUAkP_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test7 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: 100.7645358,
         longitude: 162.4730327,
-        name: 'Great House',
+        name: 'Signal',
         description: 'Nearby downtown',
         pricePerNight: 953,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/GfauCgU6XLFm_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test8 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: 2.7645358,
         longitude: 41.4730327,
-        name: 'Great House',
+        name: 'Harbor Island',
         description: 'Nearby downtown',
         pricePerNight: 375,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/8UsqvBWzr_l0_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test9 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Corona Del Mar',
+        state: 'California',
         country: 'United States of America',
         latitude: 10.7645358,
         longitude: 99.4730327,
-        name: 'Great House',
+        name: 'Orrington II',
         description: 'Nearby downtown',
         pricePerNight: 234,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/eraUOwQ8CnxP_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test10 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: 132.7645358,
         longitude: 23.4730327,
-        name: 'Great House',
+        name: 'South Bay Front',
         description: 'Nearby downtown',
         pricePerNight: 532,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/yj9OcUe73IXa_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test11 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: -79.7645358,
         longitude: 100.4730327,
-        name: 'Great House',
+        name: 'Hazel I',
         description: 'Nearby downtown',
         pricePerNight: 321,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/uPCqxgOkFr8B_l.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test12 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Newport Beach',
+        state: 'California',
         country: 'United States of America',
         latitude: -123.7645358,
         longitude: 32.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 60,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/Ptgn_NBywMZd_s.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test13 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Corona Del Mar',
+        state: 'California',
         country: 'United States of America',
         latitude: 22.7645358,
         longitude: -52.4730327,
-        name: 'Great House',
+        name: 'Larkspur V',
         description: 'Nearby downtown',
         pricePerNight: 547,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/BGJpEhRlZL_j_l.jpg'
       },
       {
         ownerId: 1,
         address: '123 Test14 Ave',
-        city: 'Tampa',
-        state: 'Florida',
+        city: 'Corona Del Mar',
+        state: 'California',
         country: 'United States of America',
         latitude: 32.7645358,
         longitude: -99.4730327,
         name: 'Great House',
         description: 'Nearby downtown',
         pricePerNight: 90,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test15 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: -179.7645358,
-        longitude: -150.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 666,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test16 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 89.7645358,
-        longitude: 10.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 888,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test17 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 7.7645358,
-        longitude: 5.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 321,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test18 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 90.7645358,
-        longitude: 230.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 500,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test19 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: -239.7645358,
-        longitude: -520.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 100,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test20 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 19.7645358,
-        longitude: 70.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 124,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test21 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 98.7645358,
-        longitude: 4.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 947,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test22 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 7.7645358,
-        longitude: -5.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 147,
-        previewImage: 'image url'
-      },
-      {
-        ownerId: 1,
-        address: '123 Test23 Ave',
-        city: 'Tampa',
-        state: 'Florida',
-        country: 'United States of America',
-        latitude: 49.7645358,
-        longitude: -40.4730327,
-        name: 'Great House',
-        description: 'Nearby downtown',
-        pricePerNight: 1547,
-        previewImage: 'image url'
+        previewImage: 'https://www.brandonarchitects.com/content/4rhwK1xbaXeN_l.jpg'
       },
     ])
   },
@@ -430,15 +313,6 @@ module.exports = {
       '123 Test12 Ave',
       '123 Test13 Ave',
       '123 Test14 Ave',
-      '123 Test15 Ave',
-      '123 Test16 Ave',
-      '123 Test17 Ave',
-      '123 Test18 Ave',
-      '123 Test19 Ave',
-      '123 Test20 Ave',
-      '123 Test21 Ave',
-      '123 Test22 Ave',
-      '123 Test23 Ave',
       '123 Test Ave',
     ] }
     })
