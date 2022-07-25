@@ -24,19 +24,26 @@ export default function SpotDetail() {
     })
 
 
-    console.log ('SPOT DETAILS', spot)
-    // console.log ('SPOT IMAGES', spotImagesArr)
+    // console.log ('SPOT DETAILS', spot)
+    // console.log ('SPOT IMAGES', images.images)
     return (
-        <div className='spot-details-main-container'>
-            <div className='spot-details-header-container'>
-                <h1>{spot.name}</h1>
-            </div>
-            <div className='spot-images-container'>
-                {spot.Images.map((image, idx) => (
-                    // console.log('IMAGES', image.url)
-                    <img key={idx} style={{width: 300}} src={`${image.url}`} />
-                ))}
-            </div>
-        </div>
+        <>
+        {spot && <div className='spot-details-main-container'>
+                    <header className='spot-details-header-container'>
+                        <div className='spot-name-container'>
+                            <h1>{spot.name}</h1>
+                        </div>
+                        <div className='spot-details-container'>
+                            <span>{spot.avgStarRating}</span>
+                        </div>
+                    </header>
+                    <div className='spot-images-container'>
+                        {spot.Images && spot.Images.map((image, idx) => (
+                            // console.log('IMAGES', image.url)
+                            <img key={idx} style={{width: 300}} src={`${image.url}`} />
+                        ))}
+                    </div>
+                </div>}
+        </>
     )
 }
