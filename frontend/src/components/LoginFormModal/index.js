@@ -9,7 +9,7 @@ import ProfileIconDropdown from "../ProfileIconDropdown";
 import SignUpFormModal from "../SignupFormModal";
 import SignupForm from '../SignupFormModal/SignupForm';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import './LoginFormModal.css';
 
@@ -71,8 +71,8 @@ export default function LoginFormModal() {
                         {sessionUser ? <div>{sessionUser.email}</div> : null}
                     </div>}
                     {!sessionUser && <div>
-                        {showMenu && <button id="test" onClick={() => {
-                            setShowModal(true)}}>Log In</button>}
+                        {showMenu && <Link to='/login' onClick={() => {
+                            setShowModal(true)}}>Log In</Link>}
                     </div>}
                     {!sessionUser && <div>
                         {showMenu && <button onClick={() => {

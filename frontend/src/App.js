@@ -15,8 +15,8 @@ function App() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
+    if (!sessionUser) return;
 
-    // if (sessionUser) {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
         .catch((e) => {
           if (e) {
@@ -24,7 +24,7 @@ function App() {
             console.log(e);
           }
         })
-    // }
+
   }, [dispatch])
 
   console.log('is loaded', isLoaded)
@@ -35,7 +35,7 @@ function App() {
       <Switch>
 
         {/* <Route path='/login'>
-          <LoginFormPage />
+          <LoginFormModal />
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
@@ -43,7 +43,7 @@ function App() {
       </Switch>
       )}
       <Switch>
-        <Route exact path='/'>
+        <Route path='/'>
           <h1>HOME</h1>
         </Route>
         <Route>
