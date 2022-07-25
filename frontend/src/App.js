@@ -6,6 +6,7 @@ import SignupFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import LoginFormModal from './components/LoginFormModal';
+import LoginForm from './components/LoginFormModal/LoginForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ function App() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    if (!sessionUser) return;
+    // if (!sessionUser) return;
 
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
         .catch((e) => {
@@ -31,25 +32,26 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
+      <Route exact path='/'>Spots will go here</Route>
       {isLoaded && (
       <Switch>
 
-        {/* <Route path='/login'>
-          <LoginFormModal />
+        <Route path='/login'>
+          <LoginFormPage />
         </Route>
         <Route path='/signup'>
           <SignupFormPage />
-        </Route> */}
+        </Route>
       </Switch>
       )}
-      <Switch>
+      {/* <Switch>
         <Route path='/'>
-          <h1>HOME</h1>
+          <h1>Spots will go here</h1>
         </Route>
         <Route>
           <h1>Page Not Found</h1>
         </Route>
-      </Switch>
+      </Switch> */}
     </>
   );
 }

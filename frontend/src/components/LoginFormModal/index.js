@@ -66,17 +66,18 @@ export default function LoginFormModal() {
                 </button>
             </div>
             <div className='main-dropdown-container'>
+                {/* <ul> */}
                 <div className={className ? 'dropdown-menu' : 'off'}>
                     {showMenu && <div>
                         {sessionUser ? <div>{sessionUser.email}</div> : null}
                     </div>}
-                    {!sessionUser && <div>
-                        {showMenu && <Link to='/login' onClick={() => {
-                            setShowModal(true)}}>Log In</Link>}
-                    </div>}
-                    {!sessionUser && <div>
-                        {showMenu && <button onClick={() => {
-                            setShowModal2(true)}}>Sign Up</button>}
+                    {!sessionUser && <div className='dropdown-login-container'>
+                        {showMenu && <button className='dropdown-login-button' onClick={() => {
+                            setShowModal(true)}}>Log In</button> }
+                    </div> }
+                    {!sessionUser && <div className='dropdown-signup-container'>
+                        {showMenu && <li> <button className='dropdown-signup-button' onClick={() => {
+                            setShowModal2(true)}}>Sign Up</button> </li>}
                     </div>}
                     {showModal && (
                         <Modal  onClose={() => setShowModal(false)}>
@@ -92,6 +93,7 @@ export default function LoginFormModal() {
                         {sessionUser ? <button onClick={logout}>Log Out</button> : null}
                     </div>}
                 </div>
+                {/* </ul> */}
             </div>
         </div>
     )

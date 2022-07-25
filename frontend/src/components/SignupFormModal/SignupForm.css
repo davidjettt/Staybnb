@@ -55,6 +55,7 @@
 .signup-button {
     border: 0;
     border-radius: 4px;
+    cursor: pointer;
     /* background: #FF5A5F; */
     padding: 12px;
     color: white;
