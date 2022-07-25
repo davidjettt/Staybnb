@@ -2,28 +2,41 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 
+import './SignupForm.css'
+
 export default function SignupForm() {
     const dispatch = useDispatch();
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [ confirmPassword, setConfirmPassword ] = useState('');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setErrors([]);
-        return dispatch(sessionActions.login({ email, password })).catch(
-            async (res) => {
-            const data = await res.json();
-            if (data && data.errors) setErrors(data.errors);
-            }
-            );
-        };
+        if (password === confirmPassword) {
+            setErrors([]);
+            return dispatch(sessionActions.signup({ firstName, lastName, email, password }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
+        }
+        return setErrors(['Confirm Password field must be the same as the Password field']);
+    };
 
         return (
             <div>
-                <h3 className='signup-page-title'>Sign Up</h3>
+                <header className="signup-form-header">
+                    <div className="X-button-container">
+                        <button>X</button>
+                    </div>
+                    <div className="signup-form-header-title-container">
+                        <h3 className='signup-form-header-title'>Sign Up</h3>
+                    </div>
+                    <div></div>
+                </header>
                 <form className='login-form' onSubmit={handleSubmit}>
                     <div className='errors'>
                         <ul className="errors-list">
@@ -33,7 +46,7 @@ export default function SignupForm() {
                     <div className='input-container'>
                         <div>
                             <label>
-                                First Name
+
                                 <input
                                     className='first-name-input'
                                     type='text'
@@ -46,7 +59,7 @@ export default function SignupForm() {
                         </div>
                         <div>
                             <label>
-                                Last Name
+
                                 <input
                                     className='last-name-input'
                                     type='text'
@@ -59,7 +72,7 @@ export default function SignupForm() {
                         </div>
                         <div>
                             <label htmlFor='box'>
-                                Email
+
                                 <input
                                     className='email-input-field email'
                                     id='box'
@@ -73,7 +86,6 @@ export default function SignupForm() {
                         </div>
                         <div>
                             <label>
-                                Password
                                 <input
                                     className='password-input-field'
                                     type='password'
@@ -84,7 +96,22 @@ export default function SignupForm() {
                                 />
                             </label>
                         </div>
-                        <button className='signup-button' type='submit'>Sign Up</button>
+                        <div>
+                        <label>
+
+                            <input
+                                className='confirm-pw-input-field'
+                                type='password'
+                                placeholder='Confirm Password'
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                        </label>
+                    </div>
+                        <div className="signup-button-container">
+                            <button className='signup-button' type='submit'>Sign Up</button>
+                        </div>
                     </div>
                 </form>
             </div>

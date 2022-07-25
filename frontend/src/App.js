@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
 
-    if (sessionUser) {
+    // if (sessionUser) {
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
         .catch((e) => {
           if (e) {
@@ -24,7 +24,7 @@ function App() {
             console.log(e);
           }
         })
-    }
+    // }
   }, [dispatch])
 
   console.log('is loaded', isLoaded)

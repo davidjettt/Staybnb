@@ -5,12 +5,8 @@ import './LoginForm.css';
 
 import { Redirect } from "react-router-dom";
 
-import { useModalContext } from "../../context/Modal";
 
 export default function LoginForm() {
-
-    // const { showModal, setShowModal } = useModalContext();
-
 
     const dispatch = useDispatch();
     const [ email, setEmail ] = useState('');
@@ -39,44 +35,66 @@ export default function LoginForm() {
 
     return (
         <div>
-            <h3 className='login-page-title'>Welcome to Airbnb</h3>
-            <form className='login-form' onSubmit={handleSubmit}>
-                <div className='errors'>
-                    <ul className="errors-list">
-                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                    </ul>
+            <header className="login-form-header">
+                <div className="X-button-container">
+                    <button style={{background: 'transparent', borderColor: 'white', appearance: 'none'}}>
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+                    </button>
                 </div>
-                <div className='input-container'>
-                    <div>
-                        <label htmlFor='box'>
-                            Email
-                            <input
-                                className='email-input-field email'
-                                id='box'
-                                type='text'
-                                placeholder='Email'
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Password
-                            <input
-                                className='email-input-field'
-                                type='password'
-                                placeholder='Password'
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                            />
-                        </label>
-                    </div>
-                    <button className='login-button' type='submit'>Log In</button>
+                <div className="login-form-header-title-container">
+                    <h1 className='login-form-header-title'>Log in</h1>
                 </div>
-            </form>
+                <div></div>
+            </header>
+
+            <div className="login-form-container">
+                <div className="login-form-pane">
+                    <div className="login-form-title-container">
+                        <h3 className='login-form-title'>Welcome to Airbnb</h3>
+                    </div>
+                    <form className='login-form' onSubmit={handleSubmit}>
+                        <div className='errors'>
+                            <ul className="errors-list">
+                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                            </ul>
+                        </div>
+                        <div className='input-container-main'>
+                            <div className='input-container-sub'>
+                                <div className="email-input-container">
+                                    <label htmlFor='box'>
+
+                                        <input
+                                            className='email-input-field email'
+                                            id='box'
+                                            type='text'
+                                            placeholder='Email'
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+
+                                        <input
+                                            className='email-input-field'
+                                            type='password'
+                                            placeholder='Password'
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            required
+                                        />
+                                    </label>
+                                </div>
+                                <div className="login-button-container">
+                                    <button className='login-button' type='submit'>Log In</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     )
 }

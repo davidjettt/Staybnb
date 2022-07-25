@@ -4,8 +4,6 @@ import './Modal.css';
 
 const ModalContext = createContext();
 
-// export const useModalContext = () => useContext(ModalContext);
-
 
 export function ModalProvider ({ children }) {
     const modalRef = useRef();

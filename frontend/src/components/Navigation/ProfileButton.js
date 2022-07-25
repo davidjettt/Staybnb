@@ -37,12 +37,6 @@ export default function ProfileButton({ user }) {
         dispatch(sessionActions.logout());
     };
 
-    // const test = (e) => {
-    //     const ele = document.getElementsByClassName('test')[0]
-    //     ele.addEventListener('focus', e => {
-    //         console.log('test')
-    //     })
-    // }
 
     useEffect(() => {
         const listener = () => {
