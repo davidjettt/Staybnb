@@ -1,25 +1,20 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getAllSpotsThunk } from '../../store/spots';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSpotsByUserThunk } from '../../store/spots';
 import { Link } from 'react-router-dom';
-import './Spots.css';
+import './YourSpots.css';
 
-
-
-export default function Spots() {
+export default function YourSpots() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-
-        dispatch(getAllSpotsThunk());
+        dispatch(getSpotsByUserThunk());
 
     }, [dispatch])
 
     const spots = useSelector((state) => {
-        return Object.values(state.spots)
+        return Object.values(state.spots);
     })
-
-    // console.log('spots', spots)
 
     return (
         <>

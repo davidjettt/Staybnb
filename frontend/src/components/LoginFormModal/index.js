@@ -9,7 +9,7 @@ import ProfileIconDropdown from "../ProfileIconDropdown";
 import SignUpFormModal from "../SignupFormModal";
 import SignupForm from '../SignupFormModal/SignupForm';
 
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 
 import './LoginFormModal.css';
 
@@ -22,7 +22,7 @@ export default function LoginFormModal() {
     const [ className, setClassName ] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
 
-
+    const history = useHistory();
 
     const openMenu = () => {
         if (showMenu) return;
@@ -47,6 +47,8 @@ export default function LoginFormModal() {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.logout());
+
+        history.push('/');
     };
 
 
@@ -68,6 +70,11 @@ export default function LoginFormModal() {
             <div className='main-dropdown-container'>
                 {/* <ul> */}
                 <div className={className ? 'dropdown-menu' : 'off'}>
+                    {showMenu && <div>
+                        {sessionUser ? <Link to='/your-spots'>
+                            Your Spots
+                        </Link> : null}
+                    </div>}
                     {showMenu && <div>
                         {sessionUser ? <div>{sessionUser.email}</div> : null}
                     </div>}

@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+// const GET_SPOTS_BY_USER = 'spots/getSpotsByUser';
 
 
 export const setUser = (user) => {
@@ -17,6 +18,13 @@ export const removeUser = () => {
         type: REMOVE_USER,
     }
 }
+
+// export const getSpotsByUser = (spots) => {
+//     return {
+//         type: GET_SPOTS_BY_USER,
+//         payload: spots
+//     }
+// }
 
 
 // Login thunk -- POST
@@ -75,6 +83,17 @@ export const logout = () => async (dispatch) => {
     return response;
 }
 
+// export const getSpotsByUserThunk = () => async (dispatch) => {
+//     const response = await fetch('/api/your-spots');
+//     // console.log('response', response)
+
+//     if (response.ok) {
+//         const data = await response.json();
+//         // console.log('data', data)
+//         dispatch(getSpotsByUser(data));
+//     }
+// }
+
 const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
@@ -90,6 +109,11 @@ export default function sessionReducer(state = initialState, action) {
             newState.user = null;
             return newState;
         }
+        // case GET_SPOTS_BY_USER: {
+        //     newState = {...state}
+        //     newState.spots = action.payload.spots
+        //     return newState;
+        // }
         default:
             return state;
     }

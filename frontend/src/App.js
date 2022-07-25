@@ -9,6 +9,7 @@ import LoginFormModal from './components/LoginFormModal';
 import LoginForm from './components/LoginFormModal/LoginForm';
 import Spots from './components/Spots/Spots';
 import CategoryButtons from './components/CategoryButtons/CategoryButtons';
+import YourSpots from './components/YourSpots/YourSpots';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
       <CategoryButtons />
       <Route exact path='/'>
         <Spots />
+      </Route>
+      <Route path='/your-spots'>
+        <YourSpots />
       </Route>
       {isLoaded && (
       <Switch>
