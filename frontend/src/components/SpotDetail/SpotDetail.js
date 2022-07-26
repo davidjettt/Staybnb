@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { deleteSpotThunk, getSpotDetailsThunk } from '../../store/spots';
 
 import './SpotDetail.css';
+import SpotReviews from '../SpotReviews/SpotReviews';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -61,6 +62,8 @@ export default function SpotDetail() {
                         ))}
                     </div>
                     {/* {user === spot.ownerId ? } */}
+
+                    <SpotReviews spotId={spotId} />
                 </div>}
         </>
     )
