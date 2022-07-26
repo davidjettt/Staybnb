@@ -120,6 +120,7 @@
     transition: opacity 150ms ease-in-out; */
     display: flex;
     flex-direction: column;
+    z-index: 1;
 }
 
 /* .dropdown > .profile-button:focus + .dropdown-menu {

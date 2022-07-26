@@ -26,7 +26,7 @@ export default function Spots() {
             <div className='main-content-parent-container'>
                 <div className='main-content-container'>
                     {spots.map((spot, idx) => (
-                        <div key={idx} className='card-spot'>
+                        <div key={idx} className='card-spot-container'>
                             <Link className='card-spot-link' to={`/spots/${spot.id}`}>
                                 <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage}/>
                                 <div className='card-spot-text-container'>
