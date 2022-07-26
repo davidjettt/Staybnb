@@ -76,6 +76,11 @@ export default function LoginFormModal() {
                         </Link> : null}
                     </div>}
                     {showMenu && <div>
+                        {sessionUser ? <Link to='/create-a-spot'>
+                            Create a Spot
+                        </Link> : null}
+                    </div>}
+                    {showMenu && <div>
                         {sessionUser ? <div>{sessionUser.email}</div> : null}
                     </div>}
                     {!sessionUser && <div className='dropdown-login-container'>

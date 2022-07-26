@@ -1,7 +1,9 @@
+import { csrfFetch } from "./csrf";
 
 const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_SPOTS_BY_USER = 'spots/getSpotsByUser';
 const GET_SPOT_DETAILS = 'spots/getSpotDetails';
+const CREATE_SPOT = 'spots/createSpot';
 
 export const getAllSpots = (spots) => {
     return {
@@ -9,15 +11,24 @@ export const getAllSpots = (spots) => {
         payload: spots
     }
 }
+
 export const getSpotsByUser = (spots) => {
     return {
         type: GET_SPOTS_BY_USER,
         payload: spots
     }
 }
+
 export const getSpotDetails = (spot) => {
     return {
         type: GET_SPOT_DETAILS,
+        payload: spot
+    }
+}
+
+export const createSpot = (spot) => {
+    return {
+        type: CREATE_SPOT,
         payload: spot
     }
 }
@@ -58,6 +69,33 @@ export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
     }
 }
 
+// CREATE A SPOT
+export const createSpotThunk = (newSpot) => async (dispatch) => {
+    const { address, city, state, country, lat, lng, name, description, price } = newSpot;
+
+    const response = await csrfFetch('/api/spots', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            address,
+            city,
+            state,
+            country,
+            lat,
+            lng,
+            name,
+            description,
+            price
+        })
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(createSpot(data));
+        return data;
+    }
+}
+
 // const initialState = () => async (dispatch) => {
 //     const response = await fetch('/api/spots');
 
@@ -74,7 +112,7 @@ export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
 const initialState = {};
 
 export default function spotsReducer(state = initialState, action) {
-    console.log('ACTION', action)
+    // console.log('ACTION', action)
     switch(action.type) {
         case GET_ALL_SPOTS: {
             let newState = {...state};
@@ -93,8 +131,13 @@ export default function spotsReducer(state = initialState, action) {
             return newState2;
         }
         case GET_SPOT_DETAILS: {
-            console.log('payload', action.payload)
+            // console.log('payload', action.payload)
             let newState = {};
+            newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case CREATE_SPOT: {
+            let newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
         }

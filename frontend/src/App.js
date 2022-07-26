@@ -11,6 +11,8 @@ import Spots from './components/Spots/Spots';
 import CategoryButtons from './components/CategoryButtons/CategoryButtons';
 import YourSpots from './components/YourSpots/YourSpots';
 import SpotDetail from './components/SpotDetail/SpotDetail';
+import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +47,9 @@ function App() {
       </Route>
       <Route exact path='/spots/:spotId'>
         <SpotDetail />
+      </Route>
+      <Route path='/create-a-spot'>
+        <CreateSpotForm />
       </Route>
       {isLoaded && (
       <Switch>
