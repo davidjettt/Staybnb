@@ -30,7 +30,15 @@ export default function ReviewForm({ setShowModal , review, formType }) {
         }
 
         if (formType === 'Create Review') {
-            await dispatch(createReviewThunk(review)).catch(
+            await dispatch(createReviewThunk(review))
+            .then((res) => {
+                if (res) {
+                    setShowModal(false);
+                        history.push(`/spots/${review.spotId}`);
+                        // window.location.reload();
+                }
+            })
+            .catch(
                 async (res) => {
                     // console.log('RES', res)
                     const data = await res.json();
@@ -39,9 +47,6 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                     }
                 }
                 );
-                setShowModal(false);
-                history.push(`/spots/${review.spotId}`);
-                // window.location.reload();
         }
     };
 
@@ -75,7 +80,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                             placeholder='Review'
                                             value={reviewInput}
                                             onChange={(e) => setReviewInput(e.target.value)}
-                                            required
+                                            // required
                                         />
                                     </label>
                                 </div>
