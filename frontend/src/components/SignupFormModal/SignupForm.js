@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import './SignupForm.css'
 
-export default function SignupForm() {
+export default function SignupForm({ setShowModal2 }) {
     const dispatch = useDispatch();
     const [ firstName, setFirstName ] = useState('');
     const [ lastName, setLastName ] = useState('');
@@ -26,11 +26,18 @@ export default function SignupForm() {
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
+    const handleClick = () => {
+        setShowModal2(false);
+    }
+
+
         return (
             <div>
                 <header className="signup-form-header">
-                    <div className="X-button-container">
-                        <button>X</button>
+                    <div className="x-button-container">
+                        <button className="x-button-signup" onClick={handleClick}>
+                            <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
+                        </button>
                     </div>
                     <div className="signup-form-header-title-container">
                         <h3 className='signup-form-header-title'>Sign Up</h3>

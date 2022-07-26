@@ -15,11 +15,12 @@
     padding-top: 0px;
     text-size-adjust: 100%;
     border-bottom: 1px solid rgb(235, 235, 235);
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .signup-form-header-title-container {
-    display: block;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     line-height: 20px;
     /* margin-right: 50px; */
@@ -45,7 +46,6 @@
 }
 
 
-
 .signup-button-container {
     display: flex;
     justify-content: center;
@@ -61,4 +61,16 @@
     color: white;
     width: 300px;
     background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%)
+}
+
+.x-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.x-button-signup {
+    /* display: flex; */
+    border: none;
+    background-color: white;
+    cursor: pointer;
 }

@@ -67,6 +67,7 @@ export default function LoginFormModal() {
                     </div>
                 </button>
             </div>
+
             <div className='main-dropdown-container'>
                 {/* <ul> */}
                 <div className={className ? 'dropdown-menu' : 'off'}>
@@ -93,12 +94,12 @@ export default function LoginFormModal() {
                     </div>}
                     {showModal && (
                         <Modal  onClose={() => setShowModal(false)}>
-                            <LoginForm  />
+                            <LoginForm setShowModal={setShowModal}  />
                         </Modal>
                     )}
                     {showModal2 && (
                         <Modal onClose={() => setShowModal2(false)}>
-                            <SignupForm />
+                            <SignupForm setShowModal2={setShowModal2} />
                         </Modal>
                     )}
                     {showMenu && <div>

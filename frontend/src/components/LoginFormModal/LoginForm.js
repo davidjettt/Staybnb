@@ -6,7 +6,7 @@ import './LoginForm.css';
 import { Redirect } from "react-router-dom";
 
 
-export default function LoginForm() {
+export default function LoginForm({ setShowModal }) {
 
     const dispatch = useDispatch();
     const [ email, setEmail ] = useState('');
@@ -30,14 +30,17 @@ export default function LoginForm() {
                 if (data && data.message) setErrors([data.message]);
             }
         );
+    };
 
-        };
+    const handleClick = () => {
+        setShowModal(false)
+    }
 
     return (
         <div>
             <header className="login-form-header">
                 <div className="x-button-container">
-                    <button className="x-button-login" >
+                    <button onClick={handleClick} className="x-button-login" >
                     <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
                     </button>
                 </div>
