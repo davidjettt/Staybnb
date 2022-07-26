@@ -54,7 +54,7 @@ export default function SpotDetail() {
                             <h1>{spot.name}</h1>
                         </div>
                         <div className='spot-details-container'>
-                            <span>{(spot.avgStarRating.toFixed(2))}</span>
+                            <span>{(spot.avgStarRating?.toFixed(2))}</span>
                             {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
                                 Edit Spot
                             </Link> : null}

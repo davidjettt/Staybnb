@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { createReviewThunk } from '../../store/reviews';
+import { Rating } from 'react-simple-star-rating';
 import './ReviewForm.css';
 
 export default function ReviewForm({ setShowModal , review, formType }) {
@@ -12,9 +13,11 @@ export default function ReviewForm({ setShowModal , review, formType }) {
     const history = useHistory();
 
     const [ reviewInput, setReviewInput ] = useState(review.review);
-    const [ starsInput, setStarsInput ] = useState(review.stars);
+    const [ rating, setRating ] = useState(0);
+    // const [ starsInput, setStarsInput ] = useState(review.stars);
     const [ errors, setErrors ] = useState([]);
 
+    console.log('RATING', rating)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -23,7 +26,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
         review = {
             ...review,
             review: reviewInput,
-            stars: starsInput
+            stars: rating / 20
         }
 
         if (formType === 'Create Review') {
@@ -44,8 +47,13 @@ export default function ReviewForm({ setShowModal , review, formType }) {
 
 
 
+    const newRating = (rate) => {
+        setRating(rate)
+
+    }
     return (
         <>
+
             <div className="create-spot-form-container">
                 <div className="create-spot-form-pane">
                     <div className="create-spot-form-title-container">
@@ -71,7 +79,16 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                         />
                                     </label>
                                 </div>
-                                <div className='city-input-container'>
+                                <div style={{display: 'flex', justifyContent: 'center'}} >
+                                    <Rating
+                                        ratingValue={rating}
+                                        initialValue={0}
+                                        onClick={newRating}
+                                        fillColor='gold'
+                                        transition={true}
+                                    />
+                                </div>
+                                {/* <div className='city-input-container'>
                                     <label>
                                         <input
                                             className='city-input-field'
@@ -82,7 +99,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                             required
                                         />
                                     </label>
-                                </div>
+                                </div> */}
                                 <div className="login-button-container">
                                     <button className='login-button' type='submit'>{formType}</button>
                                 </div>
