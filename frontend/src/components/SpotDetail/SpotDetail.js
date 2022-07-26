@@ -1,19 +1,27 @@
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { deleteSpotThunk, getSpotDetailsThunk } from '../../store/spots';
 
 import './SpotDetail.css';
 import SpotReviews from '../SpotReviews/SpotReviews';
+import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
+import { getAllReviewsThunk } from '../../store/reviews';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [ render, setRendered ] = useState(false);
+
+    if (!render) setRendered(true);
+
+
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId));
+        dispatch(getAllReviewsThunk(spotId))
     }, [dispatch])
 
     // const spot = useSelector((state) => {
@@ -46,7 +54,7 @@ export default function SpotDetail() {
                             <h1>{spot.name}</h1>
                         </div>
                         <div className='spot-details-container'>
-                            <span>{spot.avgStarRating}</span>
+                            <span>{(spot.avgStarRating.toFixed(2))}</span>
                             {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
                                 Edit Spot
                             </Link> : null}
@@ -62,8 +70,10 @@ export default function SpotDetail() {
                         ))}
                     </div>
                     {/* {user === spot.ownerId ? } */}
-
-                    <SpotReviews spotId={spotId} />
+                    <div className='reviews-container'>
+                        <SpotReviews spotId={spotId} />
+                        {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
+                    </div>
                 </div>}
         </>
     )
