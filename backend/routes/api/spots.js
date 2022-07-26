@@ -218,15 +218,15 @@ router.get('/:spotId/reviews', existsSpot, async (req, res, next) => {
 
 // Create a review for spot by spot id
 router.post('/:spotId/reviews', existsSpot, requireAuth, validateReview, async (req, res, next) => {
-    // const existingReview = await Review.findOne({
-    //     where: {spotId: req.params.spotId, userId: req.user.id}
-    // });
+    const existingReview = await Review.findOne({
+        where: {spotId: req.params.spotId, userId: req.user.id}
+    });
 
-    // if (existingReview) {
-    //     const err = new Error ('User already has a review for this spot');
-    //     err.status = 403;
-    //     return next(err);
-    // }
+    if (existingReview) {
+        const err = new Error ('User already has a review for this spot');
+        err.status = 403;
+        return next(err);
+    }
 
     const { review, stars } = req.body;
 

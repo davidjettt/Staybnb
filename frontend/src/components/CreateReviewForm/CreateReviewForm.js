@@ -21,7 +21,7 @@ export default function CreateReviewForm({ spotId, setRendered }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Create Review</button>
+            <button onClick={() => setShowModal(true)}>Post Your Review</button>
             {showModal && <Modal onClose={handleClose}>
                 <ReviewForm setShowModal={setShowModal} review={review} formType='Create Review' />
             </Modal>}

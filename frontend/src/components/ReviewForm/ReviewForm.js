@@ -1,10 +1,8 @@
 
-
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-import { createReviewThunk } from '../../store/reviews';
+import { createReviewThunk, editReviewThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
 import './ReviewForm.css';
 
@@ -42,8 +40,32 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                 async (res) => {
                     // console.log('RES', res)
                     const data = await res.json();
+                    // console.log('DATA', data)
                     if (data.errors) {
                         setErrors(data.errors)
+                    } else {
+                        setErrors([data.message])
+                    }
+                }
+                );
+        } else {
+            await dispatch(editReviewThunk(review))
+            .then((res) => {
+                if (res) {
+                    setShowModal(false);
+                        history.push(`/spots/${review.spotId}`);
+                        // window.location.reload();
+                }
+            })
+            .catch(
+                async (res) => {
+                    // console.log('RES', res)
+                    const data = await res.json();
+                    // console.log('DATA', data)
+                    if (data.errors) {
+                        setErrors(data.errors)
+                    } else {
+                        setErrors([data.message])
                     }
                 }
                 );
@@ -74,7 +96,9 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                             <div className='input-container-sub'>
                                 <div className="address-input-container">
                                     <label>
-                                        <input
+                                        <textarea
+                                            cols={60}
+                                            rows={10}
                                             className='address-input-field'
                                             type='text'
                                             placeholder='Review'

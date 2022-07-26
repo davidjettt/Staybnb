@@ -8,6 +8,7 @@ import './SpotDetail.css';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import { getAllReviewsThunk } from '../../store/reviews';
+import EditReviewForm from '../EditReviewForm/EditReviewForm';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -71,8 +72,9 @@ export default function SpotDetail() {
                     </div>
                     {/* {user === spot.ownerId ? } */}
                     <div className='reviews-container'>
-                        <SpotReviews spotId={spotId} />
                         {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
+                        {user && <EditReviewForm spotId={spotId} />}
+                        <SpotReviews spotId={spotId} />
                     </div>
                 </div>}
         </>

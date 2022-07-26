@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_REVIEWS_USER = 'reviews/getReviewsUser';
 const GET_ALL_REVIEWS = 'reviews/getAllReviews';
 const CREATE_REVIEW  = 'reviews/createReview';
+const EDIT_REVIEW = 'reviews/editReview';
 
 export const getReviewsUser = (reviews) => {
     return {
@@ -14,6 +15,13 @@ export const getReviewsUser = (reviews) => {
 export const createReview = (review) => {
     return {
         type: CREATE_REVIEW,
+        payload: review
+    }
+}
+
+export const editReview = (review) => {
+    return {
+        type: EDIT_REVIEW,
         payload: review
     }
 }
@@ -63,6 +71,22 @@ export const createReviewThunk = (review) => async (dispatch) => {
     }
 }
 
+// EDIT REVIEW THUNK
+export const editReviewThunk = (review) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(review)
+    })
+    // .catch(err => console.log(err.message))
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(createReview(data));
+        return data;
+    }
+}
+
 
 
 const initialState = {};
@@ -84,6 +108,11 @@ export default function reviewsReducer(state = initialState, action) {
             return newState;
         }
         case CREATE_REVIEW: {
+            let newState = {...state};
+            newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case EDIT_REVIEW: {
             let newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
