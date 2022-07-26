@@ -13,6 +13,7 @@ import YourSpots from './components/YourSpots/YourSpots';
 import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 import EditSpotForm from './components/EditSpotForm/EditSpotForm';
+import YourReviews from './components/YourReviews/YourReviews';
 
 
 function App() {
@@ -54,6 +55,9 @@ function App() {
       </Route>
       <Route path='/spots/:spotId/edit'>
         <EditSpotForm />
+      </Route>
+      <Route path='/your-reviews'>
+        <YourReviews />
       </Route>
       {isLoaded && (
       <Switch>

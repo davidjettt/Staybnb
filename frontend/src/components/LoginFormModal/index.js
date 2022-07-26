@@ -77,6 +77,11 @@ export default function LoginFormModal() {
                         </Link> : null}
                     </div>}
                     {showMenu && <div>
+                        {sessionUser ? <Link to='/your-reviews'>
+                            Your Reviews
+                        </Link> : null}
+                    </div>}
+                    {showMenu && <div>
                         {sessionUser ? <Link to='/create-a-spot'>
                             Create a Spot
                         </Link> : null}

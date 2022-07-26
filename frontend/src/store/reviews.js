@@ -1,7 +1,15 @@
 import { csrfFetch } from "./csrf";
 
+const GET_REVIEWS_USER = 'reviews/getReviewsUser';
 const GET_ALL_REVIEWS = 'reviews/getAllReviews';
 const CREATE_REVIEW  = 'reviews/createReview';
+
+export const getReviewsUser = (reviews) => {
+    return {
+        type: GET_REVIEWS_USER,
+        payload: reviews
+    }
+}
 
 export const createReview = (review) => {
     return {
@@ -14,6 +22,16 @@ export const getAllReviews = (reviews) => {
     return {
         type: GET_ALL_REVIEWS,
         payload: reviews
+    }
+}
+
+// GET ALL REVIEWS BY USER THUNK
+export const getReviewsUserThunk = () => async (dispatch) => {
+    const response = await fetch('/api/your-reviews');
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getReviewsUser(data));
     }
 }
 
@@ -51,6 +69,13 @@ const initialState = {};
 
 export default function reviewsReducer(state = initialState, action) {
     switch(action.type) {
+        case GET_REVIEWS_USER: {
+            let newState = {};
+            action.payload.reviews.forEach((review) => {
+                newState[review.id] = review;
+            })
+            return newState;
+        }
         case GET_ALL_REVIEWS: {
             let newState = {};
             action.payload.reviews.forEach((review) => {
