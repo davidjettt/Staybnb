@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -24,6 +24,8 @@ export default function SpotDetail() {
     })
 
 
+    const user = useSelector(state => state.session.user?.id);
+
     // console.log ('SPOT DETAILS', spot)
     // console.log ('SPOT IMAGES', images.images)
     return (
@@ -35,6 +37,9 @@ export default function SpotDetail() {
                         </div>
                         <div className='spot-details-container'>
                             <span>{spot.avgStarRating}</span>
+                            {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
+                                Edit Spot
+                            </Link> : null}
                         </div>
                     </header>
                     <div className='spot-images-container'>
@@ -43,6 +48,7 @@ export default function SpotDetail() {
                             <img key={idx} style={{width: 300}} src={`${image.url}`} />
                         ))}
                     </div>
+                    {/* {user === spot.ownerId ? } */}
                 </div>}
         </>
     )

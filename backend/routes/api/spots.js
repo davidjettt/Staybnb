@@ -302,6 +302,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
             [Op.and]: [{address: address}, {city: city}, {state: state}, {latitude: lat}, {longitude: lng}]
         }
     });
+
     if (isExistingLatLng) {
         const err = new Error ('Combination of longitude and latitude coordinates already exists');
         err.status = 403;
@@ -320,8 +321,9 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         description,
         pricePerNight: price
     });
-    const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
-    return res.json(updatedSpot2);
+    console.log('UPDATED SPOT', updatedSpot)
+    // const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
+    return res.json(spot);
 });
 
 

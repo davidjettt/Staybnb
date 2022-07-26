@@ -12,6 +12,7 @@ import CategoryButtons from './components/CategoryButtons/CategoryButtons';
 import YourSpots from './components/YourSpots/YourSpots';
 import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
+import EditSpotForm from './components/EditSpotForm/EditSpotForm';
 
 
 function App() {
@@ -50,6 +51,9 @@ function App() {
       </Route>
       <Route path='/create-a-spot'>
         <CreateSpotForm />
+      </Route>
+      <Route path='/spots/:spotId/edit'>
+        <EditSpotForm />
       </Route>
       {isLoaded && (
       <Switch>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from 'react-router-dom';
-import { createSpotThunk } from '../../store/spots';
+import { createSpotThunk, editSpotThunk } from '../../store/spots';
 
 
 
@@ -9,15 +9,15 @@ export default function SpotForm({ spot, formType }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [ address, setAddress ] = useState('');
-    const [ city, setCity ] = useState('');
-    const [ state, setState ] = useState('');
-    const [ country, setCountry ] = useState('');
-    const [ lat, setLat ] = useState('');
-    const [ lng, setLng ] = useState('');
-    const [ name, setName ] = useState('');
-    const [ description, setDescription ] = useState('');
-    const [ price, setPrice ] = useState('');
+    const [ address, setAddress ] = useState(spot.address);
+    const [ city, setCity ] = useState(spot.city);
+    const [ state, setState ] = useState(spot.state);
+    const [ country, setCountry ] = useState(spot.country);
+    const [ lat, setLat ] = useState(spot.latitude);
+    const [ lng, setLng ] = useState(spot.longitude);
+    const [ name, setName ] = useState(spot.name);
+    const [ description, setDescription ] = useState(spot.description);
+    const [ price, setPrice ] = useState(spot.pricePerNight);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -48,16 +48,24 @@ export default function SpotForm({ spot, formType }) {
             description,
             price
         }
-
-        const spotData = await dispatch(createSpotThunk(spot)).catch(
-            async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            }
-        );
-
-        // console.log('NEW SPOT DATA', spotData)
-        history.push(`/spots/${spotData.id}`)
+        if (formType === 'Create Spot') {
+            const spotData = await dispatch(createSpotThunk(spot)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                }
+            );
+            // console.log('NEW SPOT DATA', spotData)
+            history.push(`/spots/${spotData.id}`)
+        } else {
+            await dispatch(editSpotThunk(spot)).catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                }
+            );
+            history.push(`/spots/${spot.id}`)
+        }
     };
 
     return (
@@ -65,7 +73,7 @@ export default function SpotForm({ spot, formType }) {
             <div className="create-spot-form-container">
                 <div className="create-spot-form-pane">
                     <div className="create-spot-form-title-container">
-                        <h3 className='create-spot-form-title'>Create a New Spot</h3>
+                        <h3 className='create-spot-form-title'>{formType}</h3>
                     </div>
                     <form className='create-spot-form' onSubmit={handleSubmit}>
                         <div className='errors'>
@@ -185,7 +193,7 @@ export default function SpotForm({ spot, formType }) {
                                     </label>
                                 </div>
                                 <div className="login-button-container">
-                                    <button className='login-button' type='submit'>Create Spot</button>
+                                    <button className='login-button' type='submit'>{formType}</button>
                                 </div>
                             </div>
                         </div>

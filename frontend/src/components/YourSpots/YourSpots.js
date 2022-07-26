@@ -21,11 +21,11 @@ export default function YourSpots() {
             <div className='main-content-container'>
                 {spots.map((spot) => (
                     <div className='card-spot'>
-                        <Link to={`/api/spots/${spot.id}`}>
+                        <Link to={`/spots/${spot.id}`}>
                             <img style={{width: 277, height: 263}} src={spot.previewImage}/>
+                            <h4>{`${spot.city}, ${spot.state}`}</h4>
+                            <h5>{`$${spot.pricePerNight} night`}</h5>
                         </Link>
-                        <h4>{`${spot.city}, ${spot.state}`}</h4>
-                        <h5>{`$${spot.pricePerNight} night`}</h5>
                     </div>
                 ))}
 

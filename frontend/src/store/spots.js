@@ -4,6 +4,7 @@ const GET_ALL_SPOTS = 'spots/getAllSpots';
 const GET_SPOTS_BY_USER = 'spots/getSpotsByUser';
 const GET_SPOT_DETAILS = 'spots/getSpotDetails';
 const CREATE_SPOT = 'spots/createSpot';
+const EDIT_SPOT = 'spots/editSpot';
 
 export const getAllSpots = (spots) => {
     return {
@@ -29,6 +30,12 @@ export const getSpotDetails = (spot) => {
 export const createSpot = (spot) => {
     return {
         type: CREATE_SPOT,
+        payload: spot
+    }
+}
+export const editSpot = (spot) => {
+    return {
+        type: EDIT_SPOT,
         payload: spot
     }
 }
@@ -61,7 +68,7 @@ export const getSpotDetailsThunk = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}`)
         .catch(err => console.log(err))
 
-    console.log('RESPONSE', response);
+    // console.log('RESPONSE', response);
 
     if (response.ok) {
         const data = await response.json();
@@ -92,6 +99,25 @@ export const createSpotThunk = (newSpot) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(createSpot(data));
+        return data;
+    }
+}
+
+// UPDATE A SPOT
+export const editSpotThunk = (spot) => async (dispatch) => {
+    // console.log('SPOT', spot)
+    // const { address, city, state, country, lat, lng, name, description, price } = spot;
+    const response = await csrfFetch(`/api/spots/${spot.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spot)
+    })
+    .catch(err => console.log('ERROR', err))
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editSpot(data));
+        // console.log('DATA', data)
         return data;
     }
 }
@@ -137,6 +163,11 @@ export default function spotsReducer(state = initialState, action) {
             return newState;
         }
         case CREATE_SPOT: {
+            let newState = {...state};
+            newState[action.payload.id] = action.payload;
+            return newState;
+        }
+        case EDIT_SPOT: {
             let newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
