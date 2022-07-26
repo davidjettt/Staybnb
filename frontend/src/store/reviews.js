@@ -21,7 +21,8 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
     const response = await fetch(`/api/spots/${spotId}/reviews`);
 
     if (response.ok) {
-        const data = response.json();
+        const data =  await response.json();
+        console.log('DATA', data)
         dispatch(getAllReviews(data));
         return data;
     }
@@ -36,14 +37,19 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
 
 
 
-const initialState = {}
+const initialState = {};
 
-export default function reviewsReducer (state = initialState, action) {
+export default function reviewsReducer(state = initialState, action) {
     switch(action.type) {
         case GET_ALL_REVIEWS: {
             let newState = {};
-            newState[action.payload.id] = action.payload;
+            action.payload.reviews.forEach((review) => {
+                newState[review.id] = review;
+            })
             return newState;
+        }
+        default: {
+            return state;
         }
     }
 }
