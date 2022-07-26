@@ -1,14 +1,15 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-import { getSpotDetailsThunk } from '../../store/spots';
+import { deleteSpotThunk, getSpotDetailsThunk } from '../../store/spots';
 
 import './SpotDetail.css';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId));
@@ -28,6 +29,14 @@ export default function SpotDetail() {
 
     // console.log ('SPOT DETAILS', spot)
     // console.log ('SPOT IMAGES', images.images)
+
+
+    const handleDelete = async () => {
+        await dispatch(deleteSpotThunk(spotId));
+
+        history.push('/');
+    }
+
     return (
         <>
         {spot && <div className='spot-details-main-container'>
@@ -40,6 +49,9 @@ export default function SpotDetail() {
                             {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
                                 Edit Spot
                             </Link> : null}
+                            {user === spot.ownerId ? <button onClick={handleDelete}>
+                                Delete Spot
+                            </button> : null}
                         </div>
                     </header>
                     <div className='spot-images-container'>
