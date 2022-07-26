@@ -1,3 +1,10 @@
+.navigation-main {
+    margin-top: 10px;
+    padding-bottom: 0px;
+    padding-top: 10px;
+    /* border: 1px solid red; */
+}
+
 .navigation-container {
     display: flex;
     flex-direction: row;
@@ -20,8 +27,15 @@
 }
 
 .profile-button-container {
+    min-width: 250px;
+    min-height: 20px;
+    width: 20vw;
     margin-bottom: 10px;
     margin-right: 20px;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    /* position: relative; */
 }
 
 .profile-button {
@@ -46,12 +60,28 @@
     margin-right: 5px;
 }
 
+.logo-container {
+    /* border: 1px solid red; */
+    min-width: 250px;
+    min-height: 20px;
+    width: 20vw;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 .logo {
     color: #FF5A5F;
 }
 
 .main-logo {
+    /* display: block; */
     margin-left: 20px;
+    /* min-width: 250px;
+    min-height: 20px;
+    width: 10vw;
+    margin-bottom: 10px; */
 }
 
 /* .profile-icon {
@@ -79,7 +109,7 @@
     /* margin-right: 40px; */
     width: 200px;
     position: absolute;
-    right: 0;
+    right: 70;
     top: calc(100 + .25rem);
     background-color: white;
     padding: 5px;
