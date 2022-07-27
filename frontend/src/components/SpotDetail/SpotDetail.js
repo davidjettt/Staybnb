@@ -11,6 +11,7 @@ import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 
 import { HiStar } from 'react-icons/hi';
+import Footer from '../Footer/Footer';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -64,50 +65,53 @@ export default function SpotDetail() {
     const numReviews = spot?.numReviews;
 
     return (
-        <div className='spot-details-main'>
-        {spot && <div className='spot-details-main-container'>
-                    <header className='spot-details-header-container'>
-                        <div className='spot-name-container'>
-                            <h1 className='spot-title'>{spot.name}</h1>
-                        </div>
-                        <div className='spot-details-container'>
-                            <div className='star-rating-location'>
-                                <HiStar />
-                                <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
-                                {spot.numReviews ? <span>{spot.numReviews} reviews </span> : <span>new spot </span>}
-                                <span>  · {spot.city}, {spot.state}, {spot.country} </span>
+        <>
+            <div className='spot-details-main'>
+            {spot && <div className='spot-details-main-container'>
+                        <header className='spot-details-header-container'>
+                            <div className='spot-name-container'>
+                                <h1 className='spot-title'>{spot.name}</h1>
                             </div>
-                            <div className='spot-links-container'>
-                                {user === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
-                                    <button className='edit-spot-button'>Edit Spot</button>
-                                </Link> : null}
-                                {user === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
-                                    Delete Spot
-                                </button> : null}
+                            <div className='spot-details-container'>
+                                <div className='star-rating-location'>
+                                    <HiStar />
+                                    <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
+                                    {spot.numReviews ? <span>{spot.numReviews} reviews </span> : <span>new spot </span>}
+                                    <span>  · {spot.city}, {spot.state}, {spot.country} </span>
+                                </div>
+                                <div className='spot-links-container'>
+                                    {user === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
+                                        <button className='edit-spot-button'>Edit Spot</button>
+                                    </Link> : null}
+                                    {user === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
+                                        Delete Spot
+                                    </button> : null}
+                                </div>
                             </div>
+                        </header>
+                        <div className='spot-images-container'>
+                            {spot.Images && spot.Images.map((image, idx) => (
+
+                                    <img key={idx} className={'key' + idx} style={{}} src={`${image.url}`} />
+
+                            ))}
                         </div>
-                    </header>
-                    <div className='spot-images-container'>
-                        {spot.Images && spot.Images.map((image, idx) => (
-
-                                <img key={idx} className={'key' + idx} style={{}} src={`${image.url}`} />
-
-                        ))}
-                    </div>
-                    <div className='subtitle-container'>
-                            <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
-                    </div>
-                    <div className='reviews-container'>
-                        <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
-                        {/* <div>{spot.avgStarRating?.toFixed(2)}</div>
-                        <div>{spot.numReviews} reviews</div> */}
-                        {userReview && <EditReviewForm spotId={spotId} />}
-                        {userReview && <button onClick={handleDeleteReview}>
-                            Delete Review
-                            </button>}
-                        {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
-                    </div>
-                </div>}
-        </div>
+                        <div className='subtitle-container'>
+                                <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                        </div>
+                        <div className='reviews-container'>
+                            <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
+                            {/* <div>{spot.avgStarRating?.toFixed(2)}</div>
+                            <div>{spot.numReviews} reviews</div> */}
+                            {userReview && <EditReviewForm spotId={spotId} />}
+                            {userReview && <button onClick={handleDeleteReview}>
+                                Delete Review
+                                </button>}
+                            {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
+                        </div>
+                    </div>}
+            {/* <Footer /> */}
+            </div>
+        </>
     )
 }
