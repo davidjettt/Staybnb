@@ -58,15 +58,20 @@ export default function SpotDetail() {
         setRendered(!render);
     }
 
+    const avgRating = spot?.avgStarRating;
+    const numReviews = spot?.numReviews;
+
     return (
-        <>
+        <div className='spot-details-main'>
         {spot && <div className='spot-details-main-container'>
                     <header className='spot-details-header-container'>
                         <div className='spot-name-container'>
-                            <h1>{spot.name}</h1>
+                            <h1 className='spot-title'>{spot.name}</h1>
                         </div>
                         <div className='spot-details-container'>
+
                             <span>{(spot.avgStarRating?.toFixed(2))}</span>
+                            <span>{spot.city}, {spot.state}, {spot.country}</span>
                             {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
                                 Edit Spot
                             </Link> : null}
@@ -77,22 +82,25 @@ export default function SpotDetail() {
                     </header>
                     <div className='spot-images-container'>
                         {spot.Images && spot.Images.map((image, idx) => (
-                            // console.log('IMAGES', image.url)
-                            <img key={idx} style={{width: 300}} src={`${image.url}`} />
+
+                                <img key={idx} className={'key' + idx} style={{}} src={`${image.url}`} />
+
                         ))}
                     </div>
-                    {/* {user === spot.ownerId ? } */}
-                    <div>{spot.avgStarRating?.toFixed(2)}</div>
-                    <div>{spot.numReviews} reviews</div>
+                    <div className='subtitle-container'>
+                            <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                    </div>
                     <div className='reviews-container'>
                         {userReview && <EditReviewForm spotId={spotId} />}
-                        <SpotReviews spotId={spotId} />
+                        <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
+                        {/* <div>{spot.avgStarRating?.toFixed(2)}</div>
+                        <div>{spot.numReviews} reviews</div> */}
                         {userReview && <button onClick={handleDeleteReview}>
                             Delete Review
                             </button>}
                         {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
                     </div>
                 </div>}
-        </>
+        </div>
     )
 }

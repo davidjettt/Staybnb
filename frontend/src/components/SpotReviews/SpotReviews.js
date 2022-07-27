@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllReviewsThunk } from '../../store/reviews';
 import './SpotReviews.css';
 
-export default function SpotReviews({ spotId }) {
+export default function SpotReviews({ spotId, numReviews, avgRating }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,17 +18,17 @@ export default function SpotReviews({ spotId }) {
 
     return (
         <div className='main'>
-            <h1>_________________________________________</h1>
-            <div className='reviews-container'>
+            <div className='review-header-container'>
+                <span className='rating-reviews'>{avgRating?.toFixed(2)} • {numReviews} reviews</span>
+            </div>
+            <section className='spot-review-container'>
                 {reviews.map((review, idx) => (
-                    <div key={idx}>
-                        <span>{review.review} </span>
-                        <span>{review.stars} </span>
-                        <span>{review.User?.firstName} </span>
-                        <span>{review.User?.lastName}</span>
+                    <div key={idx} className={'key'}>
+                        <div className='review-first-name'>{review.User?.firstName} </div>
+                        <div>{review.review} </div>
                     </div>
                 ))}
-            </div>
+            </section>
         </div>
     )
 }
