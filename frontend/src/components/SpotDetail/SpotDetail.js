@@ -19,12 +19,10 @@ export default function SpotDetail() {
 
     const [ render, setRendered ] = useState(false);
 
-
-
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId));
         dispatch(getAllReviewsThunk(spotId))
-    }, [dispatch])
+    }, [dispatch, spotId])
 
     // const spot = useSelector((state) => {
     //     return Object.values(state.spots);
@@ -57,6 +55,7 @@ export default function SpotDetail() {
 
     const handleDeleteReview = async () => {
         await dispatch(deleteReviewThunk(userReview));
+        await dispatch(getSpotDetailsThunk(spotId));
         setRendered(!render);
     }
 

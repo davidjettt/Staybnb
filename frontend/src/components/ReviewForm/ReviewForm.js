@@ -1,10 +1,11 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
-import { createReviewThunk, editReviewThunk } from '../../store/reviews';
+import { useHistory } from 'react-router-dom';
+import { createReviewThunk, editReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
 import './ReviewForm.css';
+import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function ReviewForm({ setShowModal , review, formType }) {
     const dispatch = useDispatch();
@@ -55,6 +56,8 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                     }
                 }
                 );
+                await dispatch(getAllReviewsThunk(review.spotId));
+                await dispatch(getSpotDetailsThunk(review.spotId));
         } else {
             await dispatch(editReviewThunk(review))
             .then((res) => {
