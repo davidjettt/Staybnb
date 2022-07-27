@@ -31,7 +31,13 @@ export default function Spots() {
                                 <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage}/>
                                 <div className='card-spot-text-container'>
                                     <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
-                                    <span className='card-spot-price'>{`$${spot.pricePerNight} night`}</span>
+                                    <div className='distance'>80 miles away</div>
+                                    <div className='date'>Jan 22 - 27</div>
+                                    <div className='price-container'>
+                                        <span className='card-spot-price'>{`$${spot.pricePerNight}`} </span>
+                                        <span className='night-word'>night</span>
+                                    </div>
+                                    <div className='star-rating'>* 4.95</div>
                                 </div>
                             </Link>
                         </div>
