@@ -18,14 +18,14 @@ export default function SpotReviews({ spotId }) {
 
     return (
         <div className='main'>
-            <h1>TESTING FROM SPOT REVIEWS</h1>
+            <h1>_________________________________________</h1>
             <div className='reviews-container'>
-                {reviews.map((review) => (
-                    <div>
+                {reviews.map((review, idx) => (
+                    <div key={idx}>
                         <span>{review.review} </span>
                         <span>{review.stars} </span>
-                        <span>{review.User.firstName} </span>
-                        <span>{review.User.lastName}</span>
+                        <span>{review.User?.firstName} </span>
+                        <span>{review.User?.lastName}</span>
                     </div>
                 ))}
             </div>
