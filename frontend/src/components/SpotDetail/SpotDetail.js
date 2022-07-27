@@ -10,6 +10,8 @@ import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 
+import { HiStar } from 'react-icons/hi';
+
 export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
@@ -69,15 +71,19 @@ export default function SpotDetail() {
                             <h1 className='spot-title'>{spot.name}</h1>
                         </div>
                         <div className='spot-details-container'>
-
-                            <span>{(spot.avgStarRating?.toFixed(2))}</span>
-                            <span>{spot.city}, {spot.state}, {spot.country}</span>
-                            {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
-                                Edit Spot
-                            </Link> : null}
-                            {user === spot.ownerId ? <button onClick={handleDelete}>
-                                Delete Spot
-                            </button> : null}
+                            <div className='star-rating-location'>
+                                <HiStar />
+                                <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))} </span>
+                                <span>{spot.city}, {spot.state}, {spot.country} </span>
+                            </div>
+                            <div className='spot-links-container'>
+                                {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
+                                    Edit Spot
+                                </Link> : null}
+                                {user === spot.ownerId ? <button onClick={handleDelete}>
+                                    Delete Spot
+                                </button> : null}
+                            </div>
                         </div>
                     </header>
                     <div className='spot-images-container'>

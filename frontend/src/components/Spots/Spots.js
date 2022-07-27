@@ -4,6 +4,7 @@ import { getAllSpotsThunk } from '../../store/spots';
 import { Link } from 'react-router-dom';
 import './Spots.css';
 
+import { TiStar } from 'react-icons/ti';
 
 
 export default function Spots() {
@@ -42,8 +43,8 @@ export default function Spots() {
                                         <span className='night-word'>night</span>
                                     </div>
                                     <div className='star-rating'>
-
-                                        {spot.Reviews.length ? (spot.Reviews.reduce((acc, review) => {
+                                        <TiStar  />
+                                        {spot.Reviews?.length ? (spot.Reviews.reduce((acc, review) => {
                                             return acc + review.stars
                                         }, 0) / spot.Reviews.length).toFixed(2) : 'new spot'}
                                     </div>

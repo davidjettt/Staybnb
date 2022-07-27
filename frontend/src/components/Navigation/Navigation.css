@@ -24,6 +24,7 @@
 
 .fa-circle-user {
     width: 100px;
+
 }
 
 .profile-button-container {
@@ -39,11 +40,15 @@
 }
 
 .profile-button {
-    border: 1px solid #717171;
+    width: 77px;
+    height: 42px;
+    /* border: 1px solid #717171; */
+    border: 1.75px solid rgb(219, 214, 214);
     border-radius: 21px;
     display: inline;
     padding: 5px 5px 5px 12px;
     /* position: relative; */
+    background-color: white;
 }
 
 .sign-in-container {

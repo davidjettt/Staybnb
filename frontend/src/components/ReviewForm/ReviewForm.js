@@ -88,12 +88,12 @@ export default function ReviewForm({ setShowModal , review, formType }) {
     return (
         <>
 
-            <div className="create-spot-form-container">
-                <div className="create-spot-form-pane">
-                    <div className="create-spot-form-title-container">
-                        <h3 className='create-spot-form-title'>{formType}</h3>
+            <div className="review-form-container">
+                <div className="review-form-pane">
+                    <div className="review-form-title-container">
+                        <h3 className='review-form-title'>{formType}</h3>
                     </div>
-                    <form className='create-spot-form' onSubmit={handleSubmit}>
+                    <form className='review-form' onSubmit={handleSubmit}>
                         <div className='errors'>
                             <ul className="errors-list">
                                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -101,7 +101,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                         </div>
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
-                            <div style={{display: 'flex', justifyContent: 'center'}} >
+                            <div style={{display: 'flex', justifyContent: 'flex-start'}} >
                                     <Rating
                                         ratingValue={rating}
                                         initialValue={0}
@@ -110,14 +110,14 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                         transition={true}
                                     />
                                 </div>
-                                <div className="address-input-container">
+                                <div className="review-input-container">
                                     <label>
                                         <textarea
                                             cols={60}
                                             rows={10}
-                                            className='address-input-field'
+
                                             type='text'
-                                            placeholder='Review'
+                                            placeholder='Add Your Review Here...'
                                             value={reviewInput}
                                             onChange={(e) => setReviewInput(e.target.value)}
                                             // required

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllReviewsThunk } from '../../store/reviews';
+import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
 
 export default function SpotReviews({ spotId, numReviews, avgRating }) {
@@ -19,7 +20,9 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
     return (
         <div className='main'>
             <div className='review-header-container'>
-                <span className='rating-reviews'>{avgRating?.toFixed(2)} • {numReviews} reviews</span>
+                <AiFillStar className='review-section-star' />
+                <span className='rating-reviews'>
+                    {avgRating?.toFixed(2)} • {numReviews} reviews</span>
             </div>
             <section className='spot-review-container'>
                 {reviews.map((review, idx) => (
