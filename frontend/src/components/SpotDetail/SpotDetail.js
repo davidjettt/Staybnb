@@ -47,7 +47,7 @@ export default function SpotDetail() {
     })
 
     const userReview = reviews.find(review => +review?.userId === +user)
-    console.log('USER REVIEW', userReview)
+    // console.log('USER REVIEW', userReview)
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
@@ -73,14 +73,15 @@ export default function SpotDetail() {
                         <div className='spot-details-container'>
                             <div className='star-rating-location'>
                                 <HiStar />
-                                <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))} </span>
-                                <span>{spot.city}, {spot.state}, {spot.country} </span>
+                                <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
+                                {spot.numReviews ? <span>{spot.numReviews} reviews </span> : <span>new spot </span>}
+                                <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                             </div>
                             <div className='spot-links-container'>
-                                {user === spot.ownerId ? <Link to={`/spots/${spotId}/edit`}>
-                                    Edit Spot
+                                {user === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
+                                    <button className='edit-spot-button'>Edit Spot</button>
                                 </Link> : null}
-                                {user === spot.ownerId ? <button onClick={handleDelete}>
+                                {user === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
                                     Delete Spot
                                 </button> : null}
                             </div>
@@ -97,10 +98,10 @@ export default function SpotDetail() {
                             <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
                     </div>
                     <div className='reviews-container'>
-                        {userReview && <EditReviewForm spotId={spotId} />}
                         <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
                         {/* <div>{spot.avgStarRating?.toFixed(2)}</div>
                         <div>{spot.numReviews} reviews</div> */}
+                        {userReview && <EditReviewForm spotId={spotId} />}
                         {userReview && <button onClick={handleDeleteReview}>
                             Delete Review
                             </button>}

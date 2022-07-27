@@ -22,8 +22,12 @@
     align-items: center;
 }
 
-input:checked {
-    /* border-color: red; */
+input {
+    outline: none;
+    width: 30rem;
+    height: 2.5rem;
+    border-radius: 0px, 0px, 8px, 8px;
+
 }
 
 .email-input-field {
@@ -128,11 +132,6 @@ h3:first-child {
     /* min-height: 56px; */
 }
 
-input {
-    width: 30rem;
-    height: 2.5rem;
-    border-radius: 0px, 0px, 8px, 8px;
-}
 
 /* div {
     display: block;

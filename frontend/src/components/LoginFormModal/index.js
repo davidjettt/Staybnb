@@ -71,22 +71,22 @@ export default function LoginFormModal() {
                 {/* <ul> */}
                 <div className={className ? 'dropdown-menu' : 'off'}>
                     {showMenu && <div>
-                        {sessionUser ? <Link to='/your-spots'>
+                        {sessionUser ? <div className='user-email'>{sessionUser.email}</div> : null}
+                    </div>}
+                    {showMenu && <div className='your-spots-container'>
+                        {sessionUser ? <Link className='your-spots' to='/your-spots'>
                             Your Spots
                         </Link> : null}
                     </div>}
-                    {showMenu && <div>
-                        {sessionUser ? <Link to='/your-reviews'>
+                    {showMenu && <div className='your-reviews-container'>
+                        {sessionUser ? <Link className='your-reviews' to='/your-reviews'>
                             Your Reviews
                         </Link> : null}
                     </div>}
-                    {showMenu && <div>
-                        {sessionUser ? <Link to='/create-a-spot'>
+                    {showMenu && <div className='create-a-spot-container'>
+                        {sessionUser ? <Link className='create-a-spot' to='/create-a-spot'>
                             Create a Spot
                         </Link> : null}
-                    </div>}
-                    {showMenu && <div>
-                        {sessionUser ? <div>{sessionUser.email}</div> : null}
                     </div>}
                     {!sessionUser && <div className='dropdown-login-container'>
                         {showMenu && <button className='dropdown-login-button' onClick={() => {
@@ -106,8 +106,8 @@ export default function LoginFormModal() {
                             <SignupForm setShowModal2={setShowModal2} />
                         </Modal>
                     )}
-                    {showMenu && <div>
-                        {sessionUser ? <button onClick={logout}>Log Out</button> : null}
+                    {showMenu && <div className='logout-container'>
+                        {sessionUser ? <button className='logout' onClick={logout}>Log Out</button> : null}
                     </div>}
                 </div>
                 {/* </ul> */}
