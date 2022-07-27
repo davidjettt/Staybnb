@@ -19,7 +19,11 @@ export default function Spots() {
         return Object.values(state.spots)
     })
 
-    // console.log('spots', spots)
+    // const reviews = spots.Reviews.reduce((acc, review) => {
+    //     return acc.stars + review.stars
+    // })
+
+    // console.log('SUM', reviews)
 
     return (
         <div className='main'>
@@ -37,7 +41,12 @@ export default function Spots() {
                                         <span className='card-spot-price'>{`$${spot.pricePerNight}`} </span>
                                         <span className='night-word'>night</span>
                                     </div>
-                                    <div className='star-rating'>* 4.95</div>
+                                    <div className='star-rating'>
+
+                                        {spot.Reviews.length ? (spot.Reviews.reduce((acc, review) => {
+                                            return acc + review.stars
+                                        }, 0) / spot.Reviews.length).toFixed(2) : 'new spot'}
+                                    </div>
                                 </div>
                             </Link>
                         </div>

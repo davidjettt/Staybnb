@@ -463,6 +463,12 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
     };
     // console.log(where)
     const spots = await Spot.findAll({
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            }
+        ],
         where,
         limit: size,
         offset: size * (page - 1)
