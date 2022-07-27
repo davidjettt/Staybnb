@@ -4,7 +4,8 @@ import { Modal } from '../../context/Modal';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import ReviewForm from "../ReviewForm/ReviewForm";
+// import ReviewForm from "../ReviewForm/ReviewForm";
+import EditReviewFormModal from './EditReviewFormModal';
 
 
 export default function EditReviewForm ({ spotId }) {
@@ -25,7 +26,7 @@ export default function EditReviewForm ({ spotId }) {
         <>
             <button onClick={() => setShowModal(true)}>Update Your Review</button>
             {showModal && <Modal onClose={handleClose}>
-                <ReviewForm setShowModal={setShowModal} review={review} formType='Update Review' />
+                <EditReviewFormModal setShowModal={setShowModal} review={review} formType='Update Review' />
             </Modal>}
         </>
     )
