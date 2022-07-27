@@ -12,7 +12,9 @@ export default function EditReviewForm ({ spotId }) {
 
     const reviews = useSelector(state => Object.values(state.reviews));
 
-    const review = reviews.find(review => +review.spotId === +spotId)
+    const currentUserId = useSelector(state => state.session.user?.id);
+
+    const review = reviews.find(review => +review.userId === +currentUserId);
 
     const handleClose = () => {
         // setRendered(false)

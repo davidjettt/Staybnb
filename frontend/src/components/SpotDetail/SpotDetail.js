@@ -7,7 +7,7 @@ import { deleteSpotThunk, getSpotDetailsThunk } from '../../store/spots';
 import './SpotDetail.css';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
-import { getAllReviewsThunk } from '../../store/reviews';
+import { deleteReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 
 export default function SpotDetail() {
@@ -17,7 +17,6 @@ export default function SpotDetail() {
 
     const [ render, setRendered ] = useState(false);
 
-    if (!render) setRendered(true);
 
 
     useEffect(() => {
@@ -36,15 +35,27 @@ export default function SpotDetail() {
 
 
     const user = useSelector(state => state.session.user?.id);
-
+    // console.log('USER', user)
     // console.log ('SPOT DETAILS', spot)
     // console.log ('SPOT IMAGES', images.images)
 
+
+    const reviews = useSelector(state => {
+        return Object.values(state.reviews)
+    })
+
+    const userReview = reviews.find(review => +review?.userId === +user)
+    console.log('USER REVIEW', userReview)
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
 
         history.push('/');
+    }
+
+    const handleDeleteReview = async () => {
+        await dispatch(deleteReviewThunk(userReview));
+        setRendered(!render);
     }
 
     return (
@@ -71,10 +82,15 @@ export default function SpotDetail() {
                         ))}
                     </div>
                     {/* {user === spot.ownerId ? } */}
+                    <div>{spot.avgStarRating?.toFixed(2)}</div>
+                    <div>{spot.numReviews} reviews</div>
                     <div className='reviews-container'>
-                        {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
-                        {user && <EditReviewForm spotId={spotId} />}
+                        {userReview && <EditReviewForm spotId={spotId} />}
                         <SpotReviews spotId={spotId} />
+                        {userReview && <button onClick={handleDeleteReview}>
+                            Delete Review
+                            </button>}
+                        {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
                     </div>
                 </div>}
         </>

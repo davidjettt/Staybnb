@@ -11,11 +11,11 @@ export default function ReviewForm({ setShowModal , review, formType }) {
     const history = useHistory();
 
     const [ reviewInput, setReviewInput ] = useState(review.review);
-    const [ rating, setRating ] = useState(0);
+    const [ rating, setRating ] = useState(review.stars * 20);
     // const [ starsInput, setStarsInput ] = useState(review.stars);
     const [ errors, setErrors ] = useState([]);
 
-    console.log('RATING', rating)
+    // console.log('RATING', rating)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,15 +27,22 @@ export default function ReviewForm({ setShowModal , review, formType }) {
             stars: rating / 20
         }
 
-        if (formType === 'Create Review') {
+        if (formType === 'Post Review') {
             await dispatch(createReviewThunk(review))
+            // .then((res) => {
+            //     if (res) {
+            //         setShowModal(false);
+            //         history.push(`/spots/${review.spotId}`);
+            //             // window.location.reload();
+            //     }
+            // })
             .then((res) => {
                 if (res) {
-                    setShowModal(false);
-                        history.push(`/spots/${review.spotId}`);
-                        // window.location.reload();
+                    setRating(0);
+                    setReviewInput('');
                 }
             })
+
             .catch(
                 async (res) => {
                     // console.log('RES', res)
@@ -94,6 +101,15 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                         </div>
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
+                            <div style={{display: 'flex', justifyContent: 'center'}} >
+                                    <Rating
+                                        ratingValue={rating}
+                                        initialValue={0}
+                                        onClick={newRating}
+                                        fillColor='gold'
+                                        transition={true}
+                                    />
+                                </div>
                                 <div className="address-input-container">
                                     <label>
                                         <textarea
@@ -108,15 +124,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                         />
                                     </label>
                                 </div>
-                                <div style={{display: 'flex', justifyContent: 'center'}} >
-                                    <Rating
-                                        ratingValue={rating}
-                                        initialValue={0}
-                                        onClick={newRating}
-                                        fillColor='gold'
-                                        transition={true}
-                                    />
-                                </div>
+
                                 {/* <div className='city-input-container'>
                                     <label>
                                         <input
@@ -130,7 +138,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                     </label>
                                 </div> */}
                                 <div className="login-button-container">
-                                    <button className='login-button' type='submit'>{formType}</button>
+                                    <button className='login-button' type='submit'>{formType || 'Post Review'}</button>
                                 </div>
                             </div>
                         </div>

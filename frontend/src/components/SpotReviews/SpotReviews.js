@@ -22,8 +22,10 @@ export default function SpotReviews({ spotId }) {
             <div className='reviews-container'>
                 {reviews.map((review) => (
                     <div>
-                        <span>{review.review}</span>
-                        <span>{review.stars}</span>
+                        <span>{review.review} </span>
+                        <span>{review.stars} </span>
+                        <span>{review.User.firstName} </span>
+                        <span>{review.User.lastName}</span>
                     </div>
                 ))}
             </div>
