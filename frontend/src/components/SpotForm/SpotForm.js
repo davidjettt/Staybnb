@@ -3,21 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from 'react-router-dom';
 import { createSpotThunk, editSpotThunk } from '../../store/spots';
 
-
+import './SpotForm.css'
 
 export default function SpotForm({ spot, formType }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const [ address, setAddress ] = useState(spot.address);
-    const [ city, setCity ] = useState(spot.city);
-    const [ state, setState ] = useState(spot.state);
-    const [ country, setCountry ] = useState(spot.country);
-    const [ lat, setLat ] = useState(spot.latitude);
-    const [ lng, setLng ] = useState(spot.longitude);
-    const [ name, setName ] = useState(spot.name);
-    const [ description, setDescription ] = useState(spot.description);
-    const [ price, setPrice ] = useState(spot.pricePerNight);
+    const [ address, setAddress ] = useState(spot?.address);
+    const [ city, setCity ] = useState(spot?.city);
+    const [ state, setState ] = useState(spot?.state);
+    const [ country, setCountry ] = useState(spot?.country);
+    const [ lat, setLat ] = useState(spot?.latitude);
+    const [ lng, setLng ] = useState(spot?.longitude);
+    const [ name, setName ] = useState(spot?.name);
+    const [ description, setDescription ] = useState(spot?.description);
+    const [ price, setPrice ] = useState(spot?.pricePerNight);
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -64,7 +64,6 @@ export default function SpotForm({ spot, formType }) {
                     if (data && data.errors) setErrors(data.errors)
                 }
             );
-            history.push(`/spots/${spot.id}`)
         }
     };
 
@@ -76,11 +75,6 @@ export default function SpotForm({ spot, formType }) {
                         <h3 className='create-spot-form-title'>{formType}</h3>
                     </div>
                     <form className='create-spot-form' onSubmit={handleSubmit}>
-                        <div className='errors'>
-                            <ul className="errors-list">
-                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                            </ul>
-                        </div>
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
                                 <div className="address-input-container">
@@ -170,7 +164,7 @@ export default function SpotForm({ spot, formType }) {
                                 </div>
                                 <div className='description-input-container'>
                                     <label>
-                                        <input
+                                        <textarea
                                             className='description-input-field'
                                             type='text'
                                             placeholder='Description'
@@ -194,6 +188,11 @@ export default function SpotForm({ spot, formType }) {
                                 </div>
                                 <div className="login-button-container">
                                     <button className='login-button' type='submit'>{formType}</button>
+                                </div>
+                                <div className='errors'>
+                                    <ul className="errors-list">
+                                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
