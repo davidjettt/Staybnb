@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotsByUserThunk } from '../../store/spots';
 import { Link } from 'react-router-dom';
+import { TiStar } from 'react-icons/ti';
 import './YourSpots.css';
 
 export default function YourSpots() {
@@ -18,42 +19,62 @@ export default function YourSpots() {
 
 
 
+
+
     return (
         <div className='main'>
-            <div className='main-content-parent-container'>
-                <div className='main-content-container'>
-                    {spots.map((spot, idx) => (
-                        <div key={idx} className='card-spot-container'>
-                            <Link className='card-spot-link' to={`/spots/${spot.id}`}>
-                                <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage}/>
-                                <div className='card-spot-text-container'>
-                                    <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
-                                    <span className='card-spot-price'>{`$${spot.pricePerNight} night`}</span>
+        <div className='main-content-parent-container'>
+            <div className='main-content-container'>
+                {spots.map((spot, idx) => (
+                    <div key={idx} className='card-spot-container'>
+                        <Link className='card-spot-link' to={`/spots/${spot.id}`}>
+                            <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage} alt=''/>
+                            <div className='card-spot-text-container'>
+                                <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
+                                <div className='distance'>80 miles away</div>
+                                <div className='date'>Jan 22 - 27</div>
+                                <div className='price-container'>
+                                    <span className='card-spot-price'>{`$${spot.pricePerNight}`} </span>
+                                    <span className='night-word'>night</span>
                                 </div>
-                            </Link>
-                        </div>
-                    ))}
+                                <div className='star-rating'>
+                                    <TiStar  />
+                                    {spot.Reviews?.length ? (spot.Reviews.reduce((acc, review) => {
+                                        return acc + review.stars
+                                    }, 0) / spot.Reviews.length).toFixed(2) : 'new spot'}
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
+                ))}
 
-                </div>
             </div>
         </div>
+    </div>
     )
 
 
     // return (
-    //     <>
-    //         <div className='main-content-container'>
-    //             {spots.map((spot) => (
-    //                 <div className='card-spot'>
-    //                     <Link to={`/spots/${spot.id}`}>
-    //                         <img style={{width: 277, height: 263}} src={spot.previewImage}/>
-    //                         <h4>{`${spot.city}, ${spot.state}`}</h4>
-    //                         <h5>{`$${spot.pricePerNight} night`}</h5>
-    //                     </Link>
-    //                 </div>
-    //             ))}
+    //     <div className='main'>
+    //         <div className='main-content-parent-container'>
+    //             <div className='main-content-container'>
+    //                 {spots.map((spot, idx) => (
+    //                     <div key={idx} className='card-spot-container'>
+    //                         <Link className='card-spot-link' to={`/spots/${spot.id}`}>
+    //                             <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage}/>
+    //                             <div className='card-spot-text-container'>
+    //                                 <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
+    //                                 <span className='card-spot-price'>{`$${spot.pricePerNight} night`}</span>
+    //                             </div>
+    //                         </Link>
+    //                     </div>
+    //                 ))}
 
+    //             </div>
     //         </div>
-    //     </>
+    //     </div>
     // )
+
+
+
 }
