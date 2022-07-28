@@ -33,7 +33,6 @@ input {
     outline: none;
     /* width: 30rem; */
     height: 2.5rem;
-    /* border-radius: 0px, 0px, 8px, 8px; */
     border-radius: 10px;
     border: 1px solid rgb(34, 34, 34)
 }
@@ -41,6 +40,16 @@ input {
 input:focus {
     border: 1px solid black;
 }
+
+/* .custom {
+    position: relative;
+    font-size: 14px;
+
+}
+
+.custom input {
+    font-size: 14px;
+} */
 
 .email-input-field {
     min-height: 20px;
