@@ -49,6 +49,9 @@ export default function SpotDetail() {
         history.push('/');
     }
 
+    const test = () => {
+        document.querySelector(".reviews-container").scrollIntoView({behavior: 'smooth' });
+    }
 
     const avgRating = spot?.avgStarRating;
     const numReviews = spot?.numReviews;
@@ -62,9 +65,9 @@ export default function SpotDetail() {
                         </div>
                         <div className='spot-details-container'>
                             <div className='star-rating-location'>
-                                <HiStar />
+                                <HiStar className='star' />
                                 <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
-                                {spot.numReviews ? <span>{spot.numReviews} reviews </span> : <span>new spot </span>}
+                                {spot.numReviews ? <span className='review-click' onClick={test}>{spot.numReviews} reviews</span> : <span>new spot </span>}
                                 <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                             </div>
                             <div className='spot-links-container'>

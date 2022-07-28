@@ -3,6 +3,21 @@ body {
     /* overflow-y: auto; */
 }
 
+.create-spot-form-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    position: relative;
+    /* width: 20vw;
+    height: 25vw; */
+    /* min-width: 1000px;
+    min-height: 760px; */
+    /* max-width: 1300px;
+    max-height: 1160px; */
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
 .description-input-field-container {
     min-height: max-content;
 }
