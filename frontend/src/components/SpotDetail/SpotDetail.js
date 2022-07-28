@@ -107,10 +107,10 @@ export default function SpotDetail() {
                         <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
                         {/* <div>{spot.avgStarRating?.toFixed(2)}</div>
                         <div>{spot.numReviews} reviews</div> */}
-                        {userReview && <EditReviewForm spotId={spotId} />}
+                        {/* {userReview && <EditReviewForm spotId={spotId} />}
                         {userReview && <button onClick={handleDeleteReview}>
                             Delete Review
-                            </button>}
+                            </button>} */}
                         {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
                     </div>
                 </div>}

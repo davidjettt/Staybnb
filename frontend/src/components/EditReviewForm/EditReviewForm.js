@@ -24,7 +24,7 @@ export default function EditReviewForm ({ spotId }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Update Your Review</button>
+            <button className='update-review-button' onClick={() => setShowModal(true)}>Update Review</button>
             {showModal && <Modal onClose={handleClose}>
                 <EditReviewFormModal setShowModal={setShowModal} review={review} formType='Update Review' />
             </Modal>}

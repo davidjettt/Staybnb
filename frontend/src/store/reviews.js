@@ -57,7 +57,7 @@ export const getAllReviewsThunk = (spotId) => async (dispatch) => {
 
     if (response.ok) {
         const data =  await response.json();
-        console.log('DATA', data)
+        // console.log('DATA', data)
         dispatch(getAllReviews(data));
         return data;
     }

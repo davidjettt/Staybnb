@@ -4,6 +4,7 @@ import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import { getAllReviewsThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
+import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function SpotReviews({ spotId, numReviews, avgRating }) {
     const dispatch = useDispatch();
@@ -23,10 +24,12 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
 
     const handleDeleteReview = async () => {
         await dispatch(deleteReviewThunk(userReview));
+        await dispatch(getSpotDetailsThunk(spotId));
         // setRendered(!render);
     }
 
     // console.log('USE SELECTOR REVIEWS', reviews);
+
 
     return (
         <div className='spot-reviews-main'>
@@ -38,7 +41,15 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
             <div className='spot-review-container'>
                 {reviews.map((review, idx) => (
                     <div key={idx} className={'key'}>
-                        { review.User && <div className='review-first-name'>{review.User.firstName} </div>}
+                        <div className='name-buttons-container'>
+                            {review.User && <div className='review-first-name'>{review.User.firstName}</div>}
+                            <div className='update-delete-buttons-container'>
+                                {user === review.userId && <EditReviewForm spotId={spotId} />}
+                                {user === review.userId && <button className='delete-review-button' onClick={handleDeleteReview}>
+                                Delete Review
+                                </button>}
+                            </div>
+                        </div>
                         <div>{review.review} </div>
                     </div>
                 ))}

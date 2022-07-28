@@ -16,6 +16,7 @@ textarea {
     border-radius: 11px;
     border: 1px solid rgb(179, 175, 175);
     /* border-color: rgb(179, 175, 175); */
+    overflow-y: auto;
 
 }
 
@@ -32,7 +33,7 @@ textarea:focus {
 .post-review-button {
     background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
     border: 0;
-    border-radius: 5px;
+    border-radius: 7px;
     /* background: #FF5A5F; */
     cursor: pointer;
     padding: .5rem;
