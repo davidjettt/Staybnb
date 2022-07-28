@@ -12,6 +12,7 @@ export default function LoginForm({ setShowModal }) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [errors, setErrors] = useState([]);
+    // const [ demoUserEmail, setDemoUserEmail ] = useState()
 
 
     const sessionUser = useSelector(state => state.session.user);
@@ -34,6 +35,11 @@ export default function LoginForm({ setShowModal }) {
 
     const handleClick = () => {
         setShowModal(false)
+    }
+
+    const handleDemoUser = () => {
+        setEmail('demo.user@demouser.io')
+        setPassword('demouser')
     }
 
     return (
@@ -91,6 +97,9 @@ export default function LoginForm({ setShowModal }) {
                                 </div>
                                 <div className="login-button-container">
                                     <button className='login-button' type='submit'>Log In</button>
+                                </div>
+                                <div className="login-button-container">
+                                    <button className='login-button' type='submit' onClick={handleDemoUser}>Demo User</button>
                                 </div>
                             </div>
                         </div>
