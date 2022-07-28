@@ -49,17 +49,31 @@
 .signup-button-container {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 1.5rem;
+}
+
+input {
+    margin: 0 auto;
+
+}
+
+.email-input-field {
+    margin-right: .2rem;
+}
+
+.password-input-field-signup {
+
 }
 
 .signup-button {
+    font-size: .9rem;
     border: 0;
-    border-radius: 4px;
+    border-radius: 7px;
     cursor: pointer;
     /* background: #FF5A5F; */
     padding: 12px;
     color: white;
-    width: 300px;
+    width: 500px;
     background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%)
 }
 
@@ -73,4 +87,9 @@
     border: none;
     background-color: white;
     cursor: pointer;
+}
+
+.x-button-signup:hover {
+    background-color: rgb(244, 240, 240);
+    border-radius: 50%;
 }

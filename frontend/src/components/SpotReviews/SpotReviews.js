@@ -54,10 +54,6 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
                     </div>
                 ))}
             </div>
-                {/* {userReview && <EditReviewForm spotId={spotId} />}
-                {userReview && <button onClick={handleDeleteReview}>
-                    Delete Review
-                    </button>} */}
         </div>
     )
 }

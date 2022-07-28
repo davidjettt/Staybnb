@@ -12,7 +12,7 @@ export default function LoginForm({ setShowModal }) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [errors, setErrors] = useState([]);
-    // const [ demoUserEmail, setDemoUserEmail ] = useState()
+
 
 
     const sessionUser = useSelector(state => state.session.user);
@@ -86,7 +86,7 @@ export default function LoginForm({ setShowModal }) {
                                 <div>
                                     <label className="custom-2">
                                         <input
-                                            className='email-input-field'
+                                            className='password-input-field'
                                             type='password'
                                             // placeholder='Password'
                                             value={password}
@@ -96,11 +96,13 @@ export default function LoginForm({ setShowModal }) {
                                         <span className="placeholder-2">Password</span>
                                     </label>
                                 </div>
-                                <div className="login-button-container">
-                                    <button className='login-button' type='submit'>Log In</button>
-                                </div>
-                                <div className="login-button-container">
-                                    <button className='login-button' type='submit' onClick={handleDemoUser}>Demo User</button>
+                                <div className="login-demo-buttons-container">
+                                    <div className="login-button-container">
+                                        <button className='login-button' type='submit'>Log In</button>
+                                    </div>
+                                    <div className="login-button-container">
+                                        <button className='login-button' type='submit' onClick={handleDemoUser}>Demo User</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

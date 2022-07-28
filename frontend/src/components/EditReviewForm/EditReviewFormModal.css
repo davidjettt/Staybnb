@@ -11,6 +11,11 @@
     left: .5rem;
 }
 
+.x-button-update-review:hover {
+    background-color: rgb(244, 240, 240);
+    border-radius: 50%;
+}
+
 .edit-review-form-title-container {
     margin-top: 1rem;
     margin-bottom: 24px;

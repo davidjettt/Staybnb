@@ -5,6 +5,11 @@
     /* border: 1px solid red; */
 }
 
+body {
+    /* margin: 0;
+    padding: 0; */
+}
+
 .navigation-container {
     display: flex;
     flex-direction: row;
@@ -50,6 +55,10 @@
     padding: 5px 5px 5px 12px;
     /* position: relative; */
     background-color: white;
+}
+
+.profile-button:hover {
+    box-shadow: 2px 3px 5px rgba(234, 234, 234 , 1);
 }
 
 .sign-in-container {

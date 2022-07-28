@@ -48,6 +48,7 @@ export default function SpotForm({ spot, formType }) {
             description,
             price
         }
+
         if (formType === 'Create Spot') {
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
@@ -55,7 +56,6 @@ export default function SpotForm({ spot, formType }) {
                     if (data && data.errors) setErrors(data.errors);
                 }
             );
-            // console.log('NEW SPOT DATA', spotData)
             history.push(`/spots/${spotData.id}`)
         } else {
             await dispatch(editSpotThunk(spot)).catch(
@@ -78,92 +78,98 @@ export default function SpotForm({ spot, formType }) {
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
                                 <div className="address-input-container">
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='address-input-field'
-
                                             type='text'
-                                            placeholder='Address'
+                                            // placeholder='Address'
                                             value={address}
                                             onChange={(e) => setAddress(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Address</span>
                                     </label>
                                 </div>
                                 <div className='city-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='city-input-field'
                                             type='text'
-                                            placeholder='City'
+                                            // placeholder='City'
                                             value={city}
                                             onChange={(e) => setCity(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>City</span>
                                     </label>
                                 </div>
                                 <div className='state-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='state-input-field'
                                             type='text'
-                                            placeholder='State'
+                                            // placeholder='State'
                                             value={state}
                                             onChange={(e) => setState(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>State</span>
                                     </label>
                                 </div>
                                 <div className='country-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='country-input-field'
                                             type='text'
-                                            placeholder='Country'
+                                            // placeholder='Country'
                                             value={country}
                                             onChange={(e) => setCountry(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Country</span>
                                     </label>
                                 </div>
                                 <div className='lat-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='lat-input-field'
                                             type='number'
-                                            placeholder='Latitude'
+                                            // placeholder='Latitude'
                                             value={lat}
                                             onChange={(e) => setLat(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Latitude</span>
                                     </label>
                                 </div>
                                 <div className='lng-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='lng-input-field'
                                             type='number'
-                                            placeholder='Longitude'
+                                            // placeholder='Longitude'
                                             value={lng}
                                             onChange={(e) => setLng(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Longitude</span>
                                     </label>
                                 </div>
                                 <div className='name-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='name-input-field'
                                             type='text'
-                                            placeholder='Name'
+                                            // placeholder='Name'
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Name</span>
                                     </label>
                                 </div>
                                 <div className='description-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <textarea
                                             className='description-input-field'
                                             type='text'
@@ -172,18 +178,20 @@ export default function SpotForm({ spot, formType }) {
                                             onChange={(e) => setDescription(e.target.value)}
                                             required
                                         />
+                                        {/* <span className='placeholder-2'>Description</span> */}
                                     </label>
                                 </div>
                                 <div className='price-input-container'>
-                                    <label>
+                                    <label className='custom-2'>
                                         <input
                                             className='price-input-field'
                                             type='number'
-                                            placeholder='Price'
+                                            // placeholder='Price'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}
                                             required
                                         />
+                                        <span className='placeholder-2'>Price</span>
                                     </label>
                                 </div>
                                 <div className="login-button-container">

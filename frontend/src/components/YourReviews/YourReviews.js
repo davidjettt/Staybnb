@@ -34,6 +34,7 @@ export default function YourReviews () {
                         <div className='your-reviews-text-content'>
                             <Link className='your-reviews-spot-link' to={`/spots/${review.spotId}`}>
                                 <div className='spot-name-location-container'>
+                                    <span style={{textDecoration: 'none', fontWeight: 'bold'}}>{idx + 1}. </span>
                                     <span className='your-review-spot-name'>{review.Spot?.name} • </span>
                                     <span>{review.Spot?.city}, {review.Spot?.state}, {review.Spot?.country}</span>
                                 </div>

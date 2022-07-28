@@ -52,68 +52,71 @@ export default function SignupForm({ setShowModal2 }) {
                     </div>
                     <div className='input-container'>
                         <div>
-                            <label>
+                            <label className="custom-2">
 
                                 <input
                                     className='first-name-input'
                                     type='text'
-                                    placeholder='First Name'
+                                    // placeholder='First Name'
                                     value={firstName}
                                     onChange={(e) => setFirstName(e.target.value)}
                                     required
                                 />
+                                <span className="placeholder-2">First Name</span>
                             </label>
                         </div>
                         <div>
-                            <label>
+                            <label className="custom-2">
 
                                 <input
                                     className='last-name-input'
                                     type='text'
-                                    placeholder='Last Name'
+                                    // placeholder='Last Name'
                                     value={lastName}
                                     onChange={(e) => setLastName(e.target.value)}
                                     required
                                 />
+                                <span className="placeholder-2">Last Name</span>
                             </label>
                         </div>
                         <div>
-                            <label htmlFor='box'>
-
+                            <label className="custom-2" htmlFor='box'>
                                 <input
                                     className='email-input-field email'
                                     id='box'
                                     type='text'
-                                    placeholder='Email'
+                                    // placeholder='Email'
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
+                                <span className="placeholder-2">Email</span>
                             </label>
                         </div>
                         <div>
-                            <label>
+                            <label className="custom-2">
                                 <input
-                                    className='password-input-field'
+                                    className='password-input-field-signup'
                                     type='password'
-                                    placeholder='Password'
+                                    // placeholder='Password'
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
+                                <span className="placeholder-2">Password</span>
                             </label>
                         </div>
                         <div>
-                        <label>
-
+                        <label className="custom-2">
                             <input
                                 className='confirm-pw-input-field'
                                 type='password'
-                                placeholder='Confirm Password'
+                                // placeholder='Confirm Password'
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 required
                             />
+                            <span className="placeholder-2">Confirm Password</span>
                         </label>
                     </div>
                         <div className="signup-button-container">

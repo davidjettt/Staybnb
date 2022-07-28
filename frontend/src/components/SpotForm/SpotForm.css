@@ -1,5 +1,6 @@
 body {
     overflow-x: hidden;
+    /* overflow-y: auto; */
 }
 
 .description-input-field-container {
@@ -34,4 +35,9 @@ body {
 
 .create-spot-form > div {
     margin: 1rem 0;
+}
+
+textarea:focus,
+input:focus {
+    border: 2px solid black;
 }
