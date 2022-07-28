@@ -25,7 +25,9 @@ body {
     margin-left: 40px; */
     margin-top: 10px;
     border-bottom: 1px solid rgb(235, 235, 235);
-    width: 105%;
+    min-width: 1540px;
+    max-width: 105%;
+    /* padding: 0 1rem; */
     /* padding-bottom: 8px; */
 }
 
@@ -84,7 +86,7 @@ body {
 
 .logo-container {
     position: relative;
-    bottom: .7rem;
+    bottom: .3rem;
     /* border: 1px solid red; */
     min-width: 250px;
     min-height: 20px;

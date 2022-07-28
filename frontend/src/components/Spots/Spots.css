@@ -28,9 +28,17 @@
     margin: 0;
 }
 
+.card-spot-image-container {
+    width: 290px;
+    height: 275px;
+    margin-bottom: .75rem;
+}
+
 .card-spot-image {
     border-radius: 11px;
-    margin-bottom: .5rem;
+    /* margin-bottom: .5rem; */
+    width: 100%;
+    height: 100%;
 }
 
 .card-spot-price {
@@ -54,22 +62,50 @@
     width: 90vw;
     margin: 0 auto;
     flex: 1 1;
+    display: flex;
+    justify-content: center;
     /* height: fit-content; */
 }
 
 .main-content-container {
-
     box-sizing: border-box;
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: fit-content; */
+
     width: fit-content;
-    /* border: 1px solid red;
+    /* border: 1px solid red; */
     display: grid;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(5, 1fr);
     justify-items: center;
-    row-gap: 10px; */
+    row-gap: 15px;
 }
+
+@media screen and (max-width: 1600px){
+    .main-content-container {
+        width: fit-content;
+        /* border: 1px solid red; */
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        justify-items: center;
+        row-gap: 20px;
+    }
+    .card-spot-image-container {
+        width: 330px;
+        height: 314px;
+    }
+    .card-spot-container {
+        padding: 1.5rem;
+    }
+
+}
+
+/* @media screen and (max-width: 1450px){
+    .card-spot-container {
+        padding: 1rem;
+    }
+} */
 
 .card-spot-text-container {
     display: grid;
