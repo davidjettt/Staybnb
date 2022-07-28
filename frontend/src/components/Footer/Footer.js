@@ -5,7 +5,7 @@ export default function Footer () {
     return (
         <>
             <div className="footer">
-                Hello
+                {/* Hello */}
             </div>
         </>
     )

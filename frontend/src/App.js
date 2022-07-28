@@ -59,7 +59,7 @@ function App() {
       <Route path='/your-reviews'>
         <YourReviews />
       </Route>
-      {isLoaded && (
+      {/* {isLoaded && (
       <Switch>
         <Route path='/login'>
           <LoginFormPage />
@@ -68,7 +68,7 @@ function App() {
           <SignupFormPage />
         </Route>
       </Switch>
-      )}
+      )} */}
     </>
   );
 }
