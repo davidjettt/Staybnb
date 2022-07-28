@@ -31,25 +31,68 @@
 
 input {
     outline: none;
+    padding-left: 1rem;
     /* width: 30rem; */
-    height: 2.5rem;
+    margin-top: 1px;
+    height: 3.5rem;
     border-radius: 10px;
-    border: 1px solid rgb(34, 34, 34)
+    border: 1px solid rgb(34, 34, 34);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 16px;
 }
 
 input:focus {
     border: 1px solid black;
 }
 
-/* .custom {
+.custom, .custom-2 {
     position: relative;
-    font-size: 14px;
+    font-size: 16px;
 
 }
 
 .custom input {
     font-size: 14px;
-} */
+}
+
+.custom .placeholder {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        font-size 0.3s ease,
+        color 0.3s ease;
+}
+
+.custom input:valid + .placeholder,
+.custom input:focus + .placeholder {
+    top: 15px;
+    font-size: 14px;
+    color: #222;
+}
+.custom-2 .placeholder-2 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease,
+        font-size 0.3s ease,
+        color 0.3s ease;
+}
+
+.custom-2 input:valid + .placeholder-2,
+.custom-2 input:focus + .placeholder-2 {
+    top: -5px;
+    font-size: 13px;
+    color: #222;
+}
 
 .email-input-field {
     min-height: 20px;
@@ -66,6 +109,7 @@ input:focus {
 }
 
 .login-button {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border: 0;
     border-radius: 4px;
     /* background: #FF5A5F; */

@@ -75,25 +75,25 @@ export default function LoginForm({ setShowModal }) {
                                             className='email-input-field email'
                                             id='box'
                                             type='text'
-                                            placeholder='Email'
+                                            // placeholder='Email'
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
                                         />
-                                        {/* <span className="placeholder">Email</span> */}
+                                        <span className="placeholder">Email</span>
                                     </label>
                                 </div>
                                 <div>
-                                    <label>
-
+                                    <label className="custom-2">
                                         <input
                                             className='email-input-field'
                                             type='password'
-                                            placeholder='Password'
+                                            // placeholder='Password'
                                             value={password}
                                             onChange={(e) => setPassword(e.target.value)}
                                             required
-                                        />
+                                            />
+                                        <span className="placeholder-2">Password</span>
                                     </label>
                                 </div>
                                 <div className="login-button-container">
