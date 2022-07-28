@@ -9,6 +9,7 @@ import { ModalProvider } from './context/Modal';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
+import Footer from './components/Footer/Footer';
 
 const store = configureStore();
 
@@ -26,6 +27,7 @@ function Root() {
       <ModalProvider>
         <BrowserRouter>
           <App />
+          <Footer />
         </BrowserRouter>
       </ModalProvider>
     </ReduxProvider>

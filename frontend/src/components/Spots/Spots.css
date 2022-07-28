@@ -91,12 +91,12 @@
         justify-items: center;
         row-gap: 20px;
     }
-    .card-spot-image-container {
+    /* .card-spot-image-container {
         width: 330px;
         height: 314px;
-    }
+    } */
     .card-spot-container {
-        padding: 1.5rem;
+        padding: .5rem;
     }
 
 }
