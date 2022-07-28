@@ -93,8 +93,15 @@ export default function SpotDetail() {
 
                         ))}
                     </div>
-                    <div className='subtitle-container'>
-                            <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                    <div className='spot-details-subtitle-description-container'>
+                        <div className='subtitle-container'>
+                                <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                        </div>
+                        <div className='description-container'>
+                            <div className='description-content'>
+                                {spot.description}
+                            </div>
+                        </div>
                     </div>
                     <div className='reviews-container'>
                         <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />

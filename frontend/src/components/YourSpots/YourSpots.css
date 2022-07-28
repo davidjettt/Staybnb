@@ -1,12 +1,23 @@
 .main-your-spots {
-    margin: 1rem;
+    /* margin: 1rem; */
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    position: relative;
+    width: 20vw;
+    height: 25vw;
+    min-width: 1000px;
+    min-height: 760px;
+    max-width: 1300px;
+    max-height: 1160px;
 }
 
 .your-spots-header-container {
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid rgb(234, 234, 234);
+    border-bottom: 1px solid #ddd;
     margin: 1.5rem;
+    width: 1000px;
 }
 
 .your-spots-header-container > h3 {

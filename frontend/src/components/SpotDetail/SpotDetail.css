@@ -93,8 +93,26 @@
     font-weight: 540;
 }
 
+.spot-details-subtitle-description-container {
+    box-sizing: border-box;
+    display: flex;
+    /* width: 600px; */
+    width: 57%;
+    /* justify-content: space-between; */
+    flex-direction: column;
+    padding: .75rem;
+
+    /* display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-auto-flow: column; */
+}
+
+.description-container {
+    padding: 1.5rem 0;
+}
+
 .subtitle-container {
-    border-bottom: 1px solid rgb(235, 235, 235);
+    border-bottom: 1px solid #ddd;
     padding-bottom: 19px;
     padding-top: 10px;
 }
