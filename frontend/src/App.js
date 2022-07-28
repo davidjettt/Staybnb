@@ -36,7 +36,7 @@ function App() {
 
   }, [dispatch])
 
-  console.log('is loaded', isLoaded)
+  // console.log('is loaded', isLoaded)
   return (
     <>
       <Navigation isLoaded={isLoaded} />
