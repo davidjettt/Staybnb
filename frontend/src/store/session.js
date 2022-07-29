@@ -44,17 +44,22 @@ export const login = (user) => async (dispatch) => {
 
 // Restore session user thunk -- GET
 export const restoreUser = () => async (dispatch) => {
-    const response = await csrfFetch('/api/session');
+    const response = await csrfFetch('/api/session')
+    // .catch(e => {
+    //     return;
+    // })
 
-    const data = await response.json();
-    dispatch(setUser(data));
-    return response;
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data));
+        return response;
+    }
 }
 
 // Sign up user thunk
 export const signup = (user) => async (dispatch) => {
     const { firstName, lastName, email, password } = user;
-    // console.log(user);
+
     const response = await csrfFetch('/api/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -65,7 +70,7 @@ export const signup = (user) => async (dispatch) => {
             password
         })
     })
-    // console.log(response)
+
     const data = await response.json();
     dispatch(setUser(data))
     return response;
@@ -78,7 +83,7 @@ export const logout = () => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' }
     })
 
-    // const data = await response.json();
+
     dispatch(removeUser());
     return response;
 }

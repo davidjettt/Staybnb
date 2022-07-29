@@ -4,6 +4,7 @@ import { getSpotsByUserThunk } from '../../store/spots';
 import { Link } from 'react-router-dom';
 import { TiStar } from 'react-icons/ti';
 import './YourSpots.css';
+import '../Spots/Spots.css';
 
 export default function YourSpots() {
     const dispatch = useDispatch();
@@ -76,7 +77,4 @@ export default function YourSpots() {
     //         </div>
     //     </div>
     // )
-
-
-
 }

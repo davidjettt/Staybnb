@@ -1,23 +1,19 @@
 .main-your-spots {
-    /* margin: 1rem; */
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    position: relative;
-    width: 20vw;
-    height: 25vw;
-    min-width: 1000px;
-    min-height: 760px;
-    max-width: 1300px;
-    max-height: 1160px;
+    min-width: 60vw;
+    /* height: 25vw; */
+    /* min-width: 70vh; */
+    /* max-width: 100%; */
+
+    /* width: 95vw; */
 }
 
 .your-spots-header-container {
     display: flex;
     justify-content: center;
+    margin: 1.5rem 0;
+    /* width: 95vw; */
+    max-width: 100%;
     border-bottom: 1px solid #ddd;
-    margin: 1.5rem;
-    width: 1000px;
 }
 
 .your-spots-header-container > h3 {

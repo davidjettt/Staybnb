@@ -187,6 +187,7 @@ export default function spotsReducer(state = initialState, action) {
         case DELETE_SPOT: {
             let newState = {...state};
             delete newState[action.spotId];
+            // newState.reviews = {};
             return newState;
         }
         default:

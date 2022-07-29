@@ -49,7 +49,7 @@ export default function SpotForm({ spot, formType }) {
             price
         }
 
-        if (formType === 'Create Spot') {
+        if (formType === 'Create a Spot') {
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
@@ -58,12 +58,13 @@ export default function SpotForm({ spot, formType }) {
             );
             history.push(`/spots/${spotData.id}`)
         } else {
-            await dispatch(editSpotThunk(spot)).catch(
+            const spotData = await dispatch(editSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors)
                 }
             );
+            history.push(`/spots/${spot.id}`)
         }
     };
 
@@ -133,7 +134,7 @@ export default function SpotForm({ spot, formType }) {
                                     <label className='custom-2'>
                                         <input
                                             className='lat-input-field'
-                                            type='number'
+                                            type='text'
                                             // placeholder='Latitude'
                                             value={lat}
                                             onChange={(e) => setLat(e.target.value)}
@@ -146,7 +147,7 @@ export default function SpotForm({ spot, formType }) {
                                     <label className='custom-2'>
                                         <input
                                             className='lng-input-field'
-                                            type='number'
+                                            type='text'
                                             // placeholder='Longitude'
                                             value={lng}
                                             onChange={(e) => setLng(e.target.value)}
@@ -185,7 +186,7 @@ export default function SpotForm({ spot, formType }) {
                                     <label className='custom-2'>
                                         <input
                                             className='price-input-field'
-                                            type='number'
+                                            type='text'
                                             // placeholder='Price'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}

@@ -25,18 +25,16 @@ function App() {
 
   useEffect(() => {
     // if (!sessionUser) return;
-
+    // if (!isLoaded) return
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
         .catch((e) => {
-          if (e) {
             setIsLoaded(true);
             console.log(e);
-          }
         })
 
   }, [dispatch])
 
-  // console.log('is loaded', isLoaded)
+  console.log('is loaded', isLoaded)
   return (
     <>
       <Navigation isLoaded={isLoaded} />
