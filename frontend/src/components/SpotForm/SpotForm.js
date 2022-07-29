@@ -13,11 +13,11 @@ export default function SpotForm({ spot, formType }) {
     const [ city, setCity ] = useState(spot?.city);
     const [ state, setState ] = useState(spot?.state);
     const [ country, setCountry ] = useState(spot?.country);
-    const [ lat, setLat ] = useState(spot?.latitude);
-    const [ lng, setLng ] = useState(spot?.longitude);
+    const [ lat, setLat ] = useState(spot?.latitude || '');
+    const [ lng, setLng ] = useState(spot?.longitude || '');
     const [ name, setName ] = useState(spot?.name);
     const [ description, setDescription ] = useState(spot?.description);
-    const [ price, setPrice ] = useState(spot?.pricePerNight);
+    const [ price, setPrice ] = useState(spot?.pricePerNight || '');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -53,18 +53,26 @@ export default function SpotForm({ spot, formType }) {
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors);
+                    console.log(data)
+                    if (data) setErrors(data.errors || [data.message]);
                 }
             );
-            history.push(`/spots/${spotData.id}`)
+
+            if (spotData) {
+                history.push(`/spots/${spotData.id}`);
+            }
+
         } else {
             const spotData = await dispatch(editSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
-                    if (data && data.errors) setErrors(data.errors)
+                    if (data) setErrors(data.errors || [data.message])
                 }
             );
-            history.push(`/spots/${spot.id}`)
+
+            if (spotData) {
+                history.push(`/spots/${spot.id}`)
+            }
         }
     };
 
