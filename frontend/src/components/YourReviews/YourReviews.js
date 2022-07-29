@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteReviewThunk, getReviewsUserThunk } from '../../store/reviews';
+import { deleteReviewThunk, editReviewThunk, getReviewsUserThunk } from '../../store/reviews';
 import { Link } from 'react-router-dom';
 
 
@@ -20,6 +20,7 @@ export default function YourReviews () {
     })
 
 
+
     return (
         <div className='your-reviews-main'>
             <div className='your-reviews-heading-container'>
@@ -32,6 +33,9 @@ export default function YourReviews () {
                             {/* <Link to={`/spots/${review.spotId}`}>
                                 <button className='go-to-spot-button'>Go To Spot</button>
                             </Link> */}
+
+                                <EditReviewForm reviewId={review.id} />
+
                             <div className='your-reviews-text-content'>
                                 <Link className='your-reviews-spot-link' to={`/spots/${review.spotId}`}>
                                     <div className='spot-name-location-container'>

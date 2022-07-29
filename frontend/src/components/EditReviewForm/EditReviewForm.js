@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import EditReviewFormModal from './EditReviewFormModal';
 
 
-export default function EditReviewForm ({ setReviewShowModal ,spotId }) {
+export default function EditReviewForm ({ spotId, reviewId }) {
     const [ showModal, setShowModal ] = useState(false);
 
     const reviews = useSelector(state => Object.values(state.reviews));
@@ -16,6 +16,7 @@ export default function EditReviewForm ({ setReviewShowModal ,spotId }) {
     const currentUserId = useSelector(state => state.session.user?.id);
 
     const review = reviews.find(review => +review.userId === +currentUserId);
+    // const review = reviews.find(review => +review.id === +reviewId);
 
     const handleClose = () => {
         // setRendered(false)

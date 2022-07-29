@@ -22,6 +22,7 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
     const userReview = reviews.find(review => +review?.userId === +user)
 
 
+
     const handleDeleteReview = async () => {
         await dispatch(deleteReviewThunk(userReview));
         await dispatch(getSpotDetailsThunk(spotId));
@@ -44,7 +45,7 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
                         <div className='name-buttons-container'>
                             {review.User && <div className='review-first-name'>{review.User.firstName}</div>}
                             <div className='update-delete-buttons-container'>
-                                {user === review.userId && <EditReviewForm spotId={spotId} />}
+                                {user === review.userId && <EditReviewForm spotId={spotId} reviewId={userReview.id} />}
                                 {user === review.userId && <button className='delete-review-button' onClick={handleDeleteReview}>
                                 Delete Review
                                 </button>}
