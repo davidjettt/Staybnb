@@ -22,7 +22,7 @@ router.delete(
 // Get the current user
   router.get(
     '/',
-    requireAuth,
+    // requireAuth,
     restoreUser,
     (req, res) => {
       const { user } = req;
@@ -31,7 +31,7 @@ router.delete(
         //   user: user.toSafeObject()
         // });
         return res.json(user.toSafeObject())
-      } else return res.json({});
+      } else return null;
     }
   );
 
