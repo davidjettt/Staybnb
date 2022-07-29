@@ -134,9 +134,9 @@ body {
     /* padding: 7px; */
 }
 
-/* .dropdown {
+.dropdown {
     position: relative;
-} */
+}
 
 .dropdown-menu {
     /* border: 1px solid red; */
@@ -145,7 +145,8 @@ body {
     /* width: 200px; */
     width: 240px;
     position: absolute;
-    right: -14vw;
+    /* right: -14vw; */
+    right: -235px;
     top: calc(100 + .25rem);
     background-color: white;
     /* padding: 7px; */
