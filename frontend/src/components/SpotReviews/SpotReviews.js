@@ -6,7 +6,7 @@ import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
 import { getSpotDetailsThunk } from '../../store/spots';
 
-export default function SpotReviews({ spotId, numReviews, avgRating }) {
+export default function SpotReviews({ spotId, numReviews, avgRating, reviewModalClass }) {
     const dispatch = useDispatch();
 
     useEffect(() => {

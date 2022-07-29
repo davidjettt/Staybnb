@@ -25,3 +25,49 @@
     width: 35rem;
     height: 35rem;
   }
+
+
+
+
+#review-modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #review-modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  #review-modal-content {
+    position: absolute;
+    background-color:white;
+    border-radius: 9px;
+    width: 70vw;
+    height: 80vh;
+    overflow-y: scroll;
+  }
+
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 2000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}

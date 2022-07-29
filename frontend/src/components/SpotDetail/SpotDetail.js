@@ -9,6 +9,7 @@ import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import { getAllReviewsThunk } from '../../store/reviews';
 
+import ReviewsModal from '../ReviewsModal/ReviewsModal';
 
 import { HiStar } from 'react-icons/hi';
 
@@ -67,7 +68,8 @@ export default function SpotDetail() {
                             <div className='star-rating-location'>
                                 <HiStar className='star' />
                                 <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
-                                {spot.numReviews ? <span className='review-click' onClick={test}>{spot.numReviews} reviews</span> : <span>new spot </span>}
+                                {/* {spot.numReviews ? <span className='review-click' onClick={test}>{spot.numReviews} reviews</span> : <span>new spot </span>} */}
+                                <ReviewsModal spotId={spotId} numReviews={numReviews} avgRating={avgRating} />
                                 <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                             </div>
                             <div className='spot-links-container'>

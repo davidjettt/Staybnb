@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import EditReviewFormModal from './EditReviewFormModal';
 
 
-export default function EditReviewForm ({ spotId }) {
+export default function EditReviewForm ({ setReviewShowModal ,spotId }) {
     const [ showModal, setShowModal ] = useState(false);
 
     const reviews = useSelector(state => Object.values(state.reviews));
@@ -22,9 +22,14 @@ export default function EditReviewForm ({ spotId }) {
         setShowModal(false)
     }
 
+    const handleClick = () => {
+        setShowModal(true);
+        // setReviewShowModal(false);
+    }
+
     return (
         <>
-            <button className='update-review-button' onClick={() => setShowModal(true)}>Update Review</button>
+            <button className='update-review-button' onClick={handleClick}>Update Review</button>
             {showModal && <Modal onClose={handleClose}>
                 <EditReviewFormModal setShowModal={setShowModal} review={review} formType='Update Review' />
             </Modal>}

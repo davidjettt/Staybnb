@@ -10,6 +10,7 @@ import configureStore from './store';
 import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import Footer from './components/Footer/Footer';
+import { ReviewModalProvider } from './context/ReviewModal';
 
 const store = configureStore();
 
@@ -24,12 +25,14 @@ if (process.env.NODE_ENV !== "production") {
 function Root() {
   return (
     <ReduxProvider store={store}>
+      <ReviewModalProvider>
       <ModalProvider>
         <BrowserRouter>
           <App />
           <Footer />
         </BrowserRouter>
       </ModalProvider>
+      </ReviewModalProvider>
     </ReduxProvider>
   );
 }
