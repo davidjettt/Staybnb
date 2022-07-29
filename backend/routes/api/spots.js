@@ -45,6 +45,11 @@ const validateSpot = [
         else if (value.length >= 50) throw new Error ('Name must be less than 50 characters')
         return true
     }),
+    check('price')
+    .custom(value => {
+        if (isNaN(value)) throw new Error ('Price is not valid')
+        return true;
+    }),
     handleValidationErrors
 ];
 
@@ -297,17 +302,17 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
 
-    const isExistingLatLng = await Spot.findOne({
-        where: {
-            [Op.and]: [{address: address}, {city: city}, {state: state}, {latitude: lat}, {longitude: lng}]
-        }
-    });
+    // const isExistingLatLng = await Spot.findOne({
+    //     where: {
+    //         [Op.and]: [{address: address}, {city: city}, {state: state}, {latitude: lat}, {longitude: lng}]
+    //     }
+    // });
 
-    if (isExistingLatLng) {
-        const err = new Error ('Combination of longitude and latitude coordinates already exists');
-        err.status = 403;
-        return next(err)
-    }
+    // if (isExistingLatLng) {
+    //     const err = new Error ('Combination of longitude and latitude coordinates already exists');
+    //     err.status = 403;
+    //     return next(err)
+    // }
 
     const updatedSpot = await spot.update({
         ownerId: req.user.id,
@@ -321,7 +326,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         description,
         pricePerNight: price
     });
-    console.log('UPDATED SPOT', updatedSpot)
+    // console.log('UPDATED SPOT', updatedSpot)
     // const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
     return res.json(spot);
 });
@@ -493,7 +498,7 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
         }
     });
     if (isExistingLatLng) {
-        const err = new Error ('Combination of address, city, state, longitude, latitude coordinates already exists');
+        const err = new Error ('Combination of address, city, state, longitude, latitude coordinates for a spot already exists');
         err.status = 403;
         return next(err)
     }
