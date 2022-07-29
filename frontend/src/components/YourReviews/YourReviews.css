@@ -12,7 +12,7 @@
     min-height: 760px; */
     /* max-width: 1300px; */
 
-    min-width: 100vw;
+    min-width: 80%;
     /* max-height: 1160px; */
 }
 
@@ -57,9 +57,9 @@
     /* flex: 1; */
     /* padding-top: 1rem;
     padding-bottom: 2.5rem; */
-    padding: 2.5rem;
+    padding: 2rem;
     /* max-width: 80%; */
-    width: 30vw;
+    width: 40%;
 }
 
 .your-review-spot-name {
@@ -71,7 +71,7 @@
 .your-reviews-images-container > img {
     border-radius: 10px;
     /* width: 20vw; */
-    width: 60%;
+    width: 40%;
 }
 
 
