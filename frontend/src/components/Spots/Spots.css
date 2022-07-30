@@ -67,6 +67,7 @@
     display: flex;
     justify-content: center;
     /* height: fit-content; */
+    /* height: 40%; */
 }
 
 .main-content-container {
@@ -77,7 +78,6 @@
     width: fit-content; */
 
     width: fit-content;
-    /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
@@ -87,7 +87,7 @@
 @media screen and (max-width: 1600px){
     .main-content-container {
         width: fit-content;
-        /* border: 1px solid red; */
+
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         justify-items: center;
@@ -134,7 +134,6 @@
 
 .star-rating {
     justify-self: flex-end;
-
     color: rgb(34 ,34 ,34);
     font-size: .9rem;
 }

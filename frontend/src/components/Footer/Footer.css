@@ -1,20 +1,45 @@
 
-/* html,
+html,
 body {
     position: relative;
     min-height: 100%;
     margin: 0;
     padding: 0;
-} */
+}
 
 
 
 .footer {
-    /* background-color: aqua;
-    position: absolute;
-    bottom: 0;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+    background-color: rgb(234, 234, 234);
+    /* position: absolute; */
+    /* bottom: 0;
     left: 0;
-    height: 100px;
-    width: 100vw;
-    margin-top: -200px; */
+    right: 0; */
+    height: 9vh;
+    /* width: 100vw; */
+    /* min-width: 99vw; */
+    min-width: 100%;
+    max-width: fit-content;
+    margin-top: 20px;
+    /* overflow-x: hidden; */
+    /* margin-top: 100px; */
+    /* margin-top: -200px; */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-contents {
+    max-width: fit-content;
+}
+
+.my-links {
+    display: flex;
+}
+
+
+
+.github-icon {
+    width: 6vw;
 }
