@@ -22,8 +22,8 @@
     position: absolute;
     background-color:white;
     border-radius: 9px;
-    width: 35rem;
-    height: 35rem;
+    width: 37rem;
+    height: 39rem;
   }
 
 
@@ -59,7 +59,7 @@
   }
 
 
-.ReactModal__Overlay {
+/* .ReactModal__Overlay {
     opacity: 0;
     transition: opacity 2000ms ease-in-out;
 }
@@ -70,4 +70,4 @@
 
 .ReactModal__Overlay--before-close{
     opacity: 0;
-}
+} */

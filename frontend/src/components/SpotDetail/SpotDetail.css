@@ -123,6 +123,8 @@
 
 .description-container {
     padding: 1.5rem 0;
+    line-height: 1.4rem;
+    color: #222222;
 }
 
 .subtitle-container {

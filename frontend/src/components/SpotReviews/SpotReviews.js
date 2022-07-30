@@ -51,7 +51,7 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
                                 </button>}
                             </div>
                         </div>
-                        <div>{review.review} </div>
+                        <div className='spot-review-text'>{review.review} </div>
                     </div>
                 ))}
             </div>

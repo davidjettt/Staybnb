@@ -1,8 +1,6 @@
 .navigation-main {
-    /* margin-top: 10px; */
     padding-bottom: 0px;
     padding-top: 10px;
-    /* border: 1px solid red; */
     min-width: 100vw;
     max-width: 100%;
     box-sizing: border-box;
@@ -40,17 +38,6 @@ body {
     /* padding: 0 1rem; */
     /* padding-bottom: 8px; */
 }
-
-/* .fa-solid {
-    width: 100px;
-    height: 20%;
-}
-
-.fa-circle-user {
-    width: 100px;
-
-} */
-
 
 .profile-button {
     width: 77px;
@@ -130,23 +117,24 @@ body {
     /* margin-top: 15px;
     height: auto; */
     /* min-height: 20px; */
+    box-sizing: border-box;
     position: absolute;
     /* padding: 7px; */
 }
 
 .dropdown {
+    box-sizing: border-box;
     position: relative;
 }
 
 .dropdown-menu {
-    /* border: 1px solid red; */
     /* margin-right: 40px; */
     box-sizing: border-box;
     /* width: 200px; */
     width: 240px;
     position: absolute;
-    /* right: -14vw; */
-    right: -235px;
+    right: -12vw;
+    /* right: -11rem; */
     top: calc(100 + .25rem);
     background-color: white;
     /* padding: 7px; */
@@ -161,14 +149,10 @@ body {
     z-index: 1;
 }
 
-
-.dropdown-signup-container {
-    /* border: 1px solid red; */
-    /* margin-right: 5px;
-    position: relative;
-    right: 5px;
-    bottom: 5px;
-    padding-top: 10px; */
+@media screen and (max-width: 1200px) {
+    .dropdown-menu {
+        right: -14vw;
+    }
 }
 
 .dropdown-signup-button {
@@ -192,13 +176,6 @@ body {
     background-color: rgb(235, 235, 235);
 }
 
-.dropdown-login-container {
-    /* margin-right: 5px;
-    right: 5px;
-    padding-top: 5px; */
-    /* top: 5px; */
-    /* position: relative; */
-}
 
 .dropdown-login-button {
     width: 100%;

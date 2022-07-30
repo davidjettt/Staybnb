@@ -100,14 +100,18 @@
     .card-spot-container {
         padding: .5rem;
     }
+}
+@media screen and (max-width: 1371px){
 
+    .card-spot-image-container {
+        width: 280px;
+        height: 265px;
+    }
+    .card-spot-container {
+        padding: .75rem;
+    }
 }
 
-/* @media screen and (max-width: 1450px){
-    .card-spot-container {
-        padding: 1rem;
-    }
-} */
 
 .card-spot-text-container {
     display: grid;

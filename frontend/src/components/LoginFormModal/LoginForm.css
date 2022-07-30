@@ -1,3 +1,13 @@
+.errors {
+    list-style: none;
+    text-align: center;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    color: red;
+}
+
+
 .errors-list {
     list-style: none;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -6,7 +16,6 @@
 }
 
 .login-page-title {
-    /* font-family: Cereal; */
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -14,44 +23,48 @@
     color: rgb(34, 34, 34);
 }
 
-/* .login-form {
-    width: 100%;
-    height: 100%;
-    margin: 2rem auto;
-    border-radius: 5px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 15px 0;
-} */
+
 
 .input-container {
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     align-items: center;
 }
 
 .password-input-field {
+    /* border-top: none; */
     margin-left: 4px;
-    margin-top: .5px;
+    /* margin-top: .75rem; */
 }
 
 .login-demo-buttons-container {
     margin-top: 1.5rem;
+    display: block;
+    /* padding: 1rem; */
 }
+
+
 
 input {
     outline: none;
-    padding-left: 1rem;
+    width: 30rem;
+    height: 2.5rem;
+    border-color: #ddd;
     /* width: 30rem; */
-    margin-top: 1px;
-    height: 3.5rem;
-    border-radius: 10px;
-    border: 1px solid rgb(34, 34, 34);
+    /* margin-top: 1px; */
+    /* outline: none; */
+    /* padding-left: 1rem; */
+    /* height: 3.5rem; */
+    border-radius: 9px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
+    /* padding-top: 5px; */
+    padding: 10px 0px 7px 1rem;
 }
 
 input:focus {
-    border: 1px solid black;
+    /* outline: none; */
+    border-color: black;
 }
 
 .custom, .custom-2 {
@@ -81,8 +94,9 @@ input:focus {
 .custom input:focus + .placeholder {
     top: 15px;
     font-size: 14px;
-    color: #222;
+    /* color: #222; */
 }
+
 .custom-2 .placeholder-2 {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     position: absolute;
@@ -100,8 +114,10 @@ input:focus {
 .custom-2 input:focus + .placeholder-2 {
     top: -7px;
     font-size: 13px;
-    color: #222;
+    /* color: #222; */
 }
+
+
 
 .email-input-field {
     min-height: 20px;
@@ -112,20 +128,21 @@ input:focus {
 }
 
 .login-button-container {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 10px; */
+
 }
 
 .login-button {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     border: 0;
     border-radius: 7px;
-    /* background: #FF5A5F; */
     cursor: pointer;
-    padding: 12px;
+    padding: 1rem;
     color: white;
     width: 500px;
+    margin: 5px 0;
     background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%)
 }
 
@@ -184,7 +201,9 @@ input:focus {
 .login-form-pane {
     padding: 24px;
     outline: none;
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
+    width: fit-content;
+    height: fit-content;
 }
 
 h3:first-child {
@@ -201,24 +220,16 @@ h3:first-child {
 }
 
 .input-container-main {
+    /* min-width: max-content; */
     margin-top: 16px;
+    margin-left: 1rem;
 }
 
 .input-container-sub {
-    /* position: relative; */
-    border-radius: 8px;
+    width: 31vw;
+    padding: 5px;
+    height: 20vw;
 }
-
-.email-input-container {
-    display: flex;
-    position: relative;
-    /* border-radius: 0px, 0px, 8px, 8px; */
-    /* min-height: 56px; */
-}
-
-/* div {
-    display: block;
-} */
 
 
 .x-button-login {
@@ -229,5 +240,5 @@ h3:first-child {
 
 .x-button-login:hover {
     background-color: rgb(244, 240, 240);
-    border-radius: 50%;
+    border-radius: 60%;
 }

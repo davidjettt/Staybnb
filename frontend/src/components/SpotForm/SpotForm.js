@@ -203,7 +203,7 @@ export default function SpotForm({ spot, formType }) {
                                         <span className='placeholder-2'>Price</span>
                                     </label>
                                 </div>
-                                <div className="login-button-container">
+                                <div className="create-spot-button-container">
                                     <button className='login-button' type='submit'>{formType}</button>
                                 </div>
                                 <div className='errors'>

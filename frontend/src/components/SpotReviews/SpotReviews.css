@@ -83,3 +83,8 @@
 .delete-review-button {
     margin-left: 1rem;
 }
+
+.spot-review-text {
+    color: #222222;
+    line-height: 1.4rem;
+}
