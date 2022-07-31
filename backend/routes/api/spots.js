@@ -314,7 +314,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
     //     return next(err)
     // }
 
-    const updatedSpot = await spot.update({
+    await spot.update({
         ownerId: req.user.id,
         address,
         city,
@@ -326,6 +326,27 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         description,
         pricePerNight: price
     });
+
+    // const spotExists = await Spot.findOne({
+    //     where: {
+    //         [Op.and]: [
+    //             {address: address},
+    //             {city: city},
+    //             {state: state},
+    //             {latitude: lat},
+    //             {longitude: lng}
+    //         ]
+    //     }
+    // })
+
+    // if (spotExists.address === spot.address && spotExists.city === spot.city && spotExists.state === spot.state && spotExists.lat === spot.lat && spotExists.lng === spot.lng) {
+    //     const err = new Error ('Combination of longitude and latitude coordinates already exists');
+    //         err.status = 403;
+    //         return next(err)
+    // } else {
+    //     await spot.save();
+    // }
+
     // console.log('UPDATED SPOT', updatedSpot)
     // const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
     return res.json(spot);
@@ -348,16 +369,6 @@ router.delete('/:spotId', existsSpot, requireAuth, spotPermission, async (req, r
 })
 
 const validateQueryFilters = [
-    // check('page')
-    // .custom(value => {
-    //     if (value < 0) throw new Error ('Page must be greater than or equal to 0')
-    //     return true;
-    // }),
-    // check('size')
-    // .custom(value => {
-    //     if (value < 0) throw new Error ('Size must be greater than or equal to 0')
-    //     return true;
-    // }),
     body('page')
     .custom((value, { req }) => {
         if (req.query.page < 0) throw new Error ('Page must be greater than or equal to 0')
