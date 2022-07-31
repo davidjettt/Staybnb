@@ -101,7 +101,7 @@ export default function SpotDetail() {
                     </div>
                     <div className='reviews-container'>
                         <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
-                        {user && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
+                        {user && user !== spot.ownerId && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
                     </div>
                 </div>}
         </div>
