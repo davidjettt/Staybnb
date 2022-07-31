@@ -6,7 +6,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignUpFormModal from '../SignupFormModal';
 import './Navigation.css';
 
-import  logo  from './staybnb-logo-3.jpg'
+import  logo  from './staybnb-logo-5.jpg'
 
 
 export default function Navigation({ isLoaded }) {
