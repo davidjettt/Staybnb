@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import './YourReviews.css';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
+import DeleteYourReview from './DeleteYourReview';
 
 export default function YourReviews () {
     const dispatch = useDispatch();
@@ -21,6 +22,10 @@ export default function YourReviews () {
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    // const handleDeleteReview = async () => {
+    //     await dispatch(deleteReviewThunk(userReview));
+    //     // await dispatch(get);
+    // }
 
 
     return (
@@ -36,8 +41,8 @@ export default function YourReviews () {
                                 <button className='go-to-spot-button'>Go To Spot</button>
                             </Link> */}
 
-                                <EditReviewForm reviewId={review.id} />
-
+                                <EditReviewForm yourReviews={true} reviewId={review.id} />
+                                <DeleteYourReview review={review} />
                             <div className='your-reviews-text-content'>
                                 <Link className='your-reviews-spot-link' to={`/spots/${review.spotId}`}>
                                     <div className='spot-name-location-container'>

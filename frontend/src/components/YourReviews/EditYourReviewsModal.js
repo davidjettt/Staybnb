@@ -2,9 +2,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createReviewThunk, editReviewThunk, getAllReviewsThunk } from '../../store/reviews';
+import { createReviewThunk, editReviewThunk, getAllReviewsThunk, getReviewsUserThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
-import './EditReviewFormModal.css'
+
 import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function EditReviewFormModal({ setShowModal , review, formType }) {
@@ -25,41 +25,11 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
             stars: rating / 20
         }
 
-        if (formType === 'Post Review') {
-            await dispatch(createReviewThunk(review))
-            // .then((res) => {
-            //     if (res) {
-            //         setShowModal(false);
-            //         history.push(`/spots/${review.spotId}`);
-            //             // window.location.reload();
-            //     }
-            // })
-            .then((res) => {
-                if (res) {
-                    setRating(0);
-                    setReviewInput('');
-                }
-            })
-
-            .catch(
-                async (res) => {
-                    // console.log('RES', res)
-                    const data = await res.json();
-                    // console.log('DATA', data)
-                    if (data.errors) {
-                        setErrors(data.errors)
-                    } else {
-                        setErrors([data.message])
-                    }
-                }
-                );
-        } else {
+        if (formType === 'Update Review') {
             await dispatch(editReviewThunk(review))
             .then((res) => {
                 if (res) {
                     setShowModal(false);
-                        // history.push(`/spots/${review.spotId}`);
-                        // window.location.reload();
                 }
             })
             .catch(
@@ -74,8 +44,7 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                     }
                 }
                 );
-            await dispatch(getAllReviewsThunk(review.spotId));
-            await dispatch(getSpotDetailsThunk(review.spotId));
+            await dispatch(getReviewsUserThunk());
         }
     };
 
@@ -89,7 +58,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
 
     return (
         <>
-
             <div className="editreview-form-container">
                 <div className="edit-review-form-pane">
                     <div className="edit-review-form-title-container">
