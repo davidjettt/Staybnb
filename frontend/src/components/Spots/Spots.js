@@ -38,8 +38,8 @@ export default function Spots() {
                                 </div>
                                 <div className='card-spot-text-container'>
                                     <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
-                                    <div className='distance'>80 miles away</div>
-                                    <div className='date'>Jan 22 - 27</div>
+                                    <div className='distance'>{null}</div>
+                                    <div className='date'>{null}</div>
                                     <div className='price-container'>
                                         <span className='card-spot-price'>{`$${spot.pricePerNight}`} </span>
                                         <span className='night-word'>night</span>
