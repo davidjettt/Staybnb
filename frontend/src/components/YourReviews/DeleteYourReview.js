@@ -10,7 +10,7 @@ export default function DeleteYourReview({ review }) {
 
     return (
         <>
-            <button onClick={handleDeleteReview}>Delete Review</button>
+            <button className="delete-your-review-button" onClick={handleDeleteReview}>Delete Review</button>
         </>
     )
 }

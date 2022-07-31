@@ -41,17 +41,22 @@ export default function YourReviews () {
                                 <button className='go-to-spot-button'>Go To Spot</button>
                             </Link> */}
 
-                                <EditReviewForm yourReviews={true} reviewId={review.id} />
-                                <DeleteYourReview review={review} />
+
                             <div className='your-reviews-text-content'>
                                 <Link className='your-reviews-spot-link' to={`/spots/${review.spotId}`}>
                                     <div className='spot-name-location-container'>
                                         <span style={{textDecoration: 'none', fontWeight: 'bold'}}>{idx + 1}. </span>
                                         <span className='your-review-spot-name'>{review.Spot?.name} • </span>
                                         <span>{review.Spot?.city}, {review.Spot?.state}, {review.Spot?.country}</span>
-                                        <div className='your-reviews-modal-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
                                     </div>
                                 </Link>
+                                <div className='your-reviews-location-buttons-container'>
+                                    <div className='your-reviews-modal-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
+                                    <div className='your-reviews-edit-delete-buttons-container'>
+                                        <EditReviewForm yourReviews={true} reviewId={review.id} />
+                                        <DeleteYourReview review={review} />
+                                    </div>
+                                </div>
                                 <div className='your-review-text-container'>
                                     {review.review}
                                 </div>
