@@ -94,18 +94,18 @@ export default function ReviewForm({ setShowModal , review, formType }) {
             <div className="review-form-container">
                 <div className="review-form-pane">
                     <form className='review-form' onSubmit={handleSubmit}>
-                        <div className='title-errors-container'>
+                        <div className='post-review-title-errors-container'>
                             <div className="review-form-title-container">
                                 <h3 className='review-form-title'>{formType}</h3>
                             </div>
-                            <div className='errors'>
-                                <ul className="errors-list">
+                            <div className='review-post-errors'>
+                                <ul className="review-post-errors-list">
                                     {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                                 </ul>
                             </div>
                         </div>
-                        <div className='input-container-main'>
-                            <div className='input-container-sub'>
+                        <div className='review-input-container-main'>
+                            <div className='review-input-container-sub'>
                             <div style={{display: 'flex', justifyContent: 'flex-start'}} >
                                     <Rating
                                         ratingValue={rating}
@@ -125,7 +125,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                             placeholder='Add Your Review Here...'
                                             value={reviewInput}
                                             onChange={(e) => setReviewInput(e.target.value)}
-                                            // required
+                                            required
                                         />
                                     </label>
                                 </div>
@@ -142,7 +142,7 @@ export default function ReviewForm({ setShowModal , review, formType }) {
                                         />
                                     </label>
                                 </div> */}
-                                <div className="login-button-container">
+                                <div className="post-review-button-container">
                                     <button className='post-review-button' type='submit'>{formType || 'Post Review'}</button>
                                 </div>
                             </div>

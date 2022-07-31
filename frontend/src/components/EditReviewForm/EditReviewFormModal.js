@@ -144,8 +144,8 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         />
                                     </label>
                                 </div> */}
-                                <div className="login-button-container">
-                                    <button className='login-button' type='submit'>{formType || 'Post Review'}</button>
+                                <div className="modal-update-review-button-container">
+                                    <button className='modal-update-review-button' type='submit'>{formType || 'Post Review'}</button>
                                 </div>
                             </div>
                         </div>

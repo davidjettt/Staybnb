@@ -52,8 +52,20 @@
     max-width: fit-content;
 }
 
+.reviews-modal-name-date-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+}
 
+.modal-review-first-name {
+    font-size: 1rem;
+    font-weight: 500;
+}
 
-.x-button-modal-reviews {
-
+.reviews-modal-date {
+    font-size: 14px;
+    color: #717171;
+    margin-left: .1rem;
+    margin-top: -.4rem;
 }

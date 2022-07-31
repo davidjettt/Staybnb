@@ -19,6 +19,8 @@ export default function YourReviews () {
         return Object.values(state.reviews);
     })
 
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 
 
     return (
@@ -42,6 +44,7 @@ export default function YourReviews () {
                                         <span style={{textDecoration: 'none', fontWeight: 'bold'}}>{idx + 1}. </span>
                                         <span className='your-review-spot-name'>{review.Spot?.name} • </span>
                                         <span>{review.Spot?.city}, {review.Spot?.state}, {review.Spot?.country}</span>
+                                        <div className='your-reviews-modal-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
                                     </div>
                                 </Link>
                                 <div className='your-review-text-container'>

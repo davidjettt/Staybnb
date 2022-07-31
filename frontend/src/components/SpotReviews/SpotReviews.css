@@ -42,9 +42,16 @@
 }
 
 .review-first-name {
-    margin-bottom: 1rem;
+    margin-bottom: .2rem;
     font-weight: 600;
     color: rgb(34,34,34)
+}
+
+.review-date {
+    margin-left: .1rem;
+    margin-bottom: .7rem;
+    font-size: 14px;
+    color: #717171;
 }
 
 .review-section-star {

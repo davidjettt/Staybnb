@@ -49,6 +49,9 @@ export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setRe
         setReviewShowModal(false);
     }
 
+
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
     return (
         <div className='modal-spot-reviews-main'>
             <div className='modal-header-reviews'>
@@ -66,13 +69,16 @@ export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setRe
                     {reviews.map((review, idx) => (
                         <div key={idx} className={'reviews-modal-key'}>
                             <div className='modal-name-buttons-container'>
-                                {review.User && <div className='modal-review-first-name'>{review.User.firstName}</div>}
-                                <div className='modal-update-delete-buttons-container'>
+                                <div className='reviews-modal-name-date-container'>
+                                    {review.User && <div className='modal-review-first-name'>{review.User.firstName}</div>}
+                                    <div className='reviews-modal-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
+                                </div>
+                                {/* <div className='modal-update-delete-buttons-container'>
                                     {user === review.userId && <EditReviewForm setReviewShowModal={setReviewShowModal} spotId={spotId} />}
                                     {user === review.userId && <button className='delete-review-button' onClick={handleDeleteReview}>
                                     Delete Review
                                     </button>}
-                                </div>
+                                </div> */}
                             </div>
                             <div>{review.review} </div>
                         </div>
