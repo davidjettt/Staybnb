@@ -47,7 +47,7 @@ body {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    padding-top: 1.5rem;
+    /* padding-top: 1.5rem; */
 }
 
 .create-spot-form > div {

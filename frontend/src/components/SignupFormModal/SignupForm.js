@@ -20,7 +20,7 @@ export default function SignupForm({ setShowModal2 }) {
             return dispatch(sessionActions.signup({ firstName, lastName, email, password }))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors) setErrors( data.errors);
             });
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);

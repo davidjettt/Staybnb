@@ -59,7 +59,7 @@ const validateReview = [
     .withMessage('Review text is required'),
     check('stars')
     .custom(value => {
-        if (value < 1 || value > 5 || isNaN(value)) throw new Error('Stars must be an integer from 1 to 5')
+        if (value < 1 || value > 5 || isNaN(value)) throw new Error('You must select a star')
         return true;
     }),
     handleValidationErrors
@@ -228,7 +228,7 @@ router.post('/:spotId/reviews', existsSpot, requireAuth, validateReview, async (
     });
 
     if (existingReview) {
-        const err = new Error ('User already has a review for this spot');
+        const err = new Error ('You already have a review for this spot');
         err.status = 403;
         return next(err);
     }

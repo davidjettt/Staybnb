@@ -71,25 +71,19 @@ body {
 }
 
 .logo-container {
-    position: relative;
-    bottom: .3rem;
-    /* border: 1px solid red; */
+    /* position: relative;
+    bottom: .3rem; */
     min-width: 250px;
     min-height: 20px;
-    width: 20vw;
-    /* margin-bottom: 10px; */
+    width: 15vw;
     margin-left: 2rem;
     display: flex;
     justify-content: center;
 }
 
-.logo {
-    color: #FF5A5F;
-}
 
 .main-logo {
-    /* display: block; */
-    margin-left: 20px;
+    margin-left: 1.5rem;
     /* min-width: 250px;
     min-height: 20px;
     width: 10vw;

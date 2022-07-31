@@ -53,7 +53,7 @@ export default function SpotForm({ spot, formType }) {
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
-                    console.log(data)
+                    // console.log(data)
                     if (data) setErrors(data.errors || [data.message]);
                 }
             );
@@ -83,6 +83,11 @@ export default function SpotForm({ spot, formType }) {
                     <div className="create-spot-form-title-container">
                         <h3 className='create-spot-form-title'>{formType}</h3>
                     </div>
+                    <div className='errors'>
+                                    <ul className="errors-list">
+                                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                                    </ul>
+                                </div>
                     <form className='create-spot-form' onSubmit={handleSubmit}>
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
@@ -205,11 +210,6 @@ export default function SpotForm({ spot, formType }) {
                                 </div>
                                 <div className="create-spot-button-container">
                                     <button className='login-button' type='submit'>{formType}</button>
-                                </div>
-                                <div className='errors'>
-                                    <ul className="errors-list">
-                                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                                    </ul>
                                 </div>
                             </div>
                         </div>
