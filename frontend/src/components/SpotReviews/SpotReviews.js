@@ -31,6 +31,8 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
 
     // console.log('USE SELECTOR REVIEWS', reviews);
 
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 
     return (
         <div className='spot-reviews-main'>
@@ -43,7 +45,10 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
                 {reviews.map((review, idx) => (
                     <div key={idx} className={'key'}>
                         <div className='name-buttons-container'>
-                            {review.User && <div className='review-first-name'>{review.User.firstName}</div>}
+                            <div className='spot-reviews-name-date-container'>
+                                {review.User && <div className='review-first-name'>{review.User.firstName}</div>}
+                                <div className='spot-reviews-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
+                            </div>
                             <div className='update-delete-buttons-container'>
                                 {user === review.userId && <EditReviewForm spotId={spotId} reviewId={userReview.id} />}
                                 {user === review.userId && <button className='delete-review-button' onClick={handleDeleteReview}>

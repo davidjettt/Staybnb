@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteReviewThunk, editReviewThunk, getReviewsUserThunk } from '../../store/reviews';
 import { Link } from 'react-router-dom';
@@ -9,17 +9,31 @@ import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import DeleteYourReview from './DeleteYourReview';
 
 export default function YourReviews () {
+    const [ loadUserReviews, setLoadUserReviews ] = useState(false);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getReviewsUserThunk());
-
-    }, [dispatch])
 
 
     const reviews = useSelector((state) => {
-        return Object.values(state.reviews);
+        // console.log('REVIEWS STATE', state.reviews)
+        if (loadUserReviews) {
+            return Object.values(state.reviews);
+        } else {
+            return {};
+        }
     })
+
+    useEffect(() => {
+
+        dispatch(getReviewsUserThunk());
+        // console.log('DISPATCH CALLED')
+        setLoadUserReviews(true);
+        // console.log('STATE VAR CHANGED')
+    }, [dispatch])
+
+
+
+
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -30,7 +44,9 @@ export default function YourReviews () {
 
 
     return (
-        <div className='your-reviews-main'>
+        <>
+        {loadUserReviews && <div className='your-reviews-main'>
+            {/* {console.log('PAGE LOADED')} */}
             <div className='your-reviews-heading-container'>
                 <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews Yet!'}</h3>
             </div>
@@ -62,15 +78,16 @@ export default function YourReviews () {
                                     {review.review}
                                 </div>
                             </div>
-                            {review.Images && <div className='your-reviews-images-container'>
+                            {/* {review.Images && <div className='your-reviews-images-container'>
                                 {review.Images.map((image, idx) => (
                                     <img className={'your-reviews' + idx} key={idx} src={image.url} />
                                 ))}
-                            </div>}
+                            </div>} */}
                         </div>
                     ))}
                 </div>
             </div>
-        </div>
+        </div>}
+        </>
     )
 }

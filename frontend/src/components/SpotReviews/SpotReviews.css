@@ -35,6 +35,8 @@
 }
 
 
+
+
 .key {
     display: block;
     padding: 1rem 0 1rem;
@@ -94,4 +96,17 @@
 .spot-review-text {
     color: #222222;
     line-height: 1.4rem;
+}
+
+.spot-reviews-name-date-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .5rem;
+}
+
+.spot-reviews-date {
+    font-size: 14px;
+    color: #717171;
+    margin-left: .1rem;
+    /* margin-top: -.4rem; */
 }
