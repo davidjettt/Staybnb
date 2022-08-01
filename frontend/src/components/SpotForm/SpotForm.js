@@ -18,6 +18,7 @@ export default function SpotForm({ spot, formType }) {
     const [ name, setName ] = useState(spot?.name);
     const [ description, setDescription ] = useState(spot?.description);
     const [ price, setPrice ] = useState(spot?.pricePerNight || '');
+    const [ previewImage, setPreviewImage ] = useState(spot?.previewImage || '');
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -46,7 +47,8 @@ export default function SpotForm({ spot, formType }) {
             lng,
             name,
             description,
-            price
+            price,
+            previewImage
         }
 
         if (formType === 'Create a Spot') {
@@ -84,10 +86,10 @@ export default function SpotForm({ spot, formType }) {
                         <h3 className='create-spot-form-title'>{formType}</h3>
                     </div>
                     <div className='spot-errors'>
-                                    <ul className="spot-errors-list">
-                                        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                                    </ul>
-                                </div>
+                        <ul className="spot-errors-list">
+                            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                        </ul>
+                    </div>
                     <form className='create-spot-form' onSubmit={handleSubmit}>
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
@@ -206,6 +208,18 @@ export default function SpotForm({ spot, formType }) {
                                             required
                                         />
                                         <span className='placeholder-2'>Price</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label className='custom-2'>
+                                        <input
+                                            type='url'
+                                            required
+                                            value={previewImage}
+                                            onChange={(e) => {
+                                                setPreviewImage(e.target.value)}}
+                                        />
+                                        <span className='placeholder-2'>Preview Image</span>
                                     </label>
                                 </div>
                                 <div className="create-spot-button-container">

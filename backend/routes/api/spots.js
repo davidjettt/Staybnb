@@ -275,7 +275,7 @@ router.get('/:spotId', existsSpot, async (req, res, next) => {
     })
 
     const spot = await Spot.findByPk(req.params.spotId, {
-        attributes: {exclude: ['previewImage']},
+        // attributes: {exclude: ['previewImage']},
         include: [{ model: Image, attributes: ['url'] },{ model: User, as: 'Owner' }]
     });
 
@@ -299,7 +299,7 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
     //     return next(err);
     // }
 
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
 
     // const isExistingLatLng = await Spot.findOne({
@@ -324,7 +324,8 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         longitude: lng,
         name,
         description,
-        pricePerNight: price
+        pricePerNight: price,
+        previewImage
     });
     // console.log('UPDATED SPOT', updatedSpot)
     // const updatedSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
@@ -489,7 +490,7 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
 
 // Create new spot
 router.post('/',requireAuth, validateSpot, async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
 
     const isExistingLatLng = await Spot.findOne({
@@ -513,12 +514,13 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
         longitude: lng,
         name,
         description,
-        pricePerNight: price
+        pricePerNight: price,
+        previewImage
     })
 
-    const newSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
+    // const newSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
     res.status(201);
-    return res.json(newSpot2);
+    return res.json(newSpot);
 })
 
 module.exports = router;

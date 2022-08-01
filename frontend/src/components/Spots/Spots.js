@@ -27,7 +27,8 @@ export default function Spots() {
     // console.log('SUM', reviews)
 
     return (
-        <div className='main'>
+        <>
+        {spots.length > 1 && <div className='main'>
             <div className='main-content-parent-container'>
                 <div className='main-content-container'>
                     {spots.map((spot, idx) => (
@@ -54,9 +55,9 @@ export default function Spots() {
                             </Link>
                         </div>
                     ))}
-
                 </div>
             </div>
-        </div>
+        </div>}
+        </>
     )
 }

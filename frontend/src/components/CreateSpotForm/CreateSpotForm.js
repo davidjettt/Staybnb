@@ -10,7 +10,8 @@ export default function CreateSpotForm() {
         lng: '',
         name: '',
         description: '',
-        price: ''
+        price: '',
+        previewImage: ''
     }
 
     return (

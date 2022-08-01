@@ -83,11 +83,11 @@ export default function SpotDetail() {
                         </div>
                     </header>
                     <div className='spot-images-container'>
-                        {spot.Images && spot.Images.map((image, idx) => (
+                        {spot.Images?.length ? spot.Images.map((image, idx) => (
 
                                 <img key={idx} className={'key' + idx} style={{}} src={`${image.url}`} />
 
-                        ))}
+                        )) : <img className='key0' src={spot.previewImage} />}
                     </div>
                     <div className='spot-details-subtitle-description-container'>
                         <div className='subtitle-container'>
