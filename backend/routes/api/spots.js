@@ -30,13 +30,13 @@ const validateSpot = [
     check('lat')
     .exists({ checkFalsy: true })
     .custom(value => {
-        if (value % 1 === 0 || isNaN(value)) throw new Error ('Latitude is not valid')
+        if (value % 1 === 0 || isNaN(value)) throw new Error ('Latitude is not valid, must be a decimal')
         return true;
     }),
     check('lng')
     .exists({ checkFalsy: true })
     .custom(value => {
-        if (value % 1 === 0 || isNaN(value)) throw new Error ('Longitude is not valid')
+        if (value % 1 === 0 || isNaN(value)) throw new Error ('Longitude is not valid, must be a decimal')
         return true;
     }),
     check('name')
