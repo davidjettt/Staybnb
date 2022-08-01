@@ -92,10 +92,46 @@ export default function SpotDetail() {
                     <div className='spot-details-subtitle-description-container'>
                         <div className='subtitle-container'>
                                 <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                            <div className='description-container'>
+                                <div className='description-content'>
+                                    {spot.description}
+                                </div>
+                            </div>
                         </div>
-                        <div className='description-container'>
-                            <div className='description-content'>
-                                {spot.description}
+                        <div className='price-card-container'>
+                            <div className='price-card'>
+                                <div className='price-reviews-container'>
+                                    <div>
+                                        <span className='price-per-night-text'>${`${spot.pricePerNight}`} </span>
+                                        <span className='night-text'>night</span>
+                                    </div>
+                                    <div className='price-card-reviews-container'>
+                                        {/* <div>
+                                            {spot.avgStarRating?.toFixed(2)}
+                                        </div> */}
+                                        <span>
+                                            <HiStar />
+                                        </span>
+                                        <span>{spot.avgStarRating?.toFixed(2)} ᛫ </span>
+                                        <span>{spot?.numReviews} reviews</span>
+                                    </div>
+                                </div>
+                                <div className='bookings-form'>
+
+                                </div>
+                                <div className='price-night-container'>
+                                    <div className='price-night'>${`${spot.pricePerNight} x 5 nights`}</div>
+                                    <div className='total-cost'>${spot.pricePerNight * 5}</div>
+                                </div>
+                                <div className='service-fee-container'>
+                                    <div className='service-fee'>Service fee</div>
+                                    <div className='service-fee-cost'>$100</div>
+                                </div>
+                                <div className='price-card-line'></div>
+                                <div className='total-cost-container'>
+                                    <div className='total-cost-text'>Total before taxes</div>
+                                    <div className='total-cost'>${spot.pricePerNight * 5 + 100}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -111,24 +111,113 @@
     box-sizing: border-box;
     display: flex;
     /* width: 600px; */
-    width: 57%;
-    /* justify-content: space-between; */
-    flex-direction: column;
+    /* width: 57%; */
+    /* width: 80%; */
+    justify-content: space-between;
+    /* flex-direction: column; */
+    /* flex-wrap: wrap; */
     padding: .75rem;
-
+    position: relative;
     /* display: grid;
     grid-template-rows: 1fr 1fr;
     grid-auto-flow: column; */
+}
+
+.subtitle-container {
+    flex-grow: 1;
+}
+
+.price-card-container {
+    box-sizing: border-box;
+    position: sticky;
+    top: 130px;
+    /* left: 640px; */
+    /* bottom: 1px; */
+    /* display: flex; */
+    /* box-shadow: 1px 1px 5px 2px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    width: 20vw;
+    height: 15vw; */
+    height: fit-content;
+}
+
+.price-card {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* position: relative; */
+    padding: 1.5rem;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, .2);
+    border-radius: 10px;
+    width: 300px;
+    /* height: 210px; */
+}
+
+.price-per-night-text {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.night-text {
+    font-size: 16px;
+    font-weight: 320;
+}
+
+.price-reviews-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-card-reviews-container {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.bookings-form {
+    height: 130px;
+}
+
+.price-night-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.service-fee-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.price-night-container,
+.service-fee-container {
+    color: #222222;
+    font-weight: 320;
+}
+
+.price-card-line {
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+.total-cost-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
 }
 
 .description-container {
     padding: 1.5rem 0;
     line-height: 1.4rem;
     color: #222222;
+    border-top: 1px solid #ddd;
+    width: 85%;
+}
+
+.description-content {
+    width: fit-content;
 }
 
 .subtitle-container {
-    border-bottom: 1px solid #ddd;
+    /* border-bottom: 1px solid #ddd; */
     padding-bottom: 19px;
     padding-top: 10px;
 }
