@@ -49,9 +49,10 @@ export default function YourReviews () {
         <>
         {loadUserReviews && <div className='your-reviews-main'>
             {/* {console.log('PAGE LOADED')} */}
-            {reviews.length >= 1 && <div className='your-reviews-heading-container'>
-                <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews!'}</h3>
-            </div>}
+            <div className='your-reviews-heading-container'>
+                {/* <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews!'}</h3> */}
+                <h3 className='your-reviews-heading'>Your Reviews</h3>
+            </div>
             <div className='your-reviews-content-container-parent'>
                 <div className='your-reviews-content-container'>
                     {reviews.map((review, idx) => (

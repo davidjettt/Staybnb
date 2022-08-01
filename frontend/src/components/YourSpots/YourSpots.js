@@ -24,9 +24,10 @@ export default function YourSpots() {
 
     return (
         <div className='main-your-spots'>
-            {spots.length >= 1 && <div className='your-spots-header-container'>
-                <h3>{spots.length ? 'Your Spots' : 'You Don\'t Have Any Spots Yet!'}</h3>
-            </div>}
+            <div className='your-spots-header-container'>
+                {/* <h3>{spots.length  ? 'Your Spots' : 'You Don\'t Have Any Spots Yet!'}</h3> */}
+                <h3>Your Spots</h3>
+            </div>
             <div className='main-content-parent-container'>
                 <div className='main-content-container'>
                     {spots.map((spot, idx) => (
