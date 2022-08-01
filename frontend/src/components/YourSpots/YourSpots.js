@@ -22,8 +22,6 @@ export default function YourSpots() {
 
 
 
-
-
     return (
         <>
             <div className='main-your-spots'>

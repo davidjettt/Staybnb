@@ -1,30 +1,28 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
-// import ProfileButton from "./ProfileButton";
+
 import LoginFormModal from '../LoginFormModal';
-import SignUpFormModal from '../SignupFormModal';
+
 import './Navigation.css';
 
-import  logo  from './staybnb-logo-5.jpg'
+import logo from './staybnb-logo-5.jpg'
 
 
 export default function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-    // console.log('current session user', sessionUser);
+
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            // <ProfileButton user={sessionUser} />
+
             <LoginFormModal />
         );
     } else {
         sessionLinks = (
             <>
-                {/* <NavLink to='/login'>Log In</NavLink> */}
                 <LoginFormModal />
-                {/* <SignUpFormModal /> */}
-                {/* <NavLink to='/signup'>Sign Up</NavLink> */}
+
             </>
         );
     }

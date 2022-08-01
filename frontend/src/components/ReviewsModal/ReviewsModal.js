@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ReviewModal } from '../../context/ReviewModal';
 
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import SpotReviewsModal from '../SpotReviews/SpotReviewsModal';
 
 import './ReviewsModal.css';
@@ -19,10 +17,7 @@ export default function ReviewsModal ({ spotId , numReviews, avgRating }) {
     // const spot = spots.find(spot => +spot.spotId === +spotId);
 
 
-
-
     const handleClose = () => {
-        // setRendered(false)
         setReviewShowModal(false)
     }
 
@@ -35,7 +30,7 @@ export default function ReviewsModal ({ spotId , numReviews, avgRating }) {
         <>
             {numReviews ? <span className='review-click' onClick={handleOpen}>{numReviews} reviews</span> : <span>new spot </span>}
             {/* <button className='update-review-button' onClick={() => setShowModal(true)}>Update Review</button> */}
-            {showReviewModal && <ReviewModal isOpen={showReviewModal} closeTimeoutMS={500}  onClose={handleClose}>
+            {showReviewModal && <ReviewModal isOpen={showReviewModal} closeTimeoutMS={2000}  onClose={handleClose}>
                 <SpotReviewsModal className={reviewModalClass} spotId={spotId} numReviews={numReviews} avgRating={avgRating} setReviewShowModal={setReviewShowModal}/>
             </ReviewModal>}
         </>

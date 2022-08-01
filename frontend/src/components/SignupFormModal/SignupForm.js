@@ -53,7 +53,6 @@ export default function SignupForm({ setShowModal2 }) {
                     <div className='input-container'>
                         <div>
                             <label className="custom-2">
-
                                 <input
                                     className='first-name-input'
                                     type='text'
@@ -67,7 +66,6 @@ export default function SignupForm({ setShowModal2 }) {
                         </div>
                         <div>
                             <label className="custom-2">
-
                                 <input
                                     className='last-name-input'
                                     type='text'

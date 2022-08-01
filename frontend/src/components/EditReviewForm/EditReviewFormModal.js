@@ -1,15 +1,13 @@
 
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createReviewThunk, editReviewThunk, getAllReviewsThunk } from '../../store/reviews';
+import { editReviewThunk, getAllReviewsThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
 import './EditReviewFormModal.css'
 import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function EditReviewFormModal({ setShowModal , review, formType }) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [ reviewInput, setReviewInput ] = useState(review.review);
     const [ rating, setRating ] = useState(review.stars * 20);
@@ -25,48 +23,16 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
             stars: rating / 20
         }
 
-        if (formType === 'Post Review') {
-            await dispatch(createReviewThunk(review))
-            // .then((res) => {
-            //     if (res) {
-            //         setShowModal(false);
-            //         history.push(`/spots/${review.spotId}`);
-            //             // window.location.reload();
-            //     }
-            // })
-            .then((res) => {
-                if (res) {
-                    setRating(0);
-                    setReviewInput('');
-                }
-            })
-
-            .catch(
-                async (res) => {
-                    // console.log('RES', res)
-                    const data = await res.json();
-                    // console.log('DATA', data)
-                    if (data.errors) {
-                        setErrors(data.errors)
-                    } else {
-                        setErrors([data.message])
-                    }
-                }
-                );
-        } else {
+        if (formType === 'Update Review') {
             await dispatch(editReviewThunk(review))
             .then((res) => {
                 if (res) {
                     setShowModal(false);
-                        // history.push(`/spots/${review.spotId}`);
-                        // window.location.reload();
                 }
             })
             .catch(
                 async (res) => {
-                    // console.log('RES', res)
                     const data = await res.json();
-                    // console.log('DATA', data)
                     if (data.errors) {
                         setErrors(data.errors)
                     } else {
@@ -89,7 +55,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
 
     return (
         <>
-
             <div className="editreview-form-container">
                 <div className="edit-review-form-pane">
                     <div className="edit-review-form-title-container">
@@ -121,7 +86,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         <textarea
                                             cols={60}
                                             rows={10}
-
                                             type='text'
                                             placeholder='Add Your Review Here...'
                                             value={reviewInput}
@@ -130,7 +94,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         />
                                     </label>
                                 </div>
-
                                 {/* <div className='city-input-container'>
                                     <label>
                                         <input

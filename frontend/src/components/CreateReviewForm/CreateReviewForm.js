@@ -1,6 +1,5 @@
 
 import { useState } from 'react';
-import { Modal } from '../../context/Modal';
 import ReviewForm from '../ReviewForm/ReviewForm';
 import './CreateReviewForm.css';
 

@@ -19,7 +19,7 @@ export default function EditReviewForm ({ spotId, reviewId, yourReviews }) {
     // const review = reviews.find(review => +review.userId === +currentUserId);
     const review = reviews.find(review => +review.id === +reviewId);
 
-    // console.log('YOUR REVIEWS', yourReviews)
+
 
     const handleClose = () => {
         // setRendered(false)

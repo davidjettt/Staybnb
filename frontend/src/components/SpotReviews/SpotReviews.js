@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
-import { getAllReviewsThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews';
+import { getAllReviewsThunk, deleteReviewThunk } from '../../store/reviews';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
 import { getSpotDetailsThunk } from '../../store/spots';
@@ -20,7 +20,6 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
     const user = useSelector(state => state.session.user?.id);
 
     const userReview = reviews.find(review => +review?.userId === +user)
-
 
 
     const handleDeleteReview = async () => {

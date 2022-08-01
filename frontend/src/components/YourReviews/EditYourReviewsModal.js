@@ -1,15 +1,11 @@
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createReviewThunk, editReviewThunk, getAllReviewsThunk, getReviewsUserThunk } from '../../store/reviews';
+import { editReviewThunk, getReviewsUserThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
 
-import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function EditReviewFormModal({ setShowModal , review, formType }) {
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const [ reviewInput, setReviewInput ] = useState(review.review);
     const [ rating, setRating ] = useState(review.stars * 20);
@@ -34,9 +30,7 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
             })
             .catch(
                 async (res) => {
-                    // console.log('RES', res)
                     const data = await res.json();
-                    // console.log('DATA', data)
                     if (data.errors) {
                         setErrors(data.errors)
                     } else {
@@ -89,7 +83,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         <textarea
                                             cols={60}
                                             rows={10}
-
                                             type='text'
                                             placeholder='Add Your Review Here...'
                                             value={reviewInput}
@@ -98,7 +91,6 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         />
                                     </label>
                                 </div>
-
                                 {/* <div className='city-input-container'>
                                     <label>
                                         <input

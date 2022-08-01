@@ -61,7 +61,7 @@
 
 /* .ReactModal__Overlay {
     opacity: 0;
-    transition: opacity 2000ms ease-in-out;
+    transition: opacity 5000ms ease-in-out;
 }
 
 .ReactModal__Overlay--after-open{
@@ -71,3 +71,20 @@
 .ReactModal__Overlay--before-close{
     opacity: 0;
 } */
+
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 1000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+  transform: translateX(-100px);
+}

@@ -5,7 +5,6 @@ import LoginForm from './LoginForm';
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
 
-import ProfileIconDropdown from "../ProfileIconDropdown";
 import SignUpFormModal from "../SignupFormModal";
 import SignupForm from '../SignupFormModal/SignupForm';
 
@@ -52,6 +51,20 @@ export default function LoginFormModal() {
     };
 
 
+    const dropIn = {
+        hidden: {
+            y: '-100vh',
+            opacity: 0
+        },
+        visible: {
+            y: '0'
+        },
+        exit: {
+            y: '100vh',
+            opacity: 0
+        }
+    }
+
     return (
         <div className='dropdown'>
                 <div className='profile-button-container'>
@@ -68,7 +81,6 @@ export default function LoginFormModal() {
                 </div>
 
             <div className='main-dropdown-container'>
-                {/* <ul> */}
                 <div className={className ? 'dropdown-menu' : 'off'}>
                     {showMenu && <div>
                         {sessionUser ? <div className='user-email'>{sessionUser.email}</div> : null}
@@ -97,7 +109,7 @@ export default function LoginFormModal() {
                             setShowModal2(true)}}>Sign Up</button> </li>}
                     </div>}
                     {showModal && (
-                        <Modal  onClose={() => setShowModal(false)}>
+                        <Modal variants={dropIn} closeTimeoutMS={1000} isOpen={showModal} onClose={() => setShowModal(false)}>
                             <LoginForm setShowModal={setShowModal}  />
                         </Modal>
                     )}
@@ -110,7 +122,6 @@ export default function LoginFormModal() {
                         {sessionUser ? <button className='logout' onClick={logout}>Log Out</button> : null}
                     </div>}
                 </div>
-                {/* </ul> */}
             </div>
         </div>
     )

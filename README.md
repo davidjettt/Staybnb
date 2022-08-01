@@ -6,17 +6,24 @@ This project was created using Express, Sequelize, and SqLite for the backend an
 
 ## About the Project
 
-Database Schema: https://github.com/davidjettt/Airbnb-clone/raw/master/backend/airbnb-clone-db-schema-3.png
+[API Documentation](https://github.com/davidjettt/Airbnb-clone/wiki/API-Documentation)
 
-Redux State Shape of features: https://github.com/davidjettt/Airbnb-clone/wiki/Redux-State-Shape
+[Database Schema](https://github.com/davidjettt/Airbnb-clone/raw/master/backend/airbnb-clone-db-schema-3.png)
+
+[Features List](https://github.com/davidjettt/Airbnb-clone/wiki/Features-List)
+
+[Redux State Shape](https://github.com/davidjettt/Airbnb-clone/wiki/Redux-State-Shape)
+
+
 
 ## Home Page
-
 ![](app-screenshots/staybnb-homepage.png)
 
 ## Spot Details
-
 ![](app-screenshots/staybnb-spot-page.png)
+
+## User Reviews
+![](app-screenshots/staybnb-user-reviews.png)
 
 ## How to Launch Project
 

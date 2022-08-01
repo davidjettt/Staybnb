@@ -241,3 +241,20 @@ h3:first-child {
     background-color: rgb(244, 240, 240);
     border-radius: 60%;
 }
+
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 1000ms ease-in-out;
+  }
+
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+    transform: translateX(-100px);
+  }

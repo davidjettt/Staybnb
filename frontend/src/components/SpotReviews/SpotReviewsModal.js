@@ -37,11 +37,11 @@ export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setRe
     const userReview = reviews.find(review => +review?.userId === +user)
 
 
-    const handleDeleteReview = async () => {
-        await dispatch(deleteReviewThunk(userReview));
-        await dispatch(getSpotDetailsThunk(spotId));
-        // setRendered(!render);
-    }
+    // const handleDeleteReview = async () => {
+    //     await dispatch(deleteReviewThunk(userReview));
+    //     await dispatch(getSpotDetailsThunk(spotId));
+    //     // setRendered(!render);
+    // }
 
     // console.log('USE SELECTOR REVIEWS', reviews);
 

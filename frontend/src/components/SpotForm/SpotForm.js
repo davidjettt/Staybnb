@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom';
 import { createSpotThunk, editSpotThunk } from '../../store/spots';
 
 import './SpotForm.css'
@@ -25,18 +25,6 @@ export default function SpotForm({ spot, formType }) {
         e.preventDefault();
         setErrors([]);
 
-        // const newSpot = {
-        //     address,
-        //     city,
-        //     state,
-        //     country,
-        //     lat,
-        //     lng,
-        //     name,
-        //     description,
-        //     price
-        // }
-
         spot = {
             ...spot,
             address,
@@ -55,7 +43,6 @@ export default function SpotForm({ spot, formType }) {
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
-                    // console.log(data)
                     if (data) setErrors(data.errors || [data.message]);
                 }
             );
@@ -71,7 +58,6 @@ export default function SpotForm({ spot, formType }) {
                     if (data) setErrors(data.errors || [data.message])
                 }
             );
-
             if (spotData) {
                 history.push(`/spots/${spot.id}`)
             }

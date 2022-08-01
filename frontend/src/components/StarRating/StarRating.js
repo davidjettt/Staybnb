@@ -17,7 +17,5 @@ export default function StarRating () {
                 fillColor='gold'
                 transition={true}
             />
-
-
     )
 }

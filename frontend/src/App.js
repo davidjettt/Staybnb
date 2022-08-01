@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import LoginFormPage from './components/LoginFormPage';
-import SignupFormPage from './components/SignUpFormPage';
+// import LoginFormPage from './components/LoginFormPage';
+// import SignupFormPage from './components/SignUpFormPage';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
-import LoginFormModal from './components/LoginFormModal';
-import LoginForm from './components/LoginFormModal/LoginForm';
 import Spots from './components/Spots/Spots';
 import CategoryButtons from './components/CategoryButtons/CategoryButtons';
 import YourSpots from './components/YourSpots/YourSpots';
@@ -19,18 +17,16 @@ import YourReviews from './components/YourReviews/YourReviews';
 function App() {
   const dispatch = useDispatch();
 
-  const sessionUser = useSelector(state => state.session.user)
+  // const sessionUser = useSelector(state => state.session.user)
 
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    // if (!sessionUser) return;
-    // if (!isLoaded) return
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
-        .catch((e) => {
-            setIsLoaded(true);
-            console.log(e);
-        })
+        // .catch((e) => {
+        //     setIsLoaded(true);
+        //     console.log(e);
+        // })
 
   }, [dispatch])
 
