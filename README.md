@@ -25,6 +25,8 @@ Welcome to Staybnb, a clone of Airbnb.
 
 [Redux State Shape](https://github.com/davidjettt/Airbnb-clone/wiki/Redux-State-Shape)
 
+[Frontend Route](https://github.com/davidjettt/Airbnb-clone/wiki/Frontend-Routes)
+
 
 
 ## Home Page
