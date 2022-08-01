@@ -2,7 +2,18 @@
 
 Welcome to Staybnb, a clone of Airbnb.
 
-This project was created using Express, Sequelize, and SqLite for the backend and React, Redux for the frontend.
+
+## Technologies used:
+
+- Javascript
+- CSS
+- React
+- Redux
+- Express
+- Sequelize
+- SqLite
+
+
 
 ## About the Project
 
