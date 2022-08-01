@@ -13,6 +13,8 @@ export default function YourReviews () {
     const dispatch = useDispatch();
 
 
+    // const userId = useSelector(state => state.session?.userId)
+    const userId = useSelector(state => state.session.user?.id)
 
     const reviews = useSelector((state) => {
         // console.log('REVIEWS STATE', state.reviews)
@@ -48,12 +50,13 @@ export default function YourReviews () {
         {loadUserReviews && <div className='your-reviews-main'>
             {/* {console.log('PAGE LOADED')} */}
             <div className='your-reviews-heading-container'>
-                <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews Yet!'}</h3>
+                <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews!'}</h3>
             </div>
             <div className='your-reviews-content-container-parent'>
                 <div className='your-reviews-content-container'>
                     {reviews.map((review, idx) => (
-                        <div key={idx} className='your-reviews-page-container'>
+                        <>
+                        {review.userId === userId && <div key={idx} className='your-reviews-page-container'>
                             {/* <Link to={`/spots/${review.spotId}`}>
                                 <button className='go-to-spot-button'>Go To Spot</button>
                             </Link> */}
@@ -83,7 +86,8 @@ export default function YourReviews () {
                                     <img className={'your-reviews' + idx} key={idx} src={image.url} />
                                 ))}
                             </div>} */}
-                        </div>
+                        </div>}
+                        </>
                     ))}
                 </div>
             </div>

@@ -201,8 +201,8 @@ input:focus {
     padding: 24px;
     outline: none;
     /* flex: 1 1 auto; */
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content;
+    height: fit-content; */
 }
 
 h3:first-child {

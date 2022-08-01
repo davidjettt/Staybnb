@@ -83,8 +83,8 @@ export default function SpotForm({ spot, formType }) {
                     <div className="create-spot-form-title-container">
                         <h3 className='create-spot-form-title'>{formType}</h3>
                     </div>
-                    <div className='errors'>
-                                    <ul className="errors-list">
+                    <div className='spot-errors'>
+                                    <ul className="spot-errors-list">
                                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                                     </ul>
                                 </div>
