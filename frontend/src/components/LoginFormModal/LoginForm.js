@@ -70,7 +70,7 @@ export default function LoginForm({ setShowModal }) {
                         <div className='input-container-main'>
                             <div className='input-container-sub'>
                                 <div className="email-input-container">
-                                    <label className="custom" htmlFor='box'>
+                                    <label className="custom-2" htmlFor='box'>
                                         <input
                                             className='email-input-field email'
                                             id='box'
@@ -80,7 +80,7 @@ export default function LoginForm({ setShowModal }) {
                                             onChange={(e) => setEmail(e.target.value)}
                                             required
                                         />
-                                        <span className="placeholder">Email</span>
+                                        <span className="placeholder-2">Email</span>
                                     </label>
                                 </div>
                                 <div>
