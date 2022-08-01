@@ -118,6 +118,7 @@
     /* flex-wrap: wrap; */
     padding: .75rem;
     position: relative;
+    padding-bottom: 1rem;
     /* display: grid;
     grid-template-rows: 1fr 1fr;
     grid-auto-flow: column; */
