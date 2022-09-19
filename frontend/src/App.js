@@ -18,19 +18,20 @@ import { loadReviewsThunk } from './store/reviews';
 
 function App() {
   const dispatch = useDispatch();
-
-  // const sessionUser = useSelector(state => state.session.user)
-
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      await dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
-      await dispatch(getAllSpotsThunk())
-      await dispatch(loadReviewsThunk())
-
-    })()
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
+    dispatch(getAllSpotsThunk())
+    dispatch(loadReviewsThunk())
   }, [dispatch])
+
+  // useEffect(() => {
+  //   (async () => {
+  //     await dispatch(getAllSpotsThunk())
+  //     await dispatch(loadReviewsThunk())
+  //   })()
+  // }, [dispatch])
 
 
   return (
