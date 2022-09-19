@@ -3,9 +3,9 @@ import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import { deleteReviewThunk } from '../../store/reviews';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
-import { getSpotDetailsThunk } from '../../store/spots';
+import { getAllSpotsThunk, getSpotDetailsThunk } from '../../store/spots';
 
-export default function SpotReviews({ spotId, numReviews, avgRating, reviewModalClass }) {
+export default function SpotReviews({ spotId, numReviews, avgRating }) {
     const dispatch = useDispatch();
     const reviews = useSelector((state) => {
         return Object.values(state.reviews).filter(review => +review.spotId === +spotId)
@@ -15,7 +15,8 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
 
     const handleDeleteReview = async () => {
         await dispatch(deleteReviewThunk(userReview));
-        await dispatch(getSpotDetailsThunk(spotId));
+        await dispatch(getAllSpotsThunk())
+        // await dispatch(getSpotDetailsThunk(spotId));
     }
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -26,14 +27,14 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
             <div className='review-header-container'>
                 <AiFillStar className='review-section-star' />
                 <span className='rating-reviews'>
-                    {avgRating?.toFixed(2)} • {numReviews} reviews</span>
+                    {avgRating ? avgRating?.toFixed(2) : null} • {numReviews} reviews</span>
             </div>
             <div className='spot-review-container'>
-                {reviews.map((review, idx) => (
+                {reviews.length > 0 && reviews.map((review, idx) => (
                     <div key={idx} className={'key'}>
                         <div className='name-buttons-container'>
                             <div className='spot-reviews-name-date-container'>
-                                {review.User && <div className='review-first-name'>{review.User.firstName}</div>}
+                                <div className='review-first-name'>{review.User?.firstName}</div>
                                 <div className='spot-reviews-date'>{monthNames[new Date(review.createdAt).getMonth()]} {new Date(review.createdAt).getFullYear()}</div>
                             </div>
                             <div className='update-delete-buttons-container'>

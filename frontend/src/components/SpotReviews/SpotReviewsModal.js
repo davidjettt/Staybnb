@@ -39,7 +39,7 @@ export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setRe
                 <div className='modal-review-header-container'>
                     <AiFillStar className='modal-review-section-star' />
                     <span className='modal-rating-reviews'>
-                        {avgRating?.toFixed(2)} • {numReviews} reviews</span>
+                        {avgRating ? avgRating?.toFixed(2) : null} • {numReviews} reviews</span>
                 </div>
                 <div className='modal-spot-review-container'>
                     {reviews.map((review, idx) => (

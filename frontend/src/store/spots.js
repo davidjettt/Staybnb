@@ -157,7 +157,7 @@ const initialState = {};
 export default function spotsReducer(state = initialState, action) {
     switch(action.type) {
         case GET_ALL_SPOTS: {
-            let newState = {...state};
+            let newState = {};
             action.payload.spots.forEach((spot) => {
                 newState[spot.id] = spot;
             })

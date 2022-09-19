@@ -3,19 +3,11 @@ import { useState } from 'react';
 import ReviewForm from '../ReviewForm/ReviewForm';
 import './CreateReviewForm.css';
 
-export default function CreateReviewForm({ spotId, setRendered }) {
-    const [ showModal, setShowModal ] = useState(false);
-
-
+export default function CreateReviewForm({ spotId }) {
     const review = {
         spotId: spotId,
         review: '',
         starts: ''
-    }
-
-    const handleClose = () => {
-        // setRendered(false)
-        setShowModal(false)
     }
 
     return (

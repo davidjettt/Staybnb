@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createReviewThunk, getAllReviewsThunk } from '../../store/reviews';
+import { createReviewThunk, getAllReviewsThunk, loadReviewsThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
-import { getSpotDetailsThunk } from '../../store/spots';
+import { getAllSpotsThunk, getSpotDetailsThunk } from '../../store/spots';
 import './ReviewForm.css';
 
 export default function ReviewForm({ review, formType }) {
@@ -50,8 +50,8 @@ export default function ReviewForm({ review, formType }) {
                     }
                 }
                 );
-                await dispatch(getAllReviewsThunk(review.spotId));
-                await dispatch(getSpotDetailsThunk(review.spotId));
+                await dispatch(loadReviewsThunk())
+                await dispatch(getAllSpotsThunk())
         }
     };
 

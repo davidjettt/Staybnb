@@ -13,9 +13,13 @@ export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-    const [ render, setRendered ] = useState(false);
     const spot = useSelector(state => state.spots[+spotId])
     const user = useSelector(state => state.session.user?.id);
+    const spotReviews = useSelector(state => Object.values(state.reviews).filter(review => +review.spotId === +spotId))
+    const numReviews = spotReviews.length
+    const avgRating = spotReviews.reduce((acc, review) => {
+        return acc + review.stars
+    }, 0) / numReviews
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
@@ -25,16 +29,21 @@ export default function SpotDetail() {
     // const autoScroll = () => {
     //     document.querySelector(".reviews-container").scrollIntoView({behavior: 'smooth' });
     // }
+    // let avgRating
+    // let numReviews
 
-    const avgRating = spot.Reviews.reduce((acc, review) => {
-        return acc + review.stars
-    }, 0) / spot.Reviews.length
+    // if (spot.Reviews) {
+    //     avgRating = spot.Reviews.reduce((acc, review) => {
+    //         return acc + review.stars
+    //     }, 0) / spot.Reviews.length
 
-    const numReviews = spot.Reviews.length
+    //     numReviews = spot.Reviews.length
+    // }
+
 
     return (
         <div className='spot-details-main'>
-            {spot && <div className='spot-details-main-container'>
+            {spot?.Reviews.length >= 0 && <div className='spot-details-main-container'>
                         <header className='spot-details-header-container'>
                             <div className='spot-name-container'>
                                 <h1 className='spot-title'>{spot.name}</h1>
@@ -42,7 +51,7 @@ export default function SpotDetail() {
                             <div className='spot-details-container'>
                                 <div className='star-rating-location'>
                                     <HiStar className='star' />
-                                    <span className='rating-number'>{(spot.avgStarRating?.toFixed(2))}  • </span>
+                                    <span className='rating-number'>{spot.avgRating ? spot.avgRating?.toFixed(2) : null}  • </span>
                                     {/* {spot.numReviews ? <span className='review-click' onClick={test}>{spot.numReviews} reviews</span> : <span>new spot </span>} */}
                                     <ReviewsModal spotId={spotId} numReviews={numReviews} avgRating={avgRating} />
                                     <span>  · {spot.city}, {spot.state}, {spot.country} </span>
@@ -85,7 +94,7 @@ export default function SpotDetail() {
                                             <span>
                                                 <HiStar />
                                             </span>
-                                            <span>{spot.avgStarRating?.toFixed(2)} ᛫ </span>
+                                            <span>{spot.avgRating?.toFixed(2)} ᛫ </span>
                                             <span>{spot?.numReviews} reviews</span>
                                         </div>
                                     </div>
@@ -109,7 +118,7 @@ export default function SpotDetail() {
                         </div>
                         <div className='reviews-container'>
                             <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
-                            {user && user !== spot.ownerId && <CreateReviewForm setRendered={setRendered} spotId={spotId} />}
+                            {user && user !== spot.ownerId && <CreateReviewForm spotId={spotId} />}
                         </div>
                     </div>}
         </div>
