@@ -1,21 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import EditReviewForm from '../EditReviewForm/EditReviewForm';
-import { getAllReviewsThunk, editReviewThunk, deleteReviewThunk } from '../../store/reviews';
+import { useSelector } from 'react-redux';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviewsModal.css';
-import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setReviewShowModal }) {
     const [ overflow, setOverflow ] = useState(false);
-
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getAllReviewsThunk(spotId))
-    }, [dispatch])
-
-
     useEffect(() => {
         if (!overflow) {
             document.body.style.overflow = 'hidden';
@@ -29,21 +18,8 @@ export default function SpotReviewsModal ({ spotId, numReviews, avgRating, setRe
 
 
     const reviews = useSelector((state) => {
-        return Object.values(state.reviews)
+        return Object.values(state.reviews).filter(review => +review.spotId === +spotId)
     });
-
-    const user = useSelector(state => state.session.user?.id);
-
-    const userReview = reviews.find(review => +review?.userId === +user)
-
-
-    // const handleDeleteReview = async () => {
-    //     await dispatch(deleteReviewThunk(userReview));
-    //     await dispatch(getSpotDetailsThunk(spotId));
-    //     // setRendered(!render);
-    // }
-
-    // console.log('USE SELECTOR REVIEWS', reviews);
 
     const closeReviewsModal = () => {
         setReviewShowModal(false);

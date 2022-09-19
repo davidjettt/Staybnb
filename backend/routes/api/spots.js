@@ -470,11 +470,19 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
         ...priceQuery
     };
     // console.log(where)
+
     const spots = await Spot.findAll({
         include: [
             {
                 model: Review,
                 attributes: ['stars']
+            },
+            {
+                model: Image,
+                attributes: ['url']
+            },
+            {
+                model: User, as: 'Owner'
             }
         ],
         where,

@@ -1,10 +1,20 @@
 import { csrfFetch } from "./csrf";
 
+const LOAD_REVIEWS = 'reviews/loadAll'
 const GET_REVIEWS_USER = 'reviews/getReviewsUser';
 const GET_ALL_REVIEWS = 'reviews/getAllReviews';
 const CREATE_REVIEW  = 'reviews/createReview';
 const EDIT_REVIEW = 'reviews/editReview';
 const DELETE_REVIEW = 'review/deleteReview';
+const CLEAR_DATA = 'review/clearData';
+
+
+const loadReviews = (reviews) => {
+    return {
+        type: LOAD_REVIEWS,
+        reviews
+    }
+}
 
 export const getReviewsUser = (reviews) => {
     return {
@@ -38,6 +48,22 @@ export const deleteReview = (review) => {
     return {
         type: DELETE_REVIEW,
         review
+    }
+}
+
+export const clearData = () => {
+    return {
+        type: CLEAR_DATA
+    }
+}
+
+// LOAD ALL REVIEWS
+export const loadReviewsThunk = () => async (dispatch) => {
+    const response = await fetch('/api/reviews')
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(loadReviews(data))
     }
 }
 
@@ -106,17 +132,22 @@ export const deleteReviewThunk = (review) => async (dispatch) => {
 
     if (response.ok) {
         dispatch(deleteReview(review));
-    } else {
-        console.log('ERROR', response.json())
     }
 }
 
 
 
-const initialState = {};
+var initialState = {};
 
 export default function reviewsReducer(state = initialState, action) {
     switch(action.type) {
+        case LOAD_REVIEWS: {
+            let newState = {}
+            action.reviews.reviews.forEach((review) => {
+                newState[review.id] = review
+            })
+            return newState
+        }
         case GET_REVIEWS_USER: {
             let newState = {};
             action.payload.reviews.forEach((review) => {
@@ -145,6 +176,9 @@ export default function reviewsReducer(state = initialState, action) {
             let newState = {...state};
             delete newState[action.review.id];
             return newState;
+        }
+        case CLEAR_DATA: {
+            return initialState
         }
         default: {
             return state;

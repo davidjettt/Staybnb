@@ -52,6 +52,27 @@ const reviewImagesCount = async (req, res, next) => {
     return next();
 }
 
+
+// LOAD ALL REVIEWS
+router.get('/', async (req, res, next) => {
+    const reviews = await Review.findAll({
+        include: [
+            {
+                model: User
+            },
+            {
+                model: Image,
+                attributes: ['url']
+            },
+            {
+                model: Spot,
+                attributes: {exclude: ['createdAt', 'updatedAt', 'previewImage']}
+            },
+        ]
+    })
+    return res.json({ reviews });
+})
+
 // Create image by review id
 router.post('/:reviewId/images', existsReview, requireAuth, reviewPermission, reviewImagesCount, async (req, res, next) => {
     const { url } = req.body;

@@ -1,34 +1,22 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
-import { getAllReviewsThunk, deleteReviewThunk } from '../../store/reviews';
+import { deleteReviewThunk } from '../../store/reviews';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
 import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function SpotReviews({ spotId, numReviews, avgRating, reviewModalClass }) {
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getAllReviewsThunk(spotId))
-    }, [dispatch])
-
     const reviews = useSelector((state) => {
-        return Object.values(state.reviews)
+        return Object.values(state.reviews).filter(review => +review.spotId === +spotId)
     });
-
     const user = useSelector(state => state.session.user?.id);
-
     const userReview = reviews.find(review => +review?.userId === +user)
-
 
     const handleDeleteReview = async () => {
         await dispatch(deleteReviewThunk(userReview));
         await dispatch(getSpotDetailsThunk(spotId));
-        // setRendered(!render);
     }
-
-    // console.log('USE SELECTOR REVIEWS', reviews);
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -55,7 +43,7 @@ export default function SpotReviews({ spotId, numReviews, avgRating, reviewModal
                                 </button>}
                             </div>
                         </div>
-                        <div className='spot-review-text'>{review.review} </div>
+                        <div className='spot-review-text'>{review?.review} </div>
                     </div>
                 ))}
             </div>

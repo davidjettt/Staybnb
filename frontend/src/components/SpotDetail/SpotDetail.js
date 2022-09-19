@@ -1,14 +1,10 @@
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-
+import { useState } from 'react';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import ReviewsModal from '../ReviewsModal/ReviewsModal';
-
-import { deleteSpotThunk, getSpotDetailsThunk } from '../../store/spots';
-import { getAllReviewsThunk } from '../../store/reviews';
-
+import { deleteSpotThunk } from '../../store/spots';
 import './SpotDetail.css';
 import { HiStar } from 'react-icons/hi';
 
@@ -17,35 +13,12 @@ export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
-
     const [ render, setRendered ] = useState(false);
-
-    useEffect(() => {
-        dispatch(getSpotDetailsThunk(spotId));
-        dispatch(getAllReviewsThunk(spotId))
-    }, [dispatch, spotId])
-
-    // const spot = useSelector((state) => {
-    //     return Object.values(state.spots);
-    // })
-
-    const spot = useSelector((state) => {
-
-        return state.spots[spotId]
-    })
-
+    const spot = useSelector(state => state.spots[+spotId])
     const user = useSelector(state => state.session.user?.id);
-
-
-    const reviews = useSelector(state => {
-        return Object.values(state.reviews)
-    })
-
-    // const userReview = reviews.find(review => +review?.userId === +user)
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
-
         history.push('/');
     }
 
@@ -53,8 +26,11 @@ export default function SpotDetail() {
     //     document.querySelector(".reviews-container").scrollIntoView({behavior: 'smooth' });
     // }
 
-    const avgRating = spot?.avgStarRating;
-    const numReviews = spot?.numReviews;
+    const avgRating = spot.Reviews.reduce((acc, review) => {
+        return acc + review.stars
+    }, 0) / spot.Reviews.length
+
+    const numReviews = spot.Reviews.length
 
     return (
         <div className='spot-details-main'>

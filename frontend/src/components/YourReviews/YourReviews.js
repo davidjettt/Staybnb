@@ -1,45 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {  editReviewThunk, getReviewsUserThunk } from '../../store/reviews';
-
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import DeleteYourReview from './DeleteYourReview';
 
 import './YourReviews.css';
 
 export default function YourReviews () {
-    const [ loadUserReviews, setLoadUserReviews ] = useState(false);
-    const dispatch = useDispatch();
-
-
     const userId = useSelector(state => state.session.user?.id)
-
-    const reviews = useSelector((state) => {
-        // console.log('REVIEWS STATE', state.reviews)
-        if (loadUserReviews) {
-            return Object.values(state.reviews);
-        } else {
-            return {};
-        }
-    })
-
-    useEffect(() => {
-
-        dispatch(getReviewsUserThunk());
-        // console.log('DISPATCH CALLED')
-        setLoadUserReviews(true);
-        // console.log('STATE VAR CHANGED')
-    }, [dispatch])
-
-
+    const reviews = useSelector(state => Object.values(state.reviews).filter(review => +userId === +review.userId))
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
     return (
         <>
-            {loadUserReviews && <div className='your-reviews-main'>
-                {/* {console.log('PAGE LOADED')} */}
+            <div className='your-reviews-main'>
                 <div className='your-reviews-heading-container'>
                     {/* <h3 className='your-reviews-heading'>{reviews.length ? 'Your Reviews' : 'You Don\'t Have Any Reviews!'}</h3> */}
                     <h3 className='your-reviews-heading'>Your Reviews</h3>
@@ -68,7 +42,7 @@ export default function YourReviews () {
                                         </div>
                                     </div>
                                     <div className='your-review-text-container'>
-                                        {review.review}
+                                        {review?.review}
                                     </div>
                                 </div>
                                 {/* {review.Images && <div className='your-reviews-images-container'>
@@ -81,7 +55,7 @@ export default function YourReviews () {
                         ))}
                     </div>
                 </div>
-            </div>}
+            </div>
         </>
     )
 }

@@ -1,21 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getAllSpotsThunk } from '../../store/spots';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Spots.css';
-
 import { TiStar } from 'react-icons/ti';
 
 
 export default function Spots() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-
-        dispatch(getAllSpotsThunk());
-
-    }, [dispatch])
-
     const spots = useSelector((state) => {
         return Object.values(state.spots)
     })
@@ -45,6 +34,7 @@ export default function Spots() {
                                             {spot.Reviews?.length ? (spot.Reviews.reduce((acc, review) => {
                                                 return acc + review.stars
                                             }, 0) / spot.Reviews.length).toFixed(2) : 'new spot'}
+                                            {/* {spot.numReviews > 0 ? spot.avgStarRating : 'new spot'} */}
                                         </div>
                                     </div>
                                 </Link>

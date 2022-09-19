@@ -12,6 +12,8 @@ import SpotDetail from './components/SpotDetail/SpotDetail';
 import CreateSpotForm from './components/CreateSpotForm/CreateSpotForm';
 import EditSpotForm from './components/EditSpotForm/EditSpotForm';
 import YourReviews from './components/YourReviews/YourReviews';
+import { getAllSpotsThunk } from './store/spots';
+import { loadReviewsThunk } from './store/reviews';
 
 
 function App() {
@@ -22,15 +24,15 @@ function App() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
-        // .catch((e) => {
-        //     setIsLoaded(true);
-        //     console.log(e);
-        // })
+    (async () => {
+      await dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
+      await dispatch(getAllSpotsThunk())
+      await dispatch(loadReviewsThunk())
 
+    })()
   }, [dispatch])
 
-  // console.log('is loaded', isLoaded)
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
