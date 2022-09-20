@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { createSpotThunk, editSpotThunk } from '../../store/spots';
+import { createSpotThunk, editSpotThunk, getAllSpotsThunk } from '../../store/spots';
 
 import './SpotForm.css'
 
@@ -48,6 +48,7 @@ export default function SpotForm({ spot, formType }) {
             );
 
             if (spotData) {
+                // dispatch(getAllSpotsThunk())
                 history.push(`/spots/${spotData.id}`);
             }
 
@@ -59,6 +60,7 @@ export default function SpotForm({ spot, formType }) {
                 }
             );
             if (spotData) {
+                // dispatch(getAllSpotsThunk())
                 history.push(`/spots/${spot.id}`)
             }
         }

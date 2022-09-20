@@ -295,12 +295,6 @@ router.get('/:spotId', existsSpot, async (req, res, next) => {
 router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
-    // if (req.user.id !== spot.ownerId) {
-    //     const err = new Error ("Forbidden");
-    //     err.status = 403;
-    //     return next(err);
-    // }
-
     const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
 
@@ -339,28 +333,12 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
 router.delete('/:spotId', existsSpot, requireAuth, spotPermission, async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId);
 
-    // if (req.user.id !== spot.ownerId) {
-    //     const err = new Error ("Forbidden");
-    //     err.status = 403;
-    //     return next(err);
-    // }
-
     await spot.destroy();
 
     return res.json({message: "Successfuly deleted", statusCode: 200});
 })
 
 const validateQueryFilters = [
-    // check('page')
-    // .custom(value => {
-    //     if (value < 0) throw new Error ('Page must be greater than or equal to 0')
-    //     return true;
-    // }),
-    // check('size')
-    // .custom(value => {
-    //     if (value < 0) throw new Error ('Size must be greater than or equal to 0')
-    //     return true;
-    // }),
     body('page')
     .custom((value, { req }) => {
         if (req.query.page < 0) throw new Error ('Page must be greater than or equal to 0')

@@ -139,19 +139,6 @@ export const deleteSpotThunk = (spotId) => async (dispatch) => {
     }
 }
 
-// const initialState = () => async (dispatch) => {
-//     const response = await fetch('/api/spots');
-
-//     let newState = {};
-//     if (response.ok) {
-//         const data = await response.json();
-//         data.forEach((spot) => {
-//             newState[spot.id] = spot;
-//         })
-//         return newState;
-//     }
-// }
-
 const initialState = {};
 
 export default function spotsReducer(state = initialState, action) {
@@ -188,7 +175,6 @@ export default function spotsReducer(state = initialState, action) {
         case DELETE_SPOT: {
             let newState = {...state};
             delete newState[action.spotId];
-            // newState.reviews = {};
             return newState;
         }
         default:

@@ -88,6 +88,7 @@ export default function ReviewForm({ review, formType }) {
                                 <div className="review-input-container">
                                     <label>
                                         <textarea
+                                            className='create-review-textarea'
                                             cols={60}
                                             rows={10}
                                             type='text'
