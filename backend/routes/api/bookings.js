@@ -142,6 +142,17 @@ const pastStartDate = async (req, res, next) => {
 }
 
 
+// Load all bookings
+router.get('/', async (req, res, next) => {
+    const bookings = await Booking.findAll({
+        include: {
+            model: Spot
+        }
+    })
+
+    return res.json(bookings)
+})
+
 // Edit a booking
 router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, bookingPastEndDate, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;

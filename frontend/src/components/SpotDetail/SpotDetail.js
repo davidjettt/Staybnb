@@ -1,6 +1,5 @@
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import ReviewsModal from '../ReviewsModal/ReviewsModal';
@@ -14,12 +13,17 @@ export default function SpotDetail() {
     const dispatch = useDispatch();
     const history = useHistory();
     const spot = useSelector(state => state.spots[+spotId])
-    const user = useSelector(state => state.session.user?.id);
-    const spotReviews = useSelector(state => Object.values(state.reviews).filter(review => +review.spotId === +spotId))
-    const numReviews = spotReviews.length
-    const avgRating = spotReviews.reduce((acc, review) => {
-        return acc + review.stars
-    }, 0) / numReviews
+    const user = useSelector(state => state.session.user);
+    const spotReviews = useSelector(state => Object.values(state.reviews)?.filter(review => +review.spotId === +spotId))
+
+    let numReviews
+    let avgRating
+    if (spotReviews) {
+        numReviews = spotReviews.length
+        avgRating = spotReviews.reduce((acc, review) => {
+            return acc + review.stars
+        }, 0) / numReviews
+    }
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
@@ -43,7 +47,7 @@ export default function SpotDetail() {
 
     return (
         <div className='spot-details-main'>
-            {spot?.Reviews.length >= 0 && <div className='spot-details-main-container'>
+            {spot && <div className='spot-details-main-container'>
                         <header className='spot-details-header-container'>
                             <div className='spot-name-container'>
                                 <h1 className='spot-title'>{spot.name}</h1>
@@ -57,10 +61,10 @@ export default function SpotDetail() {
                                     <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                                 </div>
                                 <div className='spot-links-container'>
-                                    {user === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
+                                    {user.id === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
                                         <button className='edit-spot-button'>Edit Spot</button>
                                     </Link> : null}
-                                    {user === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
+                                    {user.id === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
                                         Delete Spot
                                     </button> : null}
                                 </div>
@@ -68,12 +72,12 @@ export default function SpotDetail() {
                         </header>
                         <div className='spot-images-container'>
                             {spot.Images?.length ? spot.Images.map((image, idx) => (
-                                    <img key={idx} className={'key' + idx} style={{}} src={`${image.url}`} />
+                                    <img key={idx} className={'key' + idx} src={`${image.url}`} />
                             )) : <img className='key0' src={spot.previewImage} />}
                         </div>
                         <div className='spot-details-subtitle-description-container'>
                             <div className='subtitle-container'>
-                                    <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
+                                    <h2 className='subtitle'>{spot.name} hosted by {user?.firstName} {user?.lastName}</h2>
                                 <div className='description-container'>
                                     <div className='description-content'>
                                         {spot.description}
@@ -118,7 +122,7 @@ export default function SpotDetail() {
                         </div>
                         <div className='reviews-container'>
                             <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
-                            {user && user !== spot.ownerId && <CreateReviewForm spotId={spotId} />}
+                            {user && user.id !== spot.ownerId && <CreateReviewForm spotId={spotId} />}
                         </div>
                     </div>}
         </div>

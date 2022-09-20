@@ -1,10 +1,8 @@
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { editReviewThunk, getAllReviewsThunk } from '../../store/reviews';
+import { editReviewThunk, loadReviewsThunk } from '../../store/reviews';
 import { Rating } from 'react-simple-star-rating';
 import './EditReviewFormModal.css'
-import { getSpotDetailsThunk } from '../../store/spots';
 
 export default function EditReviewFormModal({ setShowModal , review, formType }) {
     const dispatch = useDispatch();
@@ -40,8 +38,7 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                     }
                 }
                 );
-            await dispatch(getAllReviewsThunk(review.spotId));
-            await dispatch(getSpotDetailsThunk(review.spotId));
+            await dispatch(loadReviewsThunk())
         }
     };
 
@@ -94,20 +91,8 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                         />
                                     </label>
                                 </div>
-                                {/* <div className='city-input-container'>
-                                    <label>
-                                        <input
-                                            className='city-input-field'
-                                            type='text'
-                                            placeholder='Star rating'
-                                            value={starsInput}
-                                            onChange={(e) => setStarsInput(e.target.value)}
-                                            required
-                                        />
-                                    </label>
-                                </div> */}
                                 <div className="modal-update-review-button-container">
-                                    <button className='modal-update-review-button' type='submit'>{formType || 'Post Review'}</button>
+                                    <button className='modal-update-review-button' type='submit'>{formType}</button>
                                 </div>
                             </div>
                         </div>
