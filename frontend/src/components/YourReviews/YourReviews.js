@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import DeleteYourReview from './DeleteYourReview';
 
@@ -10,6 +10,9 @@ export default function YourReviews () {
     const reviews = useSelector(state => Object.values(state.reviews).filter(review => +userId === +review.userId))
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    if (!userId) {
+        return <Redirect to='/' />
+    }
 
     return (
         <>

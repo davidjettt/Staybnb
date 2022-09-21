@@ -14,6 +14,8 @@ import EditSpotForm from './components/EditSpotForm/EditSpotForm';
 import YourReviews from './components/YourReviews/YourReviews';
 import { getAllSpotsThunk } from './store/spots';
 import { loadReviewsThunk } from './store/reviews';
+import { loadBookingsThunk } from './store/bookings';
+import YourBookings from './components/YourBookings/YourBookings';
 
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     dispatch(getAllSpotsThunk())
     dispatch(loadReviewsThunk())
+    dispatch(loadBookingsThunk())
   }, [dispatch])
 
   // useEffect(() => {
@@ -55,6 +58,9 @@ function App() {
       </Route>
       <Route path='/your-reviews'>
         <YourReviews />
+      </Route>
+      <Route path='/your-bookings'>
+        <YourBookings />
       </Route>
       {/* {isLoaded && (
       <Switch>

@@ -1,0 +1,13 @@
+
+
+.your-bookings-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.travel-friends {
+    width: 500px;
+    height: 200px
+}
