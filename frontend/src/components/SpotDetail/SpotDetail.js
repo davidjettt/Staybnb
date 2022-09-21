@@ -6,6 +6,10 @@ import ReviewsModal from '../ReviewsModal/ReviewsModal';
 import { deleteSpotThunk } from '../../store/spots';
 import './SpotDetail.css';
 import { HiStar } from 'react-icons/hi';
+import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
+import './ReactCalendar.css'
+import { useState } from 'react';
 
 
 export default function SpotDetail() {
@@ -15,6 +19,9 @@ export default function SpotDetail() {
     const spot = useSelector(state => state.spots[+spotId])
     const user = useSelector(state => state.session.user);
     const spotReviews = useSelector(state => Object.values(state.reviews)?.filter(review => +review.spotId === +spotId))
+    const [ bookingDate, setBookingDate ] = useState(null)
+
+    console.log('START', bookingDate)
 
     let numReviews
     let avgRating
@@ -43,6 +50,10 @@ export default function SpotDetail() {
 
     //     numReviews = spot.Reviews.length
     // }
+
+    const handleBooking = () => {
+
+    }
 
 
     return (
@@ -98,11 +109,18 @@ export default function SpotDetail() {
                                             <span>
                                                 <HiStar />
                                             </span>
-                                            <span>{spot.avgRating?.toFixed(2)} ᛫ </span>
-                                            <span>{spot?.numReviews} reviews</span>
+                                            <span>{avgRating ? avgRating?.toFixed(2) : null} ᛫ </span>
+                                            <span>{numReviews} reviews</span>
                                         </div>
                                     </div>
-                                    <div className='bookings-form'>
+                                    <div className='bookings-form-container'>
+                                        <Calendar
+                                            // showNavigation={false}
+                                            selectRange={true}
+                                            value={bookingDate}
+                                            onChange={setBookingDate}
+                                        />
+                                        <button className='booking-button' onClick={handleBooking}>Reserve</button>
                                     </div>
                                     <div className='price-night-container'>
                                         <div className='price-night'>${`${spot.pricePerNight} x 5 nights`}</div>
