@@ -21,7 +21,7 @@ export default function SpotDetail() {
     const spotReviews = useSelector(state => Object.values(state.reviews)?.filter(review => +review.spotId === +spotId))
     const [ bookingDate, setBookingDate ] = useState(null)
 
-    console.log('START', bookingDate)
+    // console.log('START', bookingDate)
 
     let numReviews
     let avgRating
@@ -72,10 +72,10 @@ export default function SpotDetail() {
                                     <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                                 </div>
                                 <div className='spot-links-container'>
-                                    {user.id === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
+                                    {user?.id === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
                                         <button className='edit-spot-button'>Edit Spot</button>
                                     </Link> : null}
-                                    {user.id === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
+                                    {user?.id === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
                                         Delete Spot
                                     </button> : null}
                                 </div>
@@ -88,7 +88,7 @@ export default function SpotDetail() {
                         </div>
                         <div className='spot-details-subtitle-description-container'>
                             <div className='subtitle-container'>
-                                    <h2 className='subtitle'>{spot.name} hosted by {user?.firstName} {user?.lastName}</h2>
+                                    <h2 className='subtitle'>{spot.name} hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
                                 <div className='description-container'>
                                     <div className='description-content'>
                                         {spot.description}
