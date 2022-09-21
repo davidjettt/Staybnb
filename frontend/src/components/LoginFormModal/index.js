@@ -95,6 +95,11 @@ export default function LoginFormModal() {
                             Your Reviews
                         </Link> : null}
                     </div>}
+                    {showMenu && <div className='your-reviews-container'>
+                        {sessionUser ? <Link className='your-reviews' to='/your-bookings'>
+                            Your Bookings
+                        </Link> : null}
+                    </div>}
                     {showMenu && <div className='create-a-spot-container'>
                         {sessionUser ? <Link className='create-a-spot' to='/create-a-spot'>
                             Create a Spot

@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { TiStar } from 'react-icons/ti';
 import './YourSpots.css';
 import '../Spots/Spots.css';
@@ -9,6 +9,10 @@ export default function YourSpots() {
     const spots = useSelector((state) => {
         return Object.values(state.spots).filter(spot => +spot.ownerId === +userId)
     })
+
+    if (!userId) {
+        return <Redirect to='/' />
+    }
 
     return (
         <>
