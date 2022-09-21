@@ -10,6 +10,8 @@ import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import './ReactCalendar.css'
 import { useState } from 'react';
+import { format } from 'date-fns'
+import { createBookingThunk } from '../../store/bookings';
 
 
 export default function SpotDetail() {
@@ -20,8 +22,12 @@ export default function SpotDetail() {
     const user = useSelector(state => state.session.user);
     const spotReviews = useSelector(state => Object.values(state.reviews)?.filter(review => +review.spotId === +spotId))
     const [ bookingDate, setBookingDate ] = useState(null)
+    const [ errors, setErrors ] = useState([])
 
-    // console.log('START', bookingDate)
+    if (bookingDate) {
+        console.log('START', format(bookingDate[0], 'yyyy-MM-dd'))
+        console.log('END', format(bookingDate[1], 'yyyy-MM-dd'))
+    }
 
     let numReviews
     let avgRating
@@ -51,8 +57,39 @@ export default function SpotDetail() {
     //     numReviews = spot.Reviews.length
     // }
 
-    const handleBooking = () => {
+    const handleBooking = async () => {
+        setErrors([])
+        if (!user) {
+            window.alert('You must be logged in to reserve!')
+        }
+        else {
+            if (!bookingDate) {
+                setErrors(['Must select a start and end date'])
+            }
+            else {
+                const payload = {
+                    startDate: format(bookingDate[0], 'yyyy-MM-dd'),
+                    endDate: format(bookingDate[1], 'yyyy-MM-dd'),
+                    spotId: spotId,
+                    userId: user.id
+                }
 
+                const bookingData = await dispatch(createBookingThunk(payload))
+                            .catch(
+                                async (res) => {
+                                    const data = await res.json()
+                                    console.log('DATA', data)
+                                    if (data) {
+                                        // setErrors(Object.values(data.errors))
+                                        setErrors([data.message])
+                                    }
+                                }
+                            )
+                if (bookingData) {
+                    setBookingDate(null)
+                }
+            }
+        }
     }
 
 
@@ -114,6 +151,11 @@ export default function SpotDetail() {
                                         </div>
                                     </div>
                                     <div className='bookings-form-container'>
+                                        <div className='spot-errors'>
+                                            <ul className="spot-errors-list">
+                                                {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                                            </ul>
+                                        </div>
                                         <Calendar
                                             // showNavigation={false}
                                             selectRange={true}

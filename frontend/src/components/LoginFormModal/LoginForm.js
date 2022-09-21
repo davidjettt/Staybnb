@@ -59,7 +59,7 @@ export default function LoginForm({ setShowModal }) {
             <div className="login-form-container">
                 <div className="login-form-pane">
                     <div className="login-form-title-container">
-                        <h3 className='login-form-title'>Welcome to Airbnb</h3>
+                        <h3 className='login-form-title'>Welcome to Staybnb</h3>
                     </div>
                     <form className='login-form' onSubmit={handleSubmit}>
                         <div className='errors'>
