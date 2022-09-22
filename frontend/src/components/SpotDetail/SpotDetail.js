@@ -24,11 +24,6 @@ export default function SpotDetail() {
     const [ bookingDate, setBookingDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
 
-    if (bookingDate) {
-        console.log('START', format(bookingDate[0], 'yyyy-MM-dd'))
-        console.log('END', format(bookingDate[1], 'yyyy-MM-dd'))
-    }
-
     let numReviews
     let avgRating
     if (spotReviews) {

@@ -17,10 +17,12 @@ module.exports = (sequelize, DataTypes) => {
   }
   Image.init({
     spotId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      onDelete: 'cascade'
     },
     reviewId: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      onDelete: 'cascade'
     },
     url: {
       type: DataTypes.STRING,

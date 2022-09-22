@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { createSpotThunk, editSpotThunk, getAllSpotsThunk } from '../../store/spots';
+import { createSpotThunk, editSpotThunk } from '../../store/spots';
 
 import './SpotForm.css'
 
