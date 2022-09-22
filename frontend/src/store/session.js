@@ -3,9 +3,6 @@ import { csrfFetch } from "./csrf";
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
-// const GET_SPOTS_BY_USER = 'spots/getSpotsByUser';
-
-
 export const setUser = (user) => {
     return {
         type: SET_USER,
@@ -19,14 +16,6 @@ export const removeUser = () => {
     }
 }
 
-// export const getSpotsByUser = (spots) => {
-//     return {
-//         type: GET_SPOTS_BY_USER,
-//         payload: spots
-//     }
-// }
-
-
 // Login thunk -- POST
 export const login = (user) => async (dispatch) => {
     const { email, password } = user;
@@ -37,7 +26,6 @@ export const login = (user) => async (dispatch) => {
     })
 
     const data = await response.json();
-    // console.log(data.user)
     dispatch(setUser(data));
     return response;
 }
@@ -45,9 +33,6 @@ export const login = (user) => async (dispatch) => {
 // Restore session user thunk -- GET
 export const restoreUser = () => async (dispatch) => {
     const response = await csrfFetch('/api/session')
-    // .catch(e => {
-    //     return;
-    // })
 
     if (response.ok) {
         const data = await response.json();
@@ -88,17 +73,6 @@ export const logout = () => async (dispatch) => {
     return response;
 }
 
-// export const getSpotsByUserThunk = () => async (dispatch) => {
-//     const response = await fetch('/api/your-spots');
-//     // console.log('response', response)
-
-//     if (response.ok) {
-//         const data = await response.json();
-//         // console.log('data', data)
-//         dispatch(getSpotsByUser(data));
-//     }
-// }
-
 const initialState = { user: null };
 
 export default function sessionReducer(state = initialState, action) {
@@ -106,7 +80,7 @@ export default function sessionReducer(state = initialState, action) {
     switch(action.type) {
         case SET_USER: {
             newState = {...state};
-            newState.user = action.payload;
+            newState.user = action.payload.user;
             return newState;
         }
         case REMOVE_USER: {
@@ -114,11 +88,6 @@ export default function sessionReducer(state = initialState, action) {
             newState.user = null;
             return newState;
         }
-        // case GET_SPOTS_BY_USER: {
-        //     newState = {...state}
-        //     newState.spots = action.payload.spots
-        //     return newState;
-        // }
         default:
             return state;
     }

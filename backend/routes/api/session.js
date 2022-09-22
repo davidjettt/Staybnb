@@ -20,20 +20,34 @@ router.delete(
 
 
 // Get the current user
-  router.get(
-    '/',
-    // requireAuth,
-    restoreUser,
-    (req, res) => {
-      const { user } = req;
-      if (user) {
-        // return res.json({
-        //   user: user.toSafeObject()
-        // });
-        return res.json(user.toSafeObject())
-      } else return null;
+  // router.get(
+  //   '/',
+  //   // requireAuth,
+  //   restoreUser,
+  //   (req, res) => {
+  //     const { user } = req;
+  //     // const {token} = req.cookies.token
+  //     if (user) {
+  //       // return res.json({
+  //       //   user: user.toSafeObject()
+  //       // });
+  //       return res.json(user.toSafeObject())
+  //     } else return null;
+  //   }
+  // );
+
+  router.get("/", restoreUser, (req, res) => {
+    const { user } = req;
+    const token = req.cookies.token;
+    if (user) {
+      return res.json({
+        user: user.toSafeObject(),
+        token,
+      });
     }
-  );
+
+    return res.json({});
+  });
 
   const validateLogin = [
     check('email')
@@ -130,8 +144,9 @@ router.post(
       // }
 
       const token = await setTokenCookie(res, user);
+
       return res.json({
-        ...finduser.dataValues,
+        user: finduser.dataValues,
         token: token
       });
     }

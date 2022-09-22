@@ -24,7 +24,7 @@ function App() {
   const [ isLoaded, setIsLoaded ] = useState(false);
 
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true)).catch((data) => console.log(data))
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
     dispatch(getAllSpotsThunk())
     dispatch(loadReviewsThunk())
     dispatch(loadBookingsThunk())
