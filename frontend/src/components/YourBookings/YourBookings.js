@@ -68,9 +68,9 @@ export default function YourBookings() {
                         {upcomingBookings.map((booking, idx) => (
                             <div className='upcoming-bookings' key={idx}>
                                 <div className='yes-bookings-left'>
-                                    <div className='booking-city'>
-                                        {booking.Spot.city}
-                                    </div>
+                                    <Link to={`/spots/${booking.spotId}`} className='booking-city'>
+                                        {booking.Spot?.city}
+                                    </Link>
                                     <div className='booking-startdate'>
                                         Start Date: {format(new Date(booking.startDate), 'LLLL d, yyyy')}
                                     </div>
@@ -79,14 +79,40 @@ export default function YourBookings() {
                                     </div>
                                 </div>
                                 <div className='yes-bookings-right'>
-                                    <img className='booking-preview' src={booking.Spot.previewImage} alt='preview' />
+                                    <img className='booking-preview' src={booking.Spot?.previewImage} alt='preview' />
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
                 <div className='your-bookings-been-container'>
+                    <div className='been-title'>
+                        Where you've been
+                    </div>
+                    <div className='been-main'>
+                        {pastBookings.map((booking, idx) => (
 
+                            <div className='been-sub' key={idx}>
+                                <div className='been-left'>
+                                    <div className='been-image'>
+                                        <img src={booking.Spot.previewImage} alt='' />
+                                    </div>
+                                </div>
+                                <div className='been-right'>
+                                    <div className='been-city'>
+                                        {booking.Spot.city}
+                                    </div>
+                                    <div className='been-host'>
+                                        {booking.Spot.Owner?.firstName} {booking.Spot.Owner?.lastName}
+                                    </div>
+                                    <div className='been-date'>
+                                        <div>{format(new Date(booking.startDate), 'LLL d, yyyy')}-</div>
+                                        <div>{format(new Date(booking.endDate), 'LLL d, yyyy')}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </>

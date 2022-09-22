@@ -12,31 +12,27 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    return queryInterface.bulkInsert('Users', [
+    await queryInterface.bulkInsert('Users', [
       {
         email: 'lebron.james@gmail.com',
-        // username: 'Demo-lition',
         firstName: 'Lebron',
         lastName: 'James',
         hashedPassword: bcrypt.hashSync('lakers')
       },
       {
         email: 'kevin.durant@gmail.com',
-        // username: 'FakeUser1',
         firstName: 'Kevin',
         lastName: 'Durant',
         hashedPassword: bcrypt.hashSync('brooklyn')
       },
       {
         email: 'steph.curry@gmail.com',
-        // username: 'FakeUser2',
         firstName: 'Steph',
         lastName: 'Curry',
         hashedPassword: bcrypt.hashSync('warriors')
       },
       {
         email: 'john.smith@gmail.com',
-        // username: 'asdfasdf',
         firstName: 'John',
         lastName: 'Smith',
         hashedPassword: bcrypt.hashSync('secret password')
@@ -47,7 +43,7 @@ module.exports = {
         lastName: 'User',
         hashedPassword: bcrypt.hashSync('demouser')
       }
-    ], {});
+    ])
   },
 
 

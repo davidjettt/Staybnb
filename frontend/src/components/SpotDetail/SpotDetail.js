@@ -11,7 +11,8 @@ import Calendar from 'react-calendar';
 import './ReactCalendar.css'
 import { useState } from 'react';
 import { format } from 'date-fns'
-import { createBookingThunk } from '../../store/bookings';
+import { createBookingThunk, loadBookingsThunk } from '../../store/bookings';
+import { loadReviewsThunk } from '../../store/reviews';
 
 
 export default function SpotDetail() {
@@ -35,6 +36,8 @@ export default function SpotDetail() {
 
     const handleDelete = async () => {
         await dispatch(deleteSpotThunk(spotId));
+        await dispatch(loadBookingsThunk())
+        await dispatch(loadReviewsThunk())
         history.push('/');
     }
 
@@ -81,7 +84,9 @@ export default function SpotDetail() {
                                 }
                             )
                 if (bookingData) {
-                    setBookingDate(null)
+                    await dispatch(loadBookingsThunk())
+                    history.push('/your-bookings')
+                    // setBookingDate(null)
                 }
             }
         }
@@ -120,7 +125,7 @@ export default function SpotDetail() {
                         </div>
                         <div className='spot-details-subtitle-description-container'>
                             <div className='subtitle-container'>
-                                    <h2 className='subtitle'>{spot.name} hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                                    <h2 className='subtitle'>{spot.name} hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
                                 <div className='description-container'>
                                     <div className='description-content'>
                                         {spot.description}
