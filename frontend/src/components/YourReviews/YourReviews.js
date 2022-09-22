@@ -20,8 +20,7 @@ export default function YourReviews () {
                 <div className='your-reviews-content-container-parent'>
                     <div className='your-reviews-content-container'>
                         {reviews.map((review, idx) => (
-                            <>
-                            {review.userId === userId && <div key={idx} className='your-reviews-page-container'>
+                            review.userId === userId && <div key={idx} className='your-reviews-page-container'>
                                 {/* <Link to={`/spots/${review.spotId}`}>
                                     <button className='go-to-spot-button'>Go To Spot</button>
                                 </Link> */}
@@ -49,8 +48,7 @@ export default function YourReviews () {
                                         <img className={'your-reviews' + idx} key={idx} src={image.url} />
                                     ))}
                                 </div>} */}
-                            </div>}
-                            </>
+                            </div>
                         ))}
                     </div>
                 </div>

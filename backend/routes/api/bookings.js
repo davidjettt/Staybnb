@@ -146,7 +146,10 @@ const pastStartDate = async (req, res, next) => {
 router.get('/', async (req, res, next) => {
     const bookings = await Booking.findAll({
         include: {
-            model: Spot
+            model: Spot,
+            include: {
+                model: User, as: 'Owner'
+            }
         }
     })
 
