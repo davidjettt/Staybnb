@@ -1,13 +1,90 @@
-
-
 .your-bookings-main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* width: 50vw; */
 }
 
+.your-bookings-header-container {
+    width: 80%;
+    font-size: 32px;
+    color: #222222;
+    padding: 30px 0;
+}
 
+.your-bookings-upcoming-container {
+    width: 80%;
+}
+
+.no-bookings-container {
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    display: flex;
+    height: 290px;
+    border-radius: 11px;
+}
+
+.yes-bookings-container {
+    width: 100%;
+    /* border: 1px solid #dbdbdb;
+    display: flex;
+    height: 290px;
+    border-radius: 11px; */
+}
+
+.yes-bookings-right {
+    width: 80%;
+}
+
+.upcoming-bookings {
+    border: 1px solid #dbdbdb;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 290px;
+    border-radius: 11px;
+}
+
+.yes-bookings-left,
+.no-bookings-right {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.no-bookings-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #222222;
+}
+
+.no-bookings-description {
+    color: #717171;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.back-to-spots > a {
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    text-decoration: none;
+    color: white;
+    padding: 15px 25px 15px 25px;
+    border-radius: 10px;
+}
+
+.no-bookings-left {
+    width: 80%;
+    /* background-image: url('../../images/girls-living-room.webp');
+    background-position: 60% top; */
+}
+
+.booking-preview,
 .travel-friends {
-    width: 500px;
-    height: 200px
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-right-radius: 11px;
+    border-top-right-radius: 11px;
 }

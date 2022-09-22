@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { TiStar } from 'react-icons/ti';
 import './YourSpots.css';
 import '../Spots/Spots.css';
@@ -9,10 +9,6 @@ export default function YourSpots() {
     const spots = useSelector((state) => {
         return Object.values(state.spots).filter(spot => +spot.ownerId === +userId)
     })
-
-    if (!userId) {
-        return <Redirect to='/' />
-    }
 
     return (
         <>
@@ -24,7 +20,7 @@ export default function YourSpots() {
                 <div className='main-content-parent-container'>
                     <div className='main-content-container'>
                         {spots.map((spot, idx) => (
-                            <>
+                            <div key={idx}>
                             {spot.ownerId === userId && <div key={idx} className='card-spot-container'>
                                 <Link className='card-spot-link' to={`/spots/${spot.id}`}>
                                     <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage} alt=''/>
@@ -45,7 +41,7 @@ export default function YourSpots() {
                                     </div>
                                 </Link>
                             </div>}
-                            </>
+                            </div>
                         ))}
                     </div>
                 </div>

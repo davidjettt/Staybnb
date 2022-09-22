@@ -109,7 +109,7 @@ const bookingPermission = async (req, res, next) => {
   })
 
   if (spot) {
-    const err = new Error ('Forbidden');
+    const err = new Error ("Can't book your own spot!");
     err.status = 403;
     return next(err);
   }

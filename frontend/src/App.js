@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 // import LoginFormPage from './components/LoginFormPage';
 // import SignupFormPage from './components/SignUpFormPage';
+import ProtectedRoute from './components/auth/ProtectedRoute'
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import Spots from './components/Spots/Spots';
@@ -33,8 +34,11 @@ function App() {
   //   (async () => {
   //     await dispatch(getAllSpotsThunk())
   //     await dispatch(loadReviewsThunk())
+  //     await dispatch(loadBookingsThunk())
   //   })()
   // }, [dispatch])
+
+  if (!isLoaded) return null
 
 
   return (
@@ -44,24 +48,24 @@ function App() {
         <CategoryButtons />
         <Spots />
       </Route>
-      <Route path='/your-spots'>
+      <ProtectedRoute path='/your-spots'>
         <YourSpots />
-      </Route>
+      </ProtectedRoute>
       <Route exact path='/spots/:spotId'>
         <SpotDetail />
       </Route>
-      <Route path='/create-a-spot'>
+      <ProtectedRoute path='/create-a-spot'>
         <CreateSpotForm />
-      </Route>
-      <Route path='/spots/:spotId/edit'>
+      </ProtectedRoute>
+      <ProtectedRoute path='/spots/:spotId/edit'>
         <EditSpotForm />
-      </Route>
-      <Route path='/your-reviews'>
+      </ProtectedRoute>
+      <ProtectedRoute path='/your-reviews'>
         <YourReviews />
-      </Route>
-      <Route path='/your-bookings'>
+      </ProtectedRoute>
+      <ProtectedRoute path='/your-bookings'>
         <YourBookings />
-      </Route>
+      </ProtectedRoute>
       {/* {isLoaded && (
       <Switch>
         <Route path='/login'>
