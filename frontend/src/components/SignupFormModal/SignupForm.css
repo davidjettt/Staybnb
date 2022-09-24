@@ -9,24 +9,14 @@
     flex-basis: auto;
     flex-grow: 0;
     flex-shrink: 0;
-    padding-bottom: 0px;
-    padding-left: 24px;
-    padding-right: 24px;
-    padding-top: 0px;
     text-size-adjust: 100%;
     border-bottom: 1px solid rgb(235, 235, 235);
-    /* margin-top: 20px; */
 }
 
 .signup-form-header-title-container {
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    line-height: 20px;
-    /* margin-right: 50px; */
-    flex-basis: auto;
-    flex-grow: 0;
-    flex-shrink: 0;
 }
 
 .signup-form-header-title {
@@ -50,8 +40,6 @@
 
 }
 
-
-
 .signup-button-container {
     display: flex;
     justify-content: center;
@@ -65,10 +53,6 @@ input {
 
 .email-input-field {
     margin-right: .2rem;
-}
-
-.password-input-field-signup {
-
 }
 
 .signup-button {
@@ -89,7 +73,6 @@ input {
 }
 
 .x-button-signup {
-    /* display: flex; */
     border: none;
     background-color: white;
     cursor: pointer;

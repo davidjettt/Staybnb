@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
   }
 
   #modal-background {
@@ -22,8 +23,8 @@
     position: absolute;
     background-color:white;
     border-radius: 9px;
-    width: 37rem;
-    height: 39rem;
+    /* width: 37rem;
+    height: 39rem; */
   }
 
 
@@ -38,6 +39,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 100;
   }
 
   #review-modal-background {

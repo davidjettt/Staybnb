@@ -32,9 +32,9 @@ export default function SignupForm({ setShowModal2 }) {
 
 
         return (
-            <div>
+            <div className="signup-modal-main">
                 <header className="signup-form-header">
-                    <div className="x-button-container">
+                    <div style={{marginLeft: 10}} className="x-button-container">
                         <button className="x-button-signup" onClick={handleClick}>
                             <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style={{display: 'block', fill: 'none', height: 16, width: 16, stroke: 'currentcolor', strokeWidth: 3, overflow: 'visible'}}><path d="m6 6 20 20"></path><path d="m26 6-20 20"></path></svg>
                         </button>
@@ -44,7 +44,7 @@ export default function SignupForm({ setShowModal2 }) {
                     </div>
                     <div></div>
                 </header>
-                <form className='login-form' onSubmit={handleSubmit}>
+                <form style={{padding: '25px 35px 35px 45px'}} className='login-form' onSubmit={handleSubmit}>
                     <div className='errors'>
                         <ul className="errors-list">
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}

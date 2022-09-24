@@ -160,7 +160,11 @@ router.get('/', async (req, res, next) => {
 router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, bookingPastEndDate, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;
 
-    const booking = await Booking.findByPk(req.params.bookingId);
+    const booking = await Booking.findByPk(req.params.bookingId, {
+        include: {
+            model: Spot
+        }
+    });
 
 
     const editBooking = await booking.update({
