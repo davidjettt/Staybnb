@@ -1,0 +1,47 @@
+
+
+.edit-booking-main {
+    /* padding: 20px; */
+}
+
+.edit-booking-header-container {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #dbdbdb;
+    padding: 15px;
+}
+
+.edit-booking-header-container > img {
+    width: 20px;
+    cursor: pointer;
+}
+
+.edit-booking-header-container > img:hover {
+    border-radius: 50%;
+    background-color: rgba(219, 219, 219, .4);
+}
+
+.edit-booking-header {
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+
+.edit-booking-form-container {
+    padding: 20px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.edit-booking-btn {
+    background-image: radial-gradient(circle at center center, rgb(255, 56, 92) 0%, rgb(230, 30, 77) 27.5%, rgb(227, 28, 95) 40%, rgb(215, 4, 102) 57.5%, rgb(189, 30, 89) 75%, rgb(189, 30, 89) 100%);
+    border: none;
+    color: white;
+    padding: 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+}

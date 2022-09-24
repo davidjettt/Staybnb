@@ -25,6 +25,7 @@ export default function SpotDetail() {
     const [ bookingDate, setBookingDate ] = useState(null)
     const [ errors, setErrors ] = useState([])
 
+
     let numReviews
     let avgRating
     if (spotReviews) {
@@ -57,12 +58,19 @@ export default function SpotDetail() {
 
     const handleBooking = async () => {
         setErrors([])
+        const today = new Date()
         if (!user) {
             window.alert('You must be logged in to reserve!')
         }
+        else if (+user.id === +spot.ownerId) {
+            setErrors(['You cannot book your own spot!'])
+        }
         else {
             if (!bookingDate) {
-                setErrors(['Must select a start and end date'])
+                setErrors(['You must select a start and end date!'])
+            }
+            else if (today.getTime() > bookingDate[0].getTime() || today.getTime() > bookingDate[1].getTime()) {
+                setErrors(['You cannot select a day in the past!'])
             }
             else {
                 const payload = {
@@ -76,7 +84,6 @@ export default function SpotDetail() {
                             .catch(
                                 async (res) => {
                                     const data = await res.json()
-                                    console.log('DATA', data)
                                     if (data) {
                                         // setErrors(Object.values(data.errors))
                                         setErrors([data.message])
@@ -151,8 +158,8 @@ export default function SpotDetail() {
                                         </div>
                                     </div>
                                     <div className='bookings-form-container'>
-                                        <div className='spot-errors'>
-                                            <ul className="spot-errors-list">
+                                        <div className='booking-errors'>
+                                            <ul className="booking-errors-list">
                                                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                                             </ul>
                                         </div>

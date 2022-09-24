@@ -14,6 +14,7 @@
 
 .your-bookings-upcoming-container {
     width: 70%;
+    padding-bottom: 24px;
 }
 
 .no-bookings-container {
@@ -26,15 +27,12 @@
 
 .yes-bookings-container {
     width: 100%;
-    /* border: 1px solid #dbdbdb;
-    display: flex;
-    height: 290px;
-    border-radius: 11px; */
 }
 
 .yes-bookings-title {
     font-size: 22px;
     padding: 15px 0;
+    font-weight: 480;
 }
 
 .yes-bookings-right {
@@ -48,6 +46,13 @@
     justify-content: space-between;
     height: 290px;
     border-radius: 11px;
+    position: relative;
+}
+
+.booking-startdate,
+.booking-endDate {
+    font-size: 14px;
+    color: #717171
 }
 
 .booking-city {
@@ -103,6 +108,17 @@
 }
 
 
+.your-bookings-been-container {
+    width: 70%;
+}
+
+.been-title {
+    font-size: 22px;
+    font-weight: 480;
+    color: #222222;
+    padding: 20px 0;
+}
+
 .been-image {
     width: 100px;
     height: 100px;
@@ -111,4 +127,34 @@
 .been-image > img {
     width: 100%;
     height: 100%;
+}
+
+.been-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.been-sub {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.been-city {
+    font-weight: 550;
+}
+
+.been-date,
+.been-host {
+    color: #717171;
+    font-weight: 260;
+    font-size: 14px;
+}
+
+.been-host {
+    padding: 4px 0;
+}
+
+.been-image > img {
+    border-radius: 8px;
 }

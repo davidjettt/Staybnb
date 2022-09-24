@@ -1,5 +1,3 @@
-
-
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './YourBookings.css'
@@ -7,7 +5,7 @@ import travelFriends from '../../images/travel-friends.webp'
 import livingRoom from '../../images/girls-living-room.webp'
 import wavingHand from '../../images/waving-hand.svg'
 import { format } from 'date-fns'
-
+import EditDeleteBooking from './EditDeleteBooking'
 
 
 export default function YourBookings() {
@@ -29,8 +27,27 @@ export default function YourBookings() {
         return today.getTime() > newFormat.getTime()
     })
 
-    // console.log('UPCOMING', upcomingBookings)
-    // console.log('PAST', pastBookings)
+    const upcomingFormatted = []
+
+    for (let i = 0; i < upcomingBookings.length; i++) {
+        const booking = upcomingBookings[i]
+        const startSplit = booking.startDate.split('-')
+        const endSplit = booking.endDate.split('-')
+        const newStart = new Date(startSplit[0], startSplit[1] - 1, startSplit[2])
+        const newEnd = new Date(endSplit[0], endSplit[1] - 1, endSplit[2])
+        upcomingFormatted.push([newStart, newEnd])
+    }
+
+    const pastFormatted = []
+
+    for (let i = 0; i < pastBookings.length; i++) {
+        const booking = pastBookings[i]
+        const startSplit = booking.startDate.split('-')
+        const endSplit = booking.endDate.split('-')
+        const newStart = new Date(startSplit[0], startSplit[1] - 1, startSplit[2])
+        const newEnd = new Date(endSplit[0], endSplit[1] - 1, endSplit[2])
+        pastFormatted.push([newStart, newEnd])
+    }
 
     return (
         <>
@@ -61,21 +78,24 @@ export default function YourBookings() {
                             <img className='travel-friends' src={livingRoom} alt='travel-friends' />
                         </div>
                     </div>}
-                    <div className='yes-bookings-title'>
+                    {upcomingBookings.length > 0 && <div className='yes-bookings-title'>
                         Upcoming
-                    </div>
-                    <div className='yes-bookings-container'>
+                    </div>}
+                    {upcomingBookings.length > 0 && <div className='yes-bookings-container'>
                         {upcomingBookings.map((booking, idx) => (
                             <div className='upcoming-bookings' key={idx}>
                                 <div className='yes-bookings-left'>
+                                    <EditDeleteBooking bookingId={booking.id} />
                                     <Link to={`/spots/${booking.spotId}`} className='booking-city'>
                                         {booking.Spot?.city}
                                     </Link>
                                     <div className='booking-startdate'>
-                                        Start Date: {format(new Date(booking.startDate), 'LLLL d, yyyy')}
+
+                                        Start Date: {format(new Date(upcomingFormatted[idx][0]), 'LLLL d, yyyy')}
+
                                     </div>
                                     <div className='booking-endDate'>
-                                        End Date: {format(new Date(booking.endDate), 'LLLL d, yyyy')}
+                                        End Date: {format(new Date(upcomingFormatted[idx][1]), 'LLLL d, yyyy')}
                                     </div>
                                 </div>
                                 <div className='yes-bookings-right'>
@@ -83,7 +103,7 @@ export default function YourBookings() {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div>}
                 </div>
                 <div className='your-bookings-been-container'>
                     <div className='been-title'>
@@ -91,7 +111,6 @@ export default function YourBookings() {
                     </div>
                     <div className='been-main'>
                         {pastBookings.map((booking, idx) => (
-
                             <div className='been-sub' key={idx}>
                                 <div className='been-left'>
                                     <div className='been-image'>
@@ -103,11 +122,11 @@ export default function YourBookings() {
                                         {booking.Spot.city}
                                     </div>
                                     <div className='been-host'>
-                                        {booking.Spot.Owner?.firstName} {booking.Spot.Owner?.lastName}
+                                        Hosted by {booking.Spot.Owner?.firstName} {booking.Spot.Owner?.lastName}
                                     </div>
                                     <div className='been-date'>
-                                        <div>{format(new Date(booking.startDate), 'LLL d, yyyy')}-</div>
-                                        <div>{format(new Date(booking.endDate), 'LLL d, yyyy')}</div>
+                                        <div>{format(new Date(pastFormatted[idx][0]), 'LLL d, yyyy')}-</div>
+                                        <div>{format(new Date(pastFormatted[idx][1]), 'LLL d, yyyy')}</div>
                                     </div>
                                 </div>
                             </div>
