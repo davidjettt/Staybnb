@@ -20,13 +20,13 @@ export default function EditDeleteBooking({ bookingId }) {
     return (
         <>
             {/* <div className='edit-delete-booking-btns'> */}
-                <button onClick={handleEditModal} className='testing'>Edit Trip</button>
-                <button onClick={handleDeleteModal}>Cancel Trip</button>
+                <button onClick={handleEditModal} className='edit-trip'>Edit Trip</button>
+                <button onClick={handleDeleteModal} className='delete-trip'>Cancel Trip</button>
                 {showEdit && <Modal onClose={() => setShowEdit(false)}>
                     <EditBookingForm bookingId={bookingId} setShowEdit={setShowEdit}  />
                 </Modal>}
                 {showDelete && <Modal onClose={() => setShowDelete(false)}>
-                    <DeleteConfirmation bookingId={bookingId}  />
+                    <DeleteConfirmation bookingId={bookingId} setShowDelete={setShowDelete}  />
                 </Modal>}
             {/* </div> */}
         </>

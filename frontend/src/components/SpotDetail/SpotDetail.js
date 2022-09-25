@@ -9,7 +9,7 @@ import { HiStar } from 'react-icons/hi';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
 import './ReactCalendar.css'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns'
 import { createBookingThunk, loadBookingsThunk } from '../../store/bookings';
 import { loadReviewsThunk } from '../../store/reviews';
@@ -23,7 +23,22 @@ export default function SpotDetail() {
     const user = useSelector(state => state.session.user);
     const spotReviews = useSelector(state => Object.values(state.reviews)?.filter(review => +review.spotId === +spotId))
     const [ bookingDate, setBookingDate ] = useState(null)
+    const [ numNights, setNumNights ] = useState(0)
     const [ errors, setErrors ] = useState([])
+
+    useEffect(() => {
+        if (bookingDate) {
+            const start = new Date(bookingDate[0])
+            const end = new Date(bookingDate[1])
+            const oneDay = 1000 * 60 * 60 * 24
+
+            const diffInTime = end.getTime() - start.getTime()
+
+            const diffInDays = Math.round(diffInTime / oneDay) - 1
+
+            setNumNights(diffInDays)
+        }
+    }, [bookingDate])
 
 
     let numReviews
@@ -45,16 +60,6 @@ export default function SpotDetail() {
     // const autoScroll = () => {
     //     document.querySelector(".reviews-container").scrollIntoView({behavior: 'smooth' });
     // }
-    // let avgRating
-    // let numReviews
-
-    // if (spot.Reviews) {
-    //     avgRating = spot.Reviews.reduce((acc, review) => {
-    //         return acc + review.stars
-    //     }, 0) / spot.Reviews.length
-
-    //     numReviews = spot.Reviews.length
-    // }
 
     const handleBooking = async () => {
         setErrors([])
@@ -69,8 +74,12 @@ export default function SpotDetail() {
             if (!bookingDate) {
                 setErrors(['You must select a start and end date!'])
             }
+            else if (numNights < 2) {
+                setErrors(['Two night minimum to reserve'])
+            }
             else if (today.getTime() > bookingDate[0].getTime() || today.getTime() > bookingDate[1].getTime()) {
-                setErrors(['You cannot select a day in the past!'])
+                // setErrors(['You cannot select a day in the past!'])
+                setErrors(['You cannot select today as your start date!'])
             }
             else {
                 const payload = {
@@ -168,13 +177,15 @@ export default function SpotDetail() {
                                             selectRange={true}
                                             value={bookingDate}
                                             onChange={setBookingDate}
+                                            minDate={new Date()}
+                                            minDetail='year'
                                         />
                                         <button className='booking-button' onClick={handleBooking}>Reserve</button>
                                     </div>
-                                    <div className='price-night-container'>
-                                        <div className='price-night'>${`${spot.pricePerNight} x 5 nights`}</div>
-                                        <div className='total-cost'>${spot.pricePerNight * 5}</div>
-                                    </div>
+                                    {numNights > 0 && <div className='price-night-container'>
+                                        <div className='price-night'>${`${spot.pricePerNight} x ${numNights} nights`}</div>
+                                        <div className='total-cost'>${spot.pricePerNight * numNights}</div>
+                                    </div>}
                                     <div className='service-fee-container'>
                                         <div className='service-fee'>Service fee</div>
                                         <div className='service-fee-cost'>$100</div>
@@ -182,7 +193,7 @@ export default function SpotDetail() {
                                     <div className='price-card-line'></div>
                                     <div className='total-cost-container'>
                                         <div className='total-cost-text'>Total before taxes</div>
-                                        <div className='total-cost'>${spot.pricePerNight * 5 + 100}</div>
+                                        <div className='total-cost'>${spot.pricePerNight * numNights + 100}</div>
                                     </div>
                                 </div>
                             </div>

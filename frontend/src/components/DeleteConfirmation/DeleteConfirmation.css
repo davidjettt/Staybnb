@@ -1,0 +1,30 @@
+.delete-main {
+    padding: 20px;
+}
+
+.delete-btns {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    gap: 10px
+}
+
+.delete-btns > button {
+    cursor: pointer;
+    /* padding: 7px 10px 7px 10px; */
+    /* border-radius: 7px;
+    border: 1px solid black; */
+    border: none;
+    background-color: white;
+
+}
+
+.delete-yes {
+    color: red;
+    font-size: 16px;
+}
+
+.delete-no {
+    font-size: 16px;
+    color: black;
+}
