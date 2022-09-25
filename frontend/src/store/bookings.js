@@ -27,10 +27,10 @@ const updateBooking = (booking) => {
     }
 }
 
-const deleteBooking = (booking) => {
+const deleteBooking = (bookingId) => {
     return {
         type: DELETE_BOOKING,
-        booking
+        bookingId
     }
 }
 
@@ -71,13 +71,13 @@ export const updateBookingThunk = (booking) => async (dispatch) => {
     }
 }
 
-export const deleteBookingThunk = (booking) => async (dispatch) => {
-    const response = await csrfFetch(`/api/bookings/${booking.id}`, {
+export const deleteBookingThunk = (bookingId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/bookings/${bookingId}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
-        dispatch(deleteBooking(booking))
+        dispatch(deleteBooking(bookingId))
     }
 }
 
@@ -105,7 +105,7 @@ export default function bookingsReducer(state = initialState, action) {
         }
         case DELETE_BOOKING: {
             newState = JSON.parse(JSON.stringify(state))
-            delete newState[action.booking.id]
+            delete newState[action.bookingId]
             return newState
         }
         default:
