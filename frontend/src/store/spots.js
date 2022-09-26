@@ -6,6 +6,7 @@ const GET_SPOT_DETAILS = 'spots/getSpotDetails';
 const CREATE_SPOT = 'spots/createSpot';
 const EDIT_SPOT = 'spots/editSpot';
 const DELETE_SPOT = 'spots/deleteSpot';
+const IMG_UPLOAD_SPOT = 'spots/imageUpload'
 
 export const getAllSpots = (spots) => {
     return {
@@ -45,6 +46,13 @@ export const deleteSpot = (spotId) => {
     return {
         type: DELETE_SPOT,
         spotId
+    }
+}
+
+const imageUploadSpot = (spot) => {
+    return {
+        type: IMG_UPLOAD_SPOT,
+        spot
     }
 }
 
@@ -111,6 +119,37 @@ export const createSpotThunk = (newSpot) => async (dispatch) => {
     }
 }
 
+// Upload image to a spot
+export const uploadSpotImageThunk = (images, spotId) => async (dispatch) => {
+    let response
+    const formData = new FormData()
+
+    if (images.length < 2) {
+        formData.append('image', images[0])
+        response = await csrfFetch(`/api/spots/${spotId}/images`, {
+            method: 'POST',
+            headers: {'Content-Type': 'multipart/form-data'},
+            body: formData
+        })
+    } else {
+        images.forEach((image) => {
+            formData.append('images', image)
+        })
+
+        response = await csrfFetch(`/api/spots/${spotId}/images/multiple`, {
+            method: 'POST',
+            headers: {'Content-Type': 'multipart/form-data'},
+            body: formData
+        })
+    }
+
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(imageUploadSpot(data))
+    }
+}
+
 // UPDATE A SPOT
 export const editSpotThunk = (spot) => async (dispatch) => {
     const response = await csrfFetch(`/api/spots/${spot.id}`, {
@@ -151,14 +190,14 @@ export default function spotsReducer(state = initialState, action) {
             return newState;
         }
         case GET_SPOTS_BY_USER: {
-            let newState2 = {}
+            let newState = {}
             action.payload.spots.forEach((spot) => {
-                newState2[spot.id] = spot;
+                newState[spot.id] = spot;
             })
-            return newState2;
+            return newState;
         }
         case GET_SPOT_DETAILS: {
-            let newState = {};
+            let newState = {...state};
             newState[action.payload.id] = action.payload;
             return newState;
         }
@@ -176,6 +215,11 @@ export default function spotsReducer(state = initialState, action) {
             let newState = {...state};
             delete newState[action.spotId];
             return newState;
+        }
+        case IMG_UPLOAD_SPOT: {
+            let newState = {...state}
+            newState[action.spot.id] = action.spot
+            return newState
         }
         default:
             return state

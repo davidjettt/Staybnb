@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { createSpotThunk, editSpotThunk } from '../../store/spots';
-
+import { createSpotThunk, editSpotThunk, uploadSpotImageThunk } from '../../store/spots';
+import plusSign from '../../images/plus-sign.svg'
 import './SpotForm.css'
+import ImageRemoveBtn from '../ImageRemoveBtn/ImageRemoveBtn';
 
 export default function SpotForm({ spot, formType }) {
     const dispatch = useDispatch();
@@ -18,7 +19,9 @@ export default function SpotForm({ spot, formType }) {
     const [ name, setName ] = useState(spot?.name);
     const [ description, setDescription ] = useState(spot?.description);
     const [ price, setPrice ] = useState(spot?.pricePerNight || '');
-    const [ previewImage, setPreviewImage ] = useState(spot?.previewImage || '');
+    // const [ previewImage, setPreviewImage ] = useState(spot?.previewImage || '');
+    const [ images, setImages ] = useState([])
+    const [ previewImages, setPreviewImages ] = useState([])
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -36,7 +39,12 @@ export default function SpotForm({ spot, formType }) {
             name,
             description,
             price,
-            previewImage
+            // previewImage
+        }
+
+        if (images.length < 1) {
+            setErrors(['At least 1 image is required'])
+            return
         }
 
         if (formType === 'Create a Spot') {
@@ -44,11 +52,12 @@ export default function SpotForm({ spot, formType }) {
                 async (res) => {
                     const data = await res.json();
                     if (data) setErrors(data.errors || [data.message]);
+                    return;
                 }
             );
 
             if (spotData) {
-                // dispatch(getAllSpotsThunk())
+                await dispatch(uploadSpotImageThunk(images, spotData.id))
                 history.push(`/spots/${spotData.id}`);
             }
 
@@ -65,6 +74,34 @@ export default function SpotForm({ spot, formType }) {
             }
         }
     };
+
+    function isImgUrl(url) {
+        const img = new Image();
+        img.src = url;
+        return new Promise((resolve) => {
+            img.onerror = () => resolve(false);
+            img.onload = () => resolve(true);
+        });
+    }
+
+    const updateImage = async (e) => {
+        setErrors([])
+        const file = e.target.files[0]
+        if (file) {
+            if (await isImgUrl(URL.createObjectURL(file))) {
+                if (previewImages.length < 5) {
+                    setPreviewImages([...previewImages, URL.createObjectURL(file)])
+                    setImages([...images, file])
+                }
+                else {
+                    setErrors(['Max of 5 images is allowed'])
+                }
+            }
+            else {
+                setErrors(['Invalid image file type'])
+            }
+        }
+    }
 
     return (
         <>
@@ -198,7 +235,7 @@ export default function SpotForm({ spot, formType }) {
                                         <span className='placeholder-2'>Price</span>
                                     </label>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <label className='custom-2'>
                                         <input
                                             type='url'
@@ -209,6 +246,26 @@ export default function SpotForm({ spot, formType }) {
                                         />
                                         <span className='placeholder-2'>Preview Image</span>
                                     </label>
+                                </div> */}
+                                <div className='spot-form-image-upload-container'>
+                                    <div className='spot-form-image-title'>Add Spot Images</div>
+                                    <div className='file-input-container'>
+                                        <label className='image-file-label'>
+                                            <img className='plus-sign' src={plusSign} alt='plus sign' />
+                                            <input
+                                                className='image-file-input'
+                                                type='file'
+                                                multiple
+                                                onChange={updateImage}
+                                            />
+                                        </label>
+                                        {previewImages.map((image, idx) => (
+                                            <div className='image-container' key={idx}>
+                                                <img className='preview-image' src={image} alt='spot' />
+                                                <ImageRemoveBtn idx={idx} images={images} setImages={setImages} previewImages={previewImages} setPreviewImages={setPreviewImages} />
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                                 <div className="create-spot-button-container">
                                     <button className='login-button' type='submit'>{formType}</button>

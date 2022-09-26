@@ -19,7 +19,7 @@ export default function Spots() {
                             <div key={idx} className='card-spot-container'>
                                 <Link className='card-spot-link' to={`/spots/${spot.id}`}>
                                     <div className='card-spot-image-container'>
-                                        <img className='card-spot-image' src={spot.previewImage} alt=''/>
+                                        <img className='card-spot-image' src={spot.Images[0]?.url} alt=''/>
                                     </div>
                                     <div className='card-spot-text-container'>
                                         <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>

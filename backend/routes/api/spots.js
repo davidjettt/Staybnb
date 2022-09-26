@@ -5,6 +5,7 @@ const { requireAuth, spotPermission, bookingPermission } = require('../../utils/
 const { Spot, User, Review, Image, Booking, sequelize } = require('../../db/models');
 const { check, body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { singlePublicFileUpload, multiplePublicFileUpload, singleMulterUpload, multipleMulterUpload } = require('../../awsS3');
 
 const { Op } = require('sequelize');
 
@@ -158,33 +159,77 @@ const bookingConflictErr = async (req, res, next) => {
 }
 
 // Create an image by spot id
-router.post('/:spotId/images', existsSpot, requireAuth, spotPermission, async (req, res, next) => {
-    const { url } = req.body;
+router.post('/:spotId/images', requireAuth, singleMulterUpload('image'), async (req, res, next) => {
+    // const { url } = req.body;
+    const url = await singlePublicFileUpload(req.file)
 
     const image = await Image.create({
         spotId: req.params.spotId,
         url
     });
-    // const image2 = image.toJSON();
-    // image2.imageableId = req.params.spotId;
-    // image2.imageableType = 'Spot';
 
-    // const find = await Image.findByPk(req.params.spotId, {
-    //     attributes: []
+    // const findImage = await Image.findOne({
+    //     where: {
+    //         id: image.id,
+    //         spotId: req.params.spotId,
+    //         url: url
+    //     }
     // })
-    const findImage = await Image.findOne({
-        where: {
-            id: image.id,
+
+    const spot = await Spot.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            },
+            {
+                model: Image,
+                attributes: ['url']
+            },
+            {
+                model: User, as: 'Owner'
+            }
+        ]
+    });
+
+    // const result = findImage.toJSON();
+    // result.imageableId = Number(req.params.spotId);
+    // result.imageableType = 'Spot';
+
+    return res.json(spot)
+})
+
+// Spot Image upload multiple
+router.post('/:spotId/images/multiple', requireAuth, multipleMulterUpload('images'), async (req, res, next) => {
+    const urls = await multiplePublicFileUpload(req.files)
+
+    // console.log('URL', url)
+    for (let i = 0; i < urls.length; i++) {
+        const url = urls[i]
+        const image = await Image.create({
             spotId: req.params.spotId,
-            url: url
-        }
-    })
+            url
+        });
+    }
 
-    const result = findImage.toJSON();
-    result.imageableId = Number(req.params.spotId);
-    result.imageableType = 'Spot';
 
-    return res.json(result)
+    const spot = await Spot.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            },
+            {
+                model: Image,
+                attributes: ['url']
+            },
+            {
+                model: User, as: 'Owner'
+            }
+        ]
+    });
+
+    return res.json(spot)
 })
 
 
@@ -478,7 +523,7 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
 
 // Create new spot
 router.post('/',requireAuth, validateSpot, async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
 
 
     const isExistingLatLng = await Spot.findOne({
@@ -503,7 +548,6 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
         name,
         description,
         pricePerNight: price,
-        previewImage
     })
 
     // const newSpot2 = await Spot.findOne({where: {address: address}, attributes: {exclude: ['previewImage']}})
