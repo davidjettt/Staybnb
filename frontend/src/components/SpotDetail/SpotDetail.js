@@ -14,7 +14,6 @@ import { format } from 'date-fns'
 import { createBookingThunk, loadBookingsThunk } from '../../store/bookings';
 import { loadReviewsThunk } from '../../store/reviews';
 
-
 export default function SpotDetail() {
     const { spotId } = useParams();
     const dispatch = useDispatch();
