@@ -99,7 +99,7 @@ export default function YourBookings() {
                                     </div>
                                 </div>
                                 <div className='yes-bookings-right'>
-                                    <img className='booking-preview' src={booking.Spot?.previewImage} alt='preview' />
+                                    <img className='booking-preview' src={booking.Spot.Images[0]?.url} alt='preview' />
                                 </div>
                             </div>
                         ))}
