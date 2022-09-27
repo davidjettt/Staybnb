@@ -147,9 +147,13 @@ router.get('/', async (req, res, next) => {
     const bookings = await Booking.findAll({
         include: {
             model: Spot,
-            include: {
-                model: User, as: 'Owner'
-            }
+            include: [
+                {model: User, as: 'Owner'},
+                {
+                    model: Image,
+                    attributes: ['url']
+                }
+            ]
         }
     })
 
