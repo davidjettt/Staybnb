@@ -93,9 +93,30 @@ const imagePermission = async (req, res, next) => {
 router.delete('/:imageId', existsImage, requireAuth, imagePermission, async (req, res, next) => {
     const image = await Image.findByPk(req.params.imageId);
 
+    const { id } = req.body
+
     await image.destroy();
 
-    return res.json({ message: 'Successfully deleted', statusCode: 200 });
+    const findSpot = await Spot.findOne({
+        where: {
+            id: id
+        },
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            },
+            {
+                model: Image,
+                attributes: ['url', 'id']
+            },
+            {
+                model: User, as: 'Owner'
+            }
+        ]
+    })
+
+    return res.json(findSpot);
 })
 
 

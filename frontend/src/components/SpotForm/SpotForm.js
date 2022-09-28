@@ -10,6 +10,16 @@ export default function SpotForm({ spot, formType }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    let imagesObj = {}
+
+    if (spot?.Images) {
+        spot.Images?.forEach(img => {
+            imagesObj[img.url] = img.id
+        })
+    }
+
+    console.log('OBJ', imagesObj)
+
     const [ address, setAddress ] = useState(spot?.address);
     const [ city, setCity ] = useState(spot?.city);
     const [ state, setState ] = useState(spot?.state);
@@ -21,7 +31,7 @@ export default function SpotForm({ spot, formType }) {
     const [ price, setPrice ] = useState(spot?.pricePerNight || '');
     // const [ previewImage, setPreviewImage ] = useState(spot?.previewImage || '');
     const [ images, setImages ] = useState([])
-    const [ previewImages, setPreviewImages ] = useState([])
+    const [ previewImages, setPreviewImages ] = useState(Object.keys(imagesObj) || [])
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = async (e) => {
@@ -42,7 +52,7 @@ export default function SpotForm({ spot, formType }) {
             // previewImage
         }
 
-        if (images.length < 1) {
+        if (formType === 'Create a Spot' && images.length < 1) {
             setErrors(['At least 1 image is required'])
             return
         }
@@ -88,17 +98,37 @@ export default function SpotForm({ spot, formType }) {
         setErrors([])
         const file = e.target.files[0]
         if (file) {
-            if (await isImgUrl(URL.createObjectURL(file))) {
-                if (previewImages.length < 5) {
-                    setPreviewImages([...previewImages, URL.createObjectURL(file)])
-                    setImages([...images, file])
+            if (formType === 'Create a Spot') {
+                if (await isImgUrl(URL.createObjectURL(file))) {
+                    if (previewImages.length < 5) {
+                        setPreviewImages([...previewImages, URL.createObjectURL(file)])
+                        setImages([...images, file])
+                    }
+                    else {
+                        setErrors(['Max of 5 images is allowed'])
+                    }
                 }
                 else {
-                    setErrors(['Max of 5 images is allowed'])
+                    setErrors(['Invalid image file type'])
                 }
-            }
-            else {
-                setErrors(['Invalid image file type'])
+            } else {
+                if (await isImgUrl(URL.createObjectURL(file))) {
+                    if (previewImages.length < 5) {
+                        // setImages(file)
+                        const data = await dispatch(uploadSpotImageThunk([file], spot.id))
+                        if (data) {
+                            imagesObj = {}
+                            data.Images?.forEach(img => {
+                                imagesObj[img.url] = img.id
+                            })
+                            setPreviewImages(Object.keys(imagesObj))
+                        }
+                    } else {
+                        setErrors(['Max of 5 images is allowed'])
+                    }
+                } else {
+                    setErrors(['Invalid image file type'])
+                }
             }
         }
     }
@@ -262,7 +292,16 @@ export default function SpotForm({ spot, formType }) {
                                         {previewImages.map((image, idx) => (
                                             <div className='image-container' key={idx}>
                                                 <img className='preview-image' src={image} alt='spot' />
-                                                <ImageRemoveBtn idx={idx} images={images} setImages={setImages} previewImages={previewImages} setPreviewImages={setPreviewImages} />
+                                                <ImageRemoveBtn
+                                                    spot={spot}
+                                                    imgId={imagesObj[image]}
+                                                    formType={formType}
+                                                    idx={idx}
+                                                    images={images}
+                                                    setImages={setImages}
+                                                    previewImages={previewImages}
+                                                    setPreviewImages={setPreviewImages}
+                                                />
                                             </div>
                                         ))}
                                     </div>

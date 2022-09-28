@@ -184,7 +184,7 @@ router.post('/:spotId/images', requireAuth, singleMulterUpload('image'), async (
             },
             {
                 model: Image,
-                attributes: ['url']
+                attributes: ['url', 'id']
             },
             {
                 model: User, as: 'Owner'
@@ -338,7 +338,21 @@ router.get('/:spotId', existsSpot, async (req, res, next) => {
 
 // Edit spot by Id
 router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, async (req, res, next) => {
-    const spot = await Spot.findByPk(req.params.spotId);
+    const spot = await Spot.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: Review,
+                attributes: ['stars']
+            },
+            {
+                model: Image,
+                attributes: ['url', 'id']
+            },
+            {
+                model: User, as: 'Owner'
+            }
+        ],
+    });
 
     const { address, city, state, country, lat, lng, name, description, price, previewImage } = req.body;
 
@@ -502,7 +516,7 @@ router.get('/', validateQueryFilters, async (req, res, next) => {
             },
             {
                 model: Image,
-                attributes: ['url']
+                attributes: ['url', 'id']
             },
             {
                 model: User, as: 'Owner'
