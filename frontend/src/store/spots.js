@@ -7,6 +7,7 @@ const CREATE_SPOT = 'spots/createSpot';
 const EDIT_SPOT = 'spots/editSpot';
 const DELETE_SPOT = 'spots/deleteSpot';
 const IMG_UPLOAD_SPOT = 'spots/imageUpload'
+const DELETE_SPOT_IMG = 'spots/deleteSpotImg'
 
 export const getAllSpots = (spots) => {
     return {
@@ -53,6 +54,13 @@ const imageUploadSpot = (spot) => {
     return {
         type: IMG_UPLOAD_SPOT,
         spot
+    }
+}
+
+const deleteSpotImg = (image) => {
+    return {
+        type: DELETE_SPOT_IMG,
+        image
     }
 }
 
@@ -123,7 +131,7 @@ export const createSpotThunk = (newSpot) => async (dispatch) => {
 export const uploadSpotImageThunk = (images, spotId) => async (dispatch) => {
     let response
     const formData = new FormData()
-
+    console.log('IMGS THUNK', images)
     if (images.length < 2) {
         formData.append('image', images[0])
         response = await csrfFetch(`/api/spots/${spotId}/images`, {
@@ -147,6 +155,22 @@ export const uploadSpotImageThunk = (images, spotId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json()
         dispatch(imageUploadSpot(data))
+        return data
+    }
+}
+
+// Delete image from a spot and then updates spots slice of state
+export const deleteSpotImageThunk = (imageId, spot) => async (dispatch) => {
+    const response = await csrfFetch(`/api/images/${imageId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spot)
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(getSpotDetails(data))
+        return data
     }
 }
 
