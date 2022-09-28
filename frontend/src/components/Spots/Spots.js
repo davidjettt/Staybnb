@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Spots.css';
 import { TiStar } from 'react-icons/ti';
+import Footer from '../Footer/Footer';
 
 
 export default function Spots() {
@@ -12,7 +13,7 @@ export default function Spots() {
 
     return (
         <>
-            {spots.length > 1 && <div className='main'>
+            {spots.length > 1 &&
                 <div className='main-content-parent-container'>
                     <div className='main-content-container'>
                         {spots.map((spot, idx) => (
@@ -41,8 +42,8 @@ export default function Spots() {
                             </div>
                         ))}
                     </div>
-                </div>
-            </div>}
+                </div>}
+            <Footer />
         </>
     )
 }

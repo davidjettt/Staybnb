@@ -18,3 +18,10 @@ body {
     width: 100vw;
     margin-top: -200px;
 } */
+
+.footer {
+    height: 100px;
+    background-color: #dbdbdb;
+    position: sticky;
+    bottom: 0;
+}

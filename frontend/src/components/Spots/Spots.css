@@ -60,28 +60,26 @@
 } */
 
 .main-content-parent-container {
+    display: flex;
+    justify-content: center;
     color: rgb(34, 34, 34);
     width: 90vw;
     margin: 0 auto;
     flex: 1 1;
-    display: flex;
-    justify-content: center;
-    /* height: fit-content; */
+    height: 100vh;
 }
+
 
 .main-content-container {
     box-sizing: border-box;
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: fit-content; */
-
     width: fit-content;
-    /* border: 1px solid red; */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     justify-items: center;
+    /* grid-row: 1; */
+    grid-template-rows: repeat(auto-fill, 400px);
     row-gap: 15px;
+    /* height: 50%; */
 }
 
 @media screen and (max-width: 1600px){
