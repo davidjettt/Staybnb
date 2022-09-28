@@ -44,28 +44,30 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      <Route exact path='/'>
-        <CategoryButtons />
-        <Spots />
-      </Route>
-      <ProtectedRoute path='/your-spots'>
-        <YourSpots />
-      </ProtectedRoute>
-      <Route exact path='/spots/:spotId'>
-        <SpotDetail />
-      </Route>
-      <ProtectedRoute path='/create-a-spot'>
-        <CreateSpotForm />
-      </ProtectedRoute>
-      <ProtectedRoute path='/spots/:spotId/edit'>
-        <EditSpotForm />
-      </ProtectedRoute>
-      <ProtectedRoute path='/your-reviews'>
-        <YourReviews />
-      </ProtectedRoute>
-      <ProtectedRoute path='/your-bookings'>
-        <YourBookings />
-      </ProtectedRoute>
+      <Switch>
+        <Route exact path='/'>
+          <CategoryButtons />
+          <Spots />
+        </Route>
+        <ProtectedRoute path='/your-spots'>
+          <YourSpots />
+        </ProtectedRoute>
+        <Route exact path='/spots/:spotId'>
+          <SpotDetail />
+        </Route>
+        <ProtectedRoute path='/create-a-spot'>
+          <CreateSpotForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/spots/:spotId/edit'>
+          <EditSpotForm />
+        </ProtectedRoute>
+        <ProtectedRoute path='/your-reviews'>
+          <YourReviews />
+        </ProtectedRoute>
+        <ProtectedRoute path='/your-bookings'>
+          <YourBookings />
+        </ProtectedRoute>
+      </Switch>
       {/* {isLoaded && (
       <Switch>
         <Route path='/login'>
