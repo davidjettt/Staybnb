@@ -19,9 +19,60 @@ body {
     margin-top: -200px;
 } */
 
+#root {
+    /* position: absolute; */
+}
+
+html,
+body {
+    overflow-x: hidden;
+}
+
 .footer {
-    height: 100px;
-    background-color: #dbdbdb;
-    position: sticky;
+    height: 50px;
+    border-top: 1px solid #dddddd;
+    background: #ffffff;
+    position: fixed;
     bottom: 0;
+    left: 0;
+    width: 100vw;
+}
+
+.footer-sub {
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer-left {
+    margin-top: 10px;
+}
+
+.footer-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 50%;
+    margin-top: 10px;
+}
+
+.developer-container {
+    margin-right: 10px;
+    font-weight: 575;
+}
+
+.icons-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.github {
+    margin-right: 5px;
+}
+
+.developer-container,
+.footer-staybnb {
+    font-size: 14px;
+    color: #222222;
 }
