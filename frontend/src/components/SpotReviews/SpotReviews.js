@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import EditReviewForm from '../EditReviewForm/EditReviewForm';
 import { deleteReviewThunk } from '../../store/reviews';
 import { AiFillStar } from 'react-icons/ai';
 import './SpotReviews.css';
 import { getAllSpotsThunk, getSpotDetailsThunk } from '../../store/spots';
+import { Modal } from '../../context/Modal';
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
+import DeleteYourReview from '../YourReviews/DeleteYourReview';
 
 export default function SpotReviews({ spotId, numReviews, avgRating }) {
     const dispatch = useDispatch();
+    const [ showDelete, setShowDelete ] = useState(false)
     const reviews = useSelector((state) => {
         return Object.values(state.reviews).filter(review => +review.spotId === +spotId)
     });
@@ -21,6 +26,9 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
 
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+    const handleShowDeleteModal = () => {
+        setShowDelete(true)
+    }
 
     return (
         <div className='spot-reviews-main'>
@@ -39,9 +47,13 @@ export default function SpotReviews({ spotId, numReviews, avgRating }) {
                             </div>
                             <div className='update-delete-buttons-container'>
                                 {user === review.userId && <EditReviewForm spotId={spotId} reviewId={userReview.id} />}
-                                {user === review.userId && <button className='delete-review-button' onClick={handleDeleteReview}>
+                                {/* {user === review.userId && <button className='delete-review-button' onClick={handleShowDeleteModal}>
                                 Delete Review
-                                </button>}
+                                </button>} */}
+                                {user === review.userId && <DeleteYourReview review={userReview} />}
+                                {showDelete && <Modal onClose={() => setShowDelete(false)}>
+                                    <DeleteConfirmation review={userReview} setShowDelete={setShowDelete} />
+                                </Modal>}
                             </div>
                         </div>
                         <div className='spot-review-text'>{review?.review} </div>

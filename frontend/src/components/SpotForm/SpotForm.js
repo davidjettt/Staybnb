@@ -153,7 +153,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='address-input-field'
                                             type='text'
-                                            // placeholder='Address'
                                             value={address}
                                             onChange={(e) => setAddress(e.target.value)}
                                             required
@@ -166,7 +165,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='city-input-field'
                                             type='text'
-                                            // placeholder='City'
                                             value={city}
                                             onChange={(e) => setCity(e.target.value)}
                                             required
@@ -179,7 +177,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='state-input-field'
                                             type='text'
-                                            // placeholder='State'
                                             value={state}
                                             onChange={(e) => setState(e.target.value)}
                                             required
@@ -192,7 +189,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='country-input-field'
                                             type='text'
-                                            // placeholder='Country'
                                             value={country}
                                             onChange={(e) => setCountry(e.target.value)}
                                             required
@@ -205,7 +201,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='lat-input-field'
                                             type='text'
-                                            // placeholder='Latitude'
                                             value={lat}
                                             onChange={(e) => setLat(e.target.value)}
                                             required
@@ -218,7 +213,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='lng-input-field'
                                             type='text'
-                                            // placeholder='Longitude'
                                             value={lng}
                                             onChange={(e) => setLng(e.target.value)}
                                             required
@@ -231,7 +225,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='name-input-field'
                                             type='text'
-                                            // placeholder='Name'
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
                                             required
@@ -249,7 +242,6 @@ export default function SpotForm({ spot, formType }) {
                                             onChange={(e) => setDescription(e.target.value)}
                                             required
                                         />
-                                        {/* <span className='placeholder-2'>Description</span> */}
                                     </label>
                                 </div>
                                 <div className='price-input-container'>
@@ -257,7 +249,6 @@ export default function SpotForm({ spot, formType }) {
                                         <input
                                             className='price-input-field'
                                             type='text'
-                                            // placeholder='Price'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}
                                             required
@@ -278,7 +269,7 @@ export default function SpotForm({ spot, formType }) {
                                     </label>
                                 </div> */}
                                 <div className='spot-form-image-upload-container'>
-                                    <div className='spot-form-image-title'>Add Spot Images</div>
+                                    <div className='spot-form-image-title'>{formType === 'Create a Spot' ? 'Add images' : 'Update images'}</div>
                                     <div className='file-input-container'>
                                         <label className='image-file-label'>
                                             <img className='plus-sign' src={plusSign} alt='plus sign' />

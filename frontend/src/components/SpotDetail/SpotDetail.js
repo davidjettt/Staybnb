@@ -14,6 +14,8 @@ import { format } from 'date-fns'
 import { createBookingThunk, loadBookingsThunk } from '../../store/bookings';
 import { loadReviewsThunk } from '../../store/reviews';
 import Footer from '../Footer/Footer';
+import { Modal } from '../../context/Modal';
+import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -25,6 +27,12 @@ export default function SpotDetail() {
     const [ bookingDate, setBookingDate ] = useState(null)
     const [ numNights, setNumNights ] = useState(0)
     const [ errors, setErrors ] = useState([])
+
+    const [ showDelete, setShowDelete ] = useState(false)
+
+    const handleShowDeleteModal = () => {
+        setShowDelete(true)
+    }
 
     useEffect(() => {
         if (bookingDate) {
@@ -120,8 +128,7 @@ export default function SpotDetail() {
                                 <div className='spot-details-container'>
                                     <div className='star-rating-location'>
                                         <HiStar className='star' />
-                                        <span className='rating-number'>{spot.avgRating ? spot.avgRating?.toFixed(2) : null}  • </span>
-                                        {/* {spot.numReviews ? <span className='review-click' onClick={test}>{spot.numReviews} reviews</span> : <span>new spot </span>} */}
+                                        <span className='rating-number'>{avgRating ? avgRating?.toFixed(2) : null}  • </span>
                                         <ReviewsModal spotId={spotId} numReviews={numReviews} avgRating={avgRating} />
                                         <span>  · {spot.city}, {spot.state}, {spot.country} </span>
                                     </div>
@@ -129,9 +136,12 @@ export default function SpotDetail() {
                                         {user?.id === spot.ownerId ? <Link  to={`/spots/${spotId}/edit`}>
                                             <button className='edit-spot-button'>Edit Spot</button>
                                         </Link> : null}
-                                        {user?.id === spot.ownerId ? <button className='delete-spot-button' onClick={handleDelete}>
+                                        {user?.id === spot.ownerId ? <button className='delete-spot-button' onClick={handleShowDeleteModal}>
                                             Delete Spot
                                         </button> : null}
+                                        {showDelete && <Modal onClose={() => setShowDelete(false)}>
+                                            <DeleteConfirmation spotId={spot.id} setShowDelete={setShowDelete} />
+                                        </Modal>}
                                     </div>
                                 </div>
                             </header>
@@ -174,7 +184,6 @@ export default function SpotDetail() {
                                                 </ul>
                                             </div>
                                             <Calendar
-                                                // showNavigation={false}
                                                 selectRange={true}
                                                 value={bookingDate}
                                                 onChange={setBookingDate}

@@ -275,7 +275,7 @@ router.post('/:spotId/reviews', existsSpot, requireAuth, validateReview, async (
     });
 
     if (existingReview) {
-        const err = new Error ('User already has a review for this spot');
+        const err = new Error ('You can only have one review per spot');
         err.status = 403;
         return next(err);
     }

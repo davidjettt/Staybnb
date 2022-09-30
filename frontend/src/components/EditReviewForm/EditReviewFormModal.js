@@ -87,7 +87,7 @@ export default function EditReviewFormModal({ setShowModal , review, formType })
                                             placeholder='Add Your Review Here...'
                                             value={reviewInput}
                                             onChange={(e) => setReviewInput(e.target.value)}
-                                            // required
+                                            className='edit-review-textarea'
                                         />
                                     </label>
                                 </div>
