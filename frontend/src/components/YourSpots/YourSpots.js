@@ -23,7 +23,7 @@ export default function YourSpots() {
                             <div key={idx}>
                             {spot.ownerId === userId && <div key={idx} className='card-spot-container'>
                                 <Link className='card-spot-link' to={`/spots/${spot.id}`}>
-                                    <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.previewImage} alt=''/>
+                                    <img className='card-spot-image' style={{width: 289, height: 275}} src={spot.Images[0]?.url} alt=''/>
                                     <div className='card-spot-text-container'>
                                         <div className='card-spot-location'>{`${spot.city}, ${spot.state}`}</div>
                                         <div className='distance'>80 miles away</div>

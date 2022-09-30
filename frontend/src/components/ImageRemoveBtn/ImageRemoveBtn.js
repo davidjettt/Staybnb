@@ -16,9 +16,9 @@ export default function ImageRemoveBtn ({ spot, imgId, idx, images, previewImage
     }
 
     const removeImgEditSpot = async () => {
-        console.log('IMG ID', imgId)
+        // console.log('IMG ID', imgId)
         const data = await dispatch(deleteSpotImageThunk(imgId, spot))
-        console.log('DATA', data)
+        // console.log('DATA', data)
         const imagesObj = []
 
         data.Images?.forEach(img => {

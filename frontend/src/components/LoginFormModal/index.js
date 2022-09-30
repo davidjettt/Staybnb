@@ -82,29 +82,30 @@ export default function LoginFormModal() {
 
             <div className='main-dropdown-container'>
                 <div className={className ? 'dropdown-menu' : 'off'}>
-                    {showMenu && <div>
+                    {showMenu && <> <div>
                         {sessionUser ? <div className='user-email'>{sessionUser.email}</div> : null}
-                    </div>}
-                    {showMenu && <div className='your-spots-container'>
+                        <div style={{borderBottom: '1px solid #dbdbdb', marginBottom: 5}}></div>
+                    </div>
+                    <div className='your-spots-container'>
                         {sessionUser ? <Link className='your-spots' to='/your-spots'>
                             Your Spots
                         </Link> : null}
-                    </div>}
-                    {showMenu && <div className='your-reviews-container'>
+                    </div>
+                    <div className='your-reviews-container'>
                         {sessionUser ? <Link className='your-reviews' to='/your-reviews'>
                             Your Reviews
                         </Link> : null}
-                    </div>}
-                    {showMenu && <div className='your-reviews-container'>
+                    </div>
+                    <div className='your-reviews-container'>
                         {sessionUser ? <Link className='your-reviews' to='/your-bookings'>
                             Trips
                         </Link> : null}
-                    </div>}
-                    {showMenu && <div className='create-a-spot-container'>
+                    </div>
+                    <div className='create-a-spot-container'>
                         {sessionUser ? <Link className='create-a-spot' to='/create-a-spot'>
                             Create a Spot
                         </Link> : null}
-                    </div>}
+                    </div> </>}
                     {!sessionUser && <div className='dropdown-login-container'>
                         {showMenu && <button className='dropdown-login-button' onClick={() => {
                             setShowModal(true)}}>Log In</button> }
@@ -124,6 +125,7 @@ export default function LoginFormModal() {
                         </Modal>
                     )}
                     {showMenu && <div className='logout-container'>
+                        {sessionUser && <div style={{borderBottom: '1px solid #dbdbdb', marginTop: 5}}></div>}
                         {sessionUser ? <button className='logout' onClick={logout}>Log Out</button> : null}
                     </div>}
                 </div>

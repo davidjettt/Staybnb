@@ -23,19 +23,19 @@ body {
     /* position: absolute; */
 }
 
-html,
+/* html,
 body {
     overflow-x: hidden;
-}
+} */
 
 .footer {
     height: 50px;
+    width: 100vw;
     border-top: 1px solid #dddddd;
     background: #ffffff;
     position: fixed;
     bottom: 0;
-    left: 0;
-    width: 100vw;
+    /* left: 0; */
 }
 
 .footer-sub {

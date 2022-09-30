@@ -17,6 +17,7 @@ import { getAllSpotsThunk } from './store/spots';
 import { loadReviewsThunk } from './store/reviews';
 import { loadBookingsThunk } from './store/bookings';
 import YourBookings from './components/YourBookings/YourBookings';
+import ScrollToTop from './components/ScrollToTop';
 
 
 function App() {
@@ -43,31 +44,33 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
-      <Switch>
-        <Route exact path='/'>
-          <CategoryButtons />
-          <Spots />
-        </Route>
-        <ProtectedRoute path='/your-spots'>
-          <YourSpots />
-        </ProtectedRoute>
-        <Route exact path='/spots/:spotId'>
-          <SpotDetail />
-        </Route>
-        <ProtectedRoute path='/create-a-spot'>
-          <CreateSpotForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/spots/:spotId/edit'>
-          <EditSpotForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/your-reviews'>
-          <YourReviews />
-        </ProtectedRoute>
-        <ProtectedRoute path='/your-bookings'>
-          <YourBookings />
-        </ProtectedRoute>
-      </Switch>
+      <ScrollToTop>
+        <Navigation isLoaded={isLoaded} />
+        <Switch>
+          <Route exact path='/'>
+            <CategoryButtons />
+            <Spots />
+          </Route>
+          <ProtectedRoute path='/your-spots'>
+            <YourSpots />
+          </ProtectedRoute>
+          <Route exact path='/spots/:spotId'>
+            <SpotDetail />
+          </Route>
+          <ProtectedRoute path='/create-a-spot'>
+            <CreateSpotForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/spots/:spotId/edit'>
+            <EditSpotForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/your-reviews'>
+            <YourReviews />
+          </ProtectedRoute>
+          <ProtectedRoute path='/your-bookings'>
+            <YourBookings />
+          </ProtectedRoute>
+        </Switch>
+      </ScrollToTop>
       {/* {isLoaded && (
       <Switch>
         <Route path='/login'>
