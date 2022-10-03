@@ -10,3 +10,8 @@
     overflow-y: scroll;
 
 } */
+
+body,
+html {
+    overflow-x: hidden;
+}
