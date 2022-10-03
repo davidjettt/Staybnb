@@ -1,0 +1,37 @@
+
+.spot-map-main {
+    margin-bottom: 150px;
+}
+
+.spot-map-title {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.spot-map-location {
+    padding-top: 20px;
+    font-weight: 500;
+}
+
+.marker-circle-outer {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(220,24,98, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.marker-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #DD1962;
+    display: flex;
+    justify-content: center;
+}
+
+.marker-house {
+    width: 50%;
+}

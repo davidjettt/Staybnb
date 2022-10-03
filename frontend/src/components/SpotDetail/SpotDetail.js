@@ -16,6 +16,7 @@ import { loadReviewsThunk } from '../../store/reviews';
 import Footer from '../Footer/Footer';
 import { Modal } from '../../context/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
+import SpotMap from '../SpotMap/SpotMap';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -212,6 +213,7 @@ export default function SpotDetail() {
                                 <SpotReviews numReviews={numReviews} avgRating={avgRating} spotId={spotId} />
                                 {user && user.id !== spot.ownerId && <CreateReviewForm spotId={spotId} />}
                             </div>
+                            <SpotMap spot={spot} />
                         </div>}
             </div>
             <Footer />

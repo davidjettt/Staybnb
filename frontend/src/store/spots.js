@@ -131,7 +131,7 @@ export const createSpotThunk = (newSpot) => async (dispatch) => {
 export const uploadSpotImageThunk = (images, spotId) => async (dispatch) => {
     let response
     const formData = new FormData()
-    console.log('IMGS THUNK', images)
+    // console.log('IMGS THUNK', images)
     if (images.length < 2) {
         formData.append('image', images[0])
         response = await csrfFetch(`/api/spots/${spotId}/images`, {
