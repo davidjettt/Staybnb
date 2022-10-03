@@ -375,11 +375,11 @@ router.put('/:spotId', existsSpot, requireAuth, spotPermission, validateSpot, as
         city,
         state,
         country,
-        latitude: lat,
-        longitude: lng,
+        latitude: Number(lat),
+        longitude: Number(lng),
         name,
         description,
-        pricePerNight: price,
+        pricePerNight: Number(price),
         previewImage
     });
     // console.log('UPDATED SPOT', updatedSpot)
