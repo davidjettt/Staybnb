@@ -2,6 +2,10 @@
 
 Welcome to Staybnb, a clone of Airbnb.
 
+<h3 align='center'>
+ <a target='_blank' href="https://davids-airbnb-clone.herokuapp.com">» Check out the live site here «</a>
+</h3>
+
 
 ## Technologies used:
 
