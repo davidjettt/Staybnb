@@ -5,7 +5,7 @@ import './SpotMap.css'
 
 export default function SpotMap({ spot }) {
 
-    console.log(spot)
+    // console.log(spot)
 
     return (
         <div className='spot-map-main'>
