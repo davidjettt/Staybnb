@@ -51,6 +51,7 @@ const validateSpot = [
     check('price')
     .custom(value => {
         if (isNaN(value)) throw new Error ('Price is not valid')
+        if (value < 1) throw new Error ('Price needs to be at least $1')
         return true;
     }),
     handleValidationErrors
@@ -58,8 +59,12 @@ const validateSpot = [
 
 const validateReview = [
     check('review')
-    .exists({ checkFalsy: true })
-    .withMessage('Review text is required'),
+    .custom(value => {
+        if (!value) throw new Error('Review text is required')
+        else if (value.length < 5) throw new Error('Review must be at least 5 characters long')
+        else if (value.length > 500) throw new Error('Review cannot exceed 500 characters')
+        else return true
+    }),
     check('stars')
     .custom(value => {
         if (value < 1 || value > 5 || isNaN(value)) throw new Error('You must select a star')

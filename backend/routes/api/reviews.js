@@ -8,8 +8,12 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const validateReview = [
     check('review')
-    .exists({ checkFalsy: true })
-    .withMessage('Review text is required'),
+    .custom(value => {
+        if (!value) throw new Error('Review text is required')
+        else if (value.length < 5) throw new Error('Review must be at least 5 characters long')
+        else if (value.length > 500) throw new Error('Review cannot exceed 500 characters')
+        else return true
+    }),
     check('stars')
     .custom(value => {
         if (value < 1 || value > 5 || isNaN(value)) throw new Error('Stars must be an integer from 1 to 5')

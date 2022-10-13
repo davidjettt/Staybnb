@@ -28,7 +28,7 @@ export default function LoginForm({ setShowModal }) {
 
     const handleDemoUser = () => {
         setEmail('demo.user@demouser.io')
-        setPassword('demouser')
+        setPassword('Staybnb690@')
     }
 
     return (
