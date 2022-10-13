@@ -5,6 +5,7 @@ import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import ReviewsModal from '../ReviewsModal/ReviewsModal';
 import { deleteSpotThunk } from '../../store/spots';
 import './SpotDetail.css';
+import smallBlackStar from '../../images/small-black-star.svg'
 import { HiStar } from 'react-icons/hi';
 import Calendar from 'react-calendar';
 // import 'react-calendar/dist/Calendar.css';
@@ -172,10 +173,11 @@ export default function SpotDetail() {
                                                     {spot.avgStarRating?.toFixed(2)}
                                                 </div> */}
                                                 <span>
-                                                    <HiStar />
+                                                    {/* <HiStar /> */}
+                                                    <img style={{width: 11, marginRight: 3}} src={smallBlackStar} alt='black star'/>
                                                 </span>
                                                 <span>{avgRating ? avgRating?.toFixed(2) : null} ᛫ </span>
-                                                <span>{numReviews} reviews</span>
+                                                <span style={{marginLeft: 2}} >{numReviews} reviews</span>
                                             </div>
                                         </div>
                                         <div className='bookings-form-container'>

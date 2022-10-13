@@ -118,6 +118,7 @@
 }
 
 .delete-your-review-button {
+    background: white;
     margin-left: .4rem;
     border: 1px solid black;
     border-radius: 5px;
