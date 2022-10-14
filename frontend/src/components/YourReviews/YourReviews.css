@@ -113,10 +113,6 @@
     margin-top: .5rem;
 }
 
-.your-reviews-edit-delete-buttons-container {
-    /* margin-top: .5rem; */
-}
-
 .delete-your-review-button {
     background: white;
     margin-left: .4rem;
@@ -128,7 +124,8 @@
 }
 
 .delete-your-review-button:hover {
-    background-color: rgb(230, 30, 77);
+    /* background-color: rgb(230, 30, 77);
     border: 1px solid rgb(230, 30, 77) ;
-    color: white;
+    color: white; */
+    background-color: rgb(235, 235, 235);
 }
