@@ -18,6 +18,7 @@ import Footer from '../Footer/Footer';
 import { Modal } from '../../context/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import SpotMap from '../SpotMap/SpotMap';
+import SpotImagesModal from './SpotImagesModal';
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -31,6 +32,7 @@ export default function SpotDetail() {
     const [ errors, setErrors ] = useState([])
 
     const [ showDelete, setShowDelete ] = useState(false)
+    const [ showImagesModal, setShowImagesModal ] = useState(false)
 
     const handleShowDeleteModal = () => {
         setShowDelete(true)
@@ -148,9 +150,12 @@ export default function SpotDetail() {
                                 </div>
                             </header>
                             <div className='spot-images-container'>
-                                {spot.Images?.length ? spot.Images.map((image, idx) => (
-                                        <img key={idx} className={'key' + idx} src={`${image.url}`} />
-                                )) : <img className='key0' src={spot.previewImage} />}
+                                {spot.Images?.length && spot.Images.map((image, idx) => (
+                                    <>
+                                        <img style={{cursor: 'pointer'}} key={idx} className={'key' + idx} src={`${image.url}`} onClick={() => setShowImagesModal(true)} />
+                                    </>
+                                ))}
+                            <SpotImagesModal showImagesModal={showImagesModal} setShowImagesModal={setShowImagesModal} images={spot.Images} />
                             </div>
                             <div className='spot-details-subtitle-description-container'>
                                 <div className='subtitle-container'>

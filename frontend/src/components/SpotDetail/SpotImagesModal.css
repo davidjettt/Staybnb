@@ -1,0 +1,38 @@
+.ReactModal__Overlay {
+    opacity: 1;
+    transform: translateY(100px);
+    transition: all 1000ms;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 1;
+    transform: translateY(-100px);
+}
+
+
+.spot-images-modal-main {
+    width: 50vw;
+    height: 95vh;
+    background-color: white;
+}
+
+.spot-images-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.back-arrow {
+    cursor: pointer;
+    z-index: 110;
+    width: 20px;
+    position: absolute;
+    left: 25px;
+    top: 20px;
+}

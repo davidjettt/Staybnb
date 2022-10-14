@@ -1,6 +1,7 @@
 import React, { useContext, createContext, useRef, useState, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import './Modal.css';
+import { motion } from 'framer-motion'
 
 const ReviewModalContext = createContext();
 
@@ -28,12 +29,28 @@ export function ReviewModal({ onClose, children }) {
     if (!modalNode) return null;
 
     return ReactDOM.createPortal(
-        <div id="review-modal">
-        <div id="review-modal-background" onClick={onClose} />
-        <div id="review-modal-content">
+        <motion.div id="review-modal">
+        <motion.div id="review-modal-background" onClick={onClose}
+            initial={{
+                opacity: 0
+            }}
+            animate={{
+                opacity: 1
+            }}
+        />
+        <motion.div id="review-modal-content"
+            initial={{
+                // scale: 0
+                translateY: 100
+            }}
+            animate={{
+                // scale: 1
+                translateY: -20
+            }}
+        >
             {children}
-        </div>
-        </div>,
+        </motion.div>
+        </motion.div>,
         modalNode
     );
 }

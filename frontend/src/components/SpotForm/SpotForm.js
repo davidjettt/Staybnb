@@ -5,6 +5,7 @@ import { createSpotThunk, editSpotThunk, uploadSpotImageThunk } from '../../stor
 import plusSign from '../../images/plus-sign.svg'
 import './SpotForm.css'
 import ImageRemoveBtn from '../ImageRemoveBtn/ImageRemoveBtn';
+import LoadingBackdrop from '../LoadingBackdrop/LoadingBackdrop';
 
 export default function SpotForm({ spot, formType }) {
     const dispatch = useDispatch();
@@ -33,6 +34,7 @@ export default function SpotForm({ spot, formType }) {
     const [ images, setImages ] = useState([])
     const [ previewImages, setPreviewImages ] = useState(Object.keys(imagesObj) || [])
     const [errors, setErrors] = useState([]);
+    const [ loading, setLoading ] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -58,11 +60,14 @@ export default function SpotForm({ spot, formType }) {
         }
 
         if (formType === 'Create a Spot') {
+            setLoading(true)
             const spotData = await dispatch(createSpotThunk(spot)).catch(
                 async (res) => {
                     const data = await res.json();
-                    if (data) setErrors(data.errors || [data.message]);
-                    return;
+                    if (data) {
+                        setErrors(data.errors || [data.message]);
+                        setLoading(false)
+                    }
                 }
             );
 
@@ -135,7 +140,7 @@ export default function SpotForm({ spot, formType }) {
 
     return (
         <>
-            <div className="create-spot-form-container">
+            {!loading ? <div className="create-spot-form-container">
                 <div className="create-spot-form-pane">
                     <div className="create-spot-form-title-container">
                         <h3 className='create-spot-form-title'>{formType}</h3>
@@ -304,7 +309,7 @@ export default function SpotForm({ spot, formType }) {
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> : <LoadingBackdrop />}
         </>
     )
 }
