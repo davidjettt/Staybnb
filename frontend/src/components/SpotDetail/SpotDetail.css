@@ -45,9 +45,13 @@
 
 .delete-spot-button:hover,
 .edit-spot-button:hover {
-    background-color: rgb(230, 30, 77);
-    border: 1px solid rgb(230, 30, 77) ;
-    color: white;
+    /* background-color: rgb(230, 30, 77);
+    border: 1px solid rgb(230, 30, 77) ; */
+    /* background-color: rgb(255,90,95);
+    border-color: rgb(255,90,95); */
+    background-color: rgb(235, 235, 235);
+    /* border-color: #dbdbdb; */
+    /* color: white; */
 }
 
 
@@ -86,7 +90,7 @@
 
 .spot-images-container > img:hover {
     opacity: .8;
-    transition: .3s ease-in;
+    transition: .1s ease-in-out;
 }
 
 .key0 {

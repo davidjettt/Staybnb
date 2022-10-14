@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../../context/Modal';
 import LoginForm from './LoginForm';
-
 import { useDispatch, useSelector } from 'react-redux';
 import * as sessionActions from '../../store/session';
-
-import SignUpFormModal from "../SignupFormModal";
 import SignupForm from '../SignupFormModal/SignupForm';
-
-import { Redirect, Link, useHistory } from 'react-router-dom';
-
+import { Link, useHistory } from 'react-router-dom';
 import './LoginFormModal.css';
 
 export default function LoginFormModal() {
@@ -50,21 +45,6 @@ export default function LoginFormModal() {
         history.push('/');
     };
 
-
-    const dropIn = {
-        hidden: {
-            y: '-100vh',
-            opacity: 0
-        },
-        visible: {
-            y: '0'
-        },
-        exit: {
-            y: '100vh',
-            opacity: 0
-        }
-    }
-
     return (
         <div className='dropdown'>
                 <div className='profile-button-container'>
@@ -82,20 +62,20 @@ export default function LoginFormModal() {
 
             <div className='main-dropdown-container'>
                 <div className={className ? 'dropdown-menu' : 'off'}>
-                    {showMenu && <> <div>
+                    {showMenu && <> <div className='user-email-container'>
                         {sessionUser ? <div className='user-email'>{sessionUser.email}</div> : null}
-                        <div style={{borderBottom: '1px solid #dbdbdb', marginBottom: 5}}></div>
+                        {sessionUser &&<div style={{borderBottom: '1px solid #dbdbdb', marginBottom: 5}}></div>}
                     </div>
                     <div className='your-spots-container'>
                         {sessionUser ? <Link className='your-spots' to='/your-spots'>
                             Your Spots
                         </Link> : null}
                     </div>
-                    <div className='your-reviews-container'>
+                    {/* <div className='your-reviews-container'>
                         {sessionUser ? <Link className='your-reviews' to='/your-reviews'>
                             Your Reviews
                         </Link> : null}
-                    </div>
+                    </div> */}
                     <div className='your-reviews-container'>
                         {sessionUser ? <Link className='your-reviews' to='/your-bookings'>
                             Trips
@@ -115,7 +95,7 @@ export default function LoginFormModal() {
                             setShowModal2(true)}}>Sign Up</button> </li>}
                     </div>}
                     {showModal && (
-                        <Modal variants={dropIn} closeTimeoutMS={1000} isOpen={showModal} onClose={() => setShowModal(false)}>
+                        <Modal onClose={() => setShowModal(false)}>
                             <LoginForm setShowModal={setShowModal}  />
                         </Modal>
                     )}

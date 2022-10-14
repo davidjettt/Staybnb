@@ -41,11 +41,13 @@ export function ReviewModal({ onClose, children }) {
         <motion.div id="review-modal-content"
             initial={{
                 // scale: 0
-                translateY: 100
+                translateY: 500,
+
             }}
             animate={{
                 // scale: 1
-                translateY: -20
+                translateY: -15,
+                transitionDuration: '.2s',
             }}
         >
             {children}

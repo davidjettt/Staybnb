@@ -32,7 +32,9 @@ body {
 
 .profile-button {
     width: 77px;
+    /* width: 47px; */
     height: 42px;
+    /* height: 40px; */
     /* border: 1px solid #717171; */
     border: 1.75px solid rgb(219, 214, 214);
     border-radius: 21px;
