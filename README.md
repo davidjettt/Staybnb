@@ -42,11 +42,11 @@ Welcome to Staybnb, a clone of Airbnb.
 ## Home Page
 ![](app-screenshots/staybnb-homepage.png)
 
-## Spot Details
+## Spot Details Page
 ![](app-screenshots/staybnb-spot-page.png)
 
-## User Reviews
-![](app-screenshots/staybnb-user-reviews.png)
+## Trips Page
+![](app-screenshots/staybnb-trips-page.png)
 
 ## How to Launch Project
 
@@ -59,6 +59,6 @@ To launch project locally:
     JWT_SECRET=INSERT-PASSWORD-HERE
     JWT_EXPIRES_IN=604800
     ```
-- Run `npm install` and then `npm start` to start the server.
+- Run `npm install` to install dependencies and then `npm start` to start the server.
 - On a separate terminal, `cd` into the frontend folder.
 - Run `npm install` and then `npm start` to launch application onto the browser at http://localhost:3000
