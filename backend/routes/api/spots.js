@@ -574,4 +574,31 @@ router.post('/',requireAuth, validateSpot, async (req, res, next) => {
     return res.json(newSpot);
 })
 
+// router.post(
+//     "/update/user/:userId",
+//     asyncHandler(async (req, res) => {
+//       // find feeds including sources for userId
+//       const userId = req.params.userId;
+//       const sources = await Source.findAll({
+//         where: { userId },
+//       });
+//       // gets article data for all sources in found feeds
+//       let articleData = [];
+//       for (let source of sources) {
+//         const articles = await parseRss(source.url);
+//       for (let article of articles) {
+//         article.sourceId = source.id;
+//         article.feedId = source.feedId;
+//         article.userId = source.userId;
+//         articleData.push(article);
+//       }
+//     }
+//     // creates new articles in database
+//     const promises = imageUrls.map((url) => uploadToAWS(url)); // TODO after get greenlit
+//     let data = await Promise.all(promises);
+//     return res.json(data);
+//   })
+// );
+// BUG test
+
 module.exports = router;
