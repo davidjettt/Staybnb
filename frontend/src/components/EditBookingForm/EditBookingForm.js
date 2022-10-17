@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import xBtn from '../../images/x-button.svg'
 import '../SpotDetail/ReactCalendar.css'
 import './EditBookingForm.css'
-import { updateBookingThunk } from '../../store/bookings'
+import { loadBookingsThunk, updateBookingThunk } from '../../store/bookings'
 
 
 export default function EditBookingForm ({ bookingId, setShowEdit }) {
@@ -63,18 +63,24 @@ export default function EditBookingForm ({ bookingId, setShowEdit }) {
                 endDate: format(bookingDates[1], 'yyyy-MM-dd')
             }
 
-            const bookingData = await dispatch(updateBookingThunk(payload))
+            const bookingData = dispatch(updateBookingThunk(payload))
+                                .then((res) => {
+                                    if (res) {
+                                        setShowEdit(false)
+                                        dispatch(loadBookingsThunk())
+                                    }
+                                })
                                 .catch(
                                     async (res) => {
                                         const data = await res.json()
-                                        if (data) {
+                                        if (data && data.message) {
                                             setErrors([data.message])
                                         }
                                     }
                                 )
-            if (bookingData) {
-                setShowEdit(false)
-            }
+            // if (bookingData) {
+            //     setShowEdit(false)
+            // }
         }
     }
 
@@ -94,7 +100,7 @@ export default function EditBookingForm ({ bookingId, setShowEdit }) {
                     </div>
                 </div>
                 <div className='edit-booking-form-container'>
-                    <div className='booking-errors'>
+                    <div style={{width: 290}} className='booking-errors'>
                         <ul className="booking-errors-list">
                             {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                         </ul>

@@ -19,7 +19,9 @@ export default function LoginForm({ setShowModal }) {
                 const data = await res.json();
                 if (data && data.message) setErrors([data.message]);
             }
-        );
+        ).then(res => {
+            if (res) setShowModal(false)
+        })
     };
 
     const handleClick = () => {

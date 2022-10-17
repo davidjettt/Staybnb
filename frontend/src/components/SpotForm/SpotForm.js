@@ -24,7 +24,7 @@ export default function SpotForm({ spot, formType }) {
     const [ address, setAddress ] = useState(spot?.address);
     const [ city, setCity ] = useState(spot?.city);
     const [ state, setState ] = useState(spot?.state);
-    const [ country, setCountry ] = useState(spot?.country);
+    const [ country, setCountry ] = useState('United States');
     const [ lat, setLat ] = useState(spot?.latitude || '');
     const [ lng, setLng ] = useState(spot?.longitude || '');
     const [ name, setName ] = useState(spot?.name);
@@ -177,7 +177,7 @@ export default function SpotForm({ spot, formType }) {
                                         <span className='placeholder-2'>City</span>
                                     </label>
                                 </div>
-                                <div className='state-input-container'>
+                                {/* <div className='state-input-container'>
                                     <label className='custom-2'>
                                         <input
                                             className='state-input-field'
@@ -188,8 +188,62 @@ export default function SpotForm({ spot, formType }) {
                                         />
                                         <span className='placeholder-2'>State</span>
                                     </label>
-                                </div>
-                                <div className='country-input-container'>
+                                </div> */}
+                                <select style={{marginBottom: 5}} className="state-select-field" name='state' value={state} onChange={(e) => setState(e.target.value)}>
+                                    <option value="" defaultValue>Select a State</option>
+                                    <option value="Alabama">AL</option>
+                                    <option value="Alaska">AK</option>
+                                    <option value="Arizona">AZ</option>
+                                    <option value="Arkansas">AR</option>
+                                    <option value="California">CA</option>
+                                    <option value="Colorado">CO</option>
+                                    <option value="Connecticut">CT</option>
+                                    <option value="Delaware">DE</option>
+                                    <option value="Florida">FL</option>
+                                    <option value="Georgia">GA</option>
+                                    <option value="Hawaii">HI</option>
+                                    <option value="Idaho">ID</option>
+                                    <option value="Illinois">IL</option>
+                                    <option value="Indiana">IN</option>
+                                    <option value="Iowa">IA</option>
+                                    <option value="Kansas">KS</option>
+                                    <option value="Kentucky">KY</option>
+                                    <option value="Louisiana">LA</option>
+                                    <option value="Maine">ME</option>
+                                    <option value="Maryland">MD</option>
+                                    <option value="Massachusetts">MA</option>
+                                    <option value="Michigan">MI</option>
+                                    <option value="Minnesota">MN</option>
+                                    <option value="Mississippi">MS</option>
+                                    <option value="Missouri">MO</option>
+                                    <option value="Montana">MT</option>
+                                    <option value="Nebraska">NE</option>
+                                    <option value="Nevada">NV</option>
+                                    <option value="New Hampshire">NH</option>
+                                    <option value="New Jersey">NJ</option>
+                                    <option value="New Mexico">NM</option>
+                                    <option value="New York">NY</option>
+                                    <option value="North Carolina">NC</option>
+                                    <option value="North Dakota">ND</option>
+                                    <option value="Ohio">OH</option>
+                                    <option value="Oklahoma">OK</option>
+                                    <option value="Oregon">OR</option>
+                                    <option value="Pennsylvania">PA</option>
+                                    <option value="Rhode Island">RI</option>
+                                    <option value="South Carolina">SC</option>
+                                    <option value="South Dakota">SD</option>
+                                    <option value="Tennessee">TN</option>
+                                    <option value="Texas">TX</option>
+                                    <option value="Utah">UT</option>
+                                    <option value="Vermont">VT</option>
+                                    <option value="Virgin Islands">VI</option>
+                                    <option value="Virginia">VA</option>
+                                    <option value="Washington">WA</option>
+                                    <option value="West Virginia">WV</option>
+                                    <option value="Wisconsin">WI</option>
+                                    <option value="Wyoming">WY</option>
+                            </select>
+                                {/* <div className='country-input-container'>
                                     <label className='custom-2'>
                                         <input
                                             className='country-input-field'
@@ -200,12 +254,15 @@ export default function SpotForm({ spot, formType }) {
                                         />
                                         <span className='placeholder-2'>Country</span>
                                     </label>
-                                </div>
+                                </div> */}
+                                <select className='state-select-field' value={country} onChange={(e) => setCountry(e.target.value)}>
+                                    <option value='United States' defaultValue>United States</option>
+                                </select>
                                 <div className='lat-input-container'>
                                     <label className='custom-2'>
                                         <input
                                             className='lat-input-field'
-                                            type='text'
+                                            type='number'
                                             value={lat}
                                             onChange={(e) => setLat(e.target.value)}
                                             required
@@ -217,7 +274,7 @@ export default function SpotForm({ spot, formType }) {
                                     <label className='custom-2'>
                                         <input
                                             className='lng-input-field'
-                                            type='text'
+                                            type='number'
                                             value={lng}
                                             onChange={(e) => setLng(e.target.value)}
                                             required
@@ -253,7 +310,7 @@ export default function SpotForm({ spot, formType }) {
                                     <label className='custom-2'>
                                         <input
                                             className='price-input-field'
-                                            type='text'
+                                            type='number'
                                             value={price}
                                             onChange={(e) => setPrice(e.target.value)}
                                             required
