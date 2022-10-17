@@ -49,6 +49,8 @@ export default function YourBookings() {
         pastFormatted.push([newStart, newEnd])
     }
 
+    // console.log('img', upcomingBookings[1].Spot?.Images)
+
     return (
         <>
             <div className='your-bookings-main'>
@@ -99,7 +101,7 @@ export default function YourBookings() {
                                     </div>
                                 </div>
                                 <div className='yes-bookings-right'>
-                                    <img className='booking-preview' src={booking.Spot.Images[0]?.url} alt='preview' />
+                                    {booking.Spot.Images?.length > 0 && <img className='booking-preview' src={booking.Spot.Images[0]?.url} alt='preview' />}
                                 </div>
                             </div>
                         ))}

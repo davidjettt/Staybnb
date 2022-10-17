@@ -58,7 +58,6 @@ const bookingPastEndDate = async (req, res, next) => {
 
 // Booking conflict middleware (NEED TO REFACTOR THIS LATER MAYBE USE "check" or "body")
 const bookingConflictErr = async (req, res, next) => {
-
     const { startDate, endDate } = req.body;
 
     const spotStart = await Spot.findOne({
@@ -69,6 +68,7 @@ const bookingConflictErr = async (req, res, next) => {
             }
         }
     })
+    // console.log('spot start', spotStart.ownerId)
     const spotEnd = await Spot.findOne({
         include: {
             model: Booking,
@@ -86,24 +86,26 @@ const bookingConflictErr = async (req, res, next) => {
         }
     })
 
+    // console.log('spot start end', spotStartEnd)
+
     if (spotStartEnd) {
         const err = new Error ('Sorry, this spot is already booked for the specifed dates');
         err.status = 403;
         err.errors = {startDate: 'Start date conflicts with an exiting booking',endDate: 'End date conflicts with an existing booking'};
         return next(err);
     }
-    if (spotStart) {
-        const err = new Error ('Sorry, this spot is already booked for the specifed dates');
-        err.status = 403;
-        err.errors = {startDate: 'Start date conflicts with an existing booking'};
-        return next(err);
-    }
-    if (spotEnd) {
-        const err = new Error ('Sorry, this spot is already booked for the specifed dates');
-        err.status = 403;
-        err.errors = {endDate: 'End date conflicts with an existing booking'};
-        return next(err);
-    }
+    // if (spotStart) {
+    //     const err = new Error ('Sorry, this spot is already booked for the specifed dates');
+    //     err.status = 403;
+    //     err.errors = {startDate: 'Start date conflicts with an existing booking'};
+    //     return next(err);
+    // }
+    // if (spotEnd) {
+    //     const err = new Error ('Sorry, this spot is already booked for the specifed dates');
+    //     err.status = 403;
+    //     err.errors = {endDate: 'End date conflicts with an existing booking'};
+    //     return next(err);
+    // }
     return next()
 }
 
@@ -117,24 +119,17 @@ const pastStartDate = async (req, res, next) => {
     const booking = await Booking.findByPk(req.params.bookingId, {
         attributes: ['startDate']
     });
-    const today = new Date();
-    // const date = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+    const todayWithTime = new Date();
 
+    const today = new Date(todayWithTime.getFullYear(), todayWithTime.getMonth(), todayWithTime.getDate())
 
     const bookingStartDate = new Date(booking.startDate)
 
-    // console.log('TEST', booking.startDate);
-    // console.log('TEST2', testDate);
-    // console.log('TODAYS DATE', date);
-    // console.log(new Date());
-    // if (date > booking.dataValues.endDate[0]) {
-    //     const err = new Error ("Past bookings can't be modified");
-    //     err.status = 400;
-    //     return next(err);
-    // }
-    // console.log(today.getTime() > testDate.getTime())
+    // console.log('start date', bookingStartDate)
+    // console.log('today', today)
+
     if (today.getTime() > bookingStartDate.getTime()) {
-        const err = new Error ("Bookings that have been started can't be deleted");
+        const err = new Error ("Bookings that have been started can't be changed or deleted");
         err.status = 400;
         return next(err);
     }
@@ -161,7 +156,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // Edit a booking
-router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, bookingPastEndDate, validateBooking, bookingConflictErr,  async (req, res, next) => {
+router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, pastStartDate, bookingPastEndDate, validateBooking, bookingConflictErr,  async (req, res, next) => {
     const { startDate, endDate } = req.body;
 
     const booking = await Booking.findByPk(req.params.bookingId, {
@@ -175,7 +170,7 @@ router.put('/:bookingId', existsBooking, requireAuth, bookingBelongsPermission, 
         startDate,
         endDate
     });
-
+    // console.log('editBooking', editBooking)
     return res.json(editBooking);
 });
 

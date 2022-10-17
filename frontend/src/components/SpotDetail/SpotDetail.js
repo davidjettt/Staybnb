@@ -8,7 +8,6 @@ import './SpotDetail.css';
 import smallBlackStar from '../../images/small-black-star.svg'
 import { HiStar } from 'react-icons/hi';
 import Calendar from 'react-calendar';
-// import 'react-calendar/dist/Calendar.css';
 import './ReactCalendar.css'
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns'
@@ -19,6 +18,7 @@ import { Modal } from '../../context/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
 import SpotMap from '../SpotMap/SpotMap';
 import SpotImagesModal from './SpotImagesModal';
+import LoginForm from '../LoginFormModal/LoginForm'
 
 export default function SpotDetail() {
     const { spotId } = useParams();
@@ -30,7 +30,7 @@ export default function SpotDetail() {
     const [ bookingDate, setBookingDate ] = useState(null)
     const [ numNights, setNumNights ] = useState(0)
     const [ errors, setErrors ] = useState([])
-
+    const [ showLoginModal, setShowLoginModal ] = useState(false)
     const [ showDelete, setShowDelete ] = useState(false)
     const [ showImagesModal, setShowImagesModal ] = useState(false)
 
@@ -77,7 +77,8 @@ export default function SpotDetail() {
         setErrors([])
         const today = new Date()
         if (!user) {
-            window.alert('You must be logged in to reserve!')
+            // window.alert('You must be logged in to reserve!')
+            setShowLoginModal(true)
         }
         else if (+user.id === +spot.ownerId) {
             setErrors(['You cannot book your own spot!'])
@@ -224,6 +225,10 @@ export default function SpotDetail() {
                         </div>}
             </div>
             <Footer />
+            {showLoginModal &&
+                <Modal onClose={() => setShowLoginModal(false)}>
+                    <LoginForm setShowModal={setShowLoginModal} />
+                </Modal>}
         </>
     )
 }

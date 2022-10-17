@@ -11,11 +11,19 @@ const { Op } = require('sequelize');
 
 const validateSpot = [
     check('address')
-    .exists({ checkFalsy: true })
-    .withMessage('Street address is required'),
+    .custom(value => {
+        if (value.trim().length === 0) throw new Error('Address is required')
+        else if (value.trim().length < 10) throw new Error('Address must be at least 10 characters long')
+        else if (value.trim().length > 50) throw new Error('Address cannot exceed 50 characters')
+        else return true
+    }),
     check('city')
-    .exists({ checkFalsy: true })
-    .withMessage('City is required'),
+    .custom(value => {
+        if (value.trim().length === 0) throw new Error('City is required')
+        else if (value.trim().length < 3) throw new Error('City must be at least 3 characters long')
+        else if (value.trim().length > 17) throw new Error('City cannot exceed 17 characters')
+        else return true
+    }),
     check('state')
     .exists({ checkFalsy: true })
     .withMessage('State is required'),
@@ -23,8 +31,12 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .withMessage('Country is required'),
     check('description')
-    .exists({ checkFalsy: true })
-    .withMessage('Description is required'),
+    .custom(value => {
+        if (value.trim().length === 0) throw new Error('Description is required')
+        else if (value.trim().length < 10) throw new Error('Description must be at least 10 characters long')
+        else if (value.trim().length > 1000) throw new Error('Descritpion cannot exeed 1000 characters')
+        else return true
+    }),
     check('price')
     .exists({ checkFalsy: true })
     .withMessage('Price per day is required'),
@@ -32,20 +44,20 @@ const validateSpot = [
     .exists({ checkFalsy: true })
     .custom(value => {
         // if (value % 1 === 0 || isNaN(value)) throw new Error ('Latitude is not valid, must be a decimal')
-        if (value < -90 || value > 90 || isNaN(value)) throw new Error ('Latitude is not valid, must be between -90 and 90')
+        if (value < -90 || value > 90 || isNaN(value)) throw new Error ('Latitude is not valid, must be a number between -90 and 90')
         return true;
     }),
     check('lng')
     .exists({ checkFalsy: true })
     .custom(value => {
         // if (value % 1 === 0 || isNaN(value)) throw new Error ('Longitude is not valid, must be a decimal')
-        if (value < -180 || value > 180 || isNaN(value)) throw new Error ('Longitude is not valid, must be between -180 and 180')
+        if (value < -180 || value > 180 || isNaN(value)) throw new Error ('Longitude is not valid, must be a number between -180 and 180')
         return true;
     }),
     check('name')
     .custom(value => {
-        if (!value) throw new Error ('Name is required')
-        else if (value.length >= 50) throw new Error ('Name must be less than 50 characters')
+        if (value.trim().length === 0) throw new Error ('Name is required')
+        else if (value.trim().length > 50) throw new Error('Name cannot exceed 50 characters')
         return true
     }),
     check('price')
@@ -60,9 +72,9 @@ const validateSpot = [
 const validateReview = [
     check('review')
     .custom(value => {
-        if (!value) throw new Error('Review text is required')
-        else if (value.length < 5) throw new Error('Review must be at least 5 characters long')
-        else if (value.length > 500) throw new Error('Review cannot exceed 500 characters')
+        if (value.trim().length === 0) throw new Error('Review text is required')
+        else if (value.trim().length < 5) throw new Error('Review must be at least 5 characters long')
+        else if (value.trim().length > 500) throw new Error('Review cannot exceed 500 characters')
         else return true
     }),
     check('stars')
