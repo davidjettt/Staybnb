@@ -116,7 +116,7 @@ export default function YourBookings() {
                             <div className='been-sub' key={idx}>
                                 <div className='been-left'>
                                     <div className='been-image'>
-                                        <img src={booking.Spot.previewImage} alt='' />
+                                        <img src={booking.Spot.Images[0]?.url} alt='' />
                                     </div>
                                 </div>
                                 <div className='been-right'>
