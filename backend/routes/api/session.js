@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
+const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -36,77 +36,36 @@ router.delete(
   //   }
   // );
 
-  router.get("/", restoreUser, (req, res) => {
-    const { user } = req;
-    const token = req.cookies.token;
-    if (user) {
-      return res.json({
-        user: user.toSafeObject(),
-        token,
-      });
-    }
-
-    return res.json({});
-  });
-
-  const validateLogin = [
-    check('email')
-      .exists({ checkFalsy: true })
-      // .notEmpty()
-      .withMessage('Email is required'),
-    check('password')
-      .exists({ checkFalsy: true })
-      .withMessage('Password is required'),
-    handleValidationErrors
-  ];
-
-  // const bodyValidation = (credential, password) => {
-  //   console.log('TEST')
-  //   if (!credential || !password) {
-  //     const err = new Error ('Validation error');
-  //     err.status = 400;
-  //     err.errors = {email: 'Email is required', password: 'Password is required'}
-  //     return res.json(err);
-  //   }
-  // }
-
-const credentialCheck = async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({
-    where: {email: email}
-  })
-  if (!user) {
-    const err = new Error ('Invalid credentials');
-        err.status = 401;
-        return res.json({message: err.message, statusCode: err.status })
-        // handleValidationErrors
+router.get("/", restoreUser, (req, res) => {
+  const { user } = req;
+  const token = req.cookies.token;
+  if (user) {
+    return res.json({
+      user: user.toSafeObject(),
+      token,
+    });
   }
-}
+
+  return res.json({});
+});
+
+const validateLogin = [
+  check('email')
+    .exists({ checkFalsy: true })
+    .withMessage('Email is required'),
+  check('password')
+    .exists({ checkFalsy: true })
+    .withMessage('Password is required'),
+  handleValidationErrors
+];
+
 
   // Log in
 router.post(
     '/',
-    // bodyValidation,
     validateLogin,
-    // credentialCheck,
     async (req, res, next) => {
       const { email, password } = req.body;
-
-      // if (!email) {
-      //   const err = new Error ('Validation error');
-      //   res.status(400);
-      //   err.status = 400;
-      //   err.errors = {email: 'Email is required'}
-      //   return res.json({message: err.message, statusCode: err.status, errors: err.errors})
-      // }
-      // if (!password) {
-      //   const err = new Error ('Validation error');
-      //   err.status = 400;
-      //   err.errors = {password: 'Password is required'}
-      //   // return res.json({message: err.message, statusCode: err.status, errors: err.errors})
-      //   next(err)
-      // }
-
 
       const finduser = await User.findOne({
         attributes: ['id', 'firstName', 'lastName', 'email'],
@@ -116,7 +75,6 @@ router.post(
       if (!finduser) {
         const err = new Error ('Invalid credentials');
         err.status = 401;
-        // return res.json({message: err.message, statusCode: err.status })
         return next(err)
       }
 
@@ -129,19 +87,10 @@ router.post(
       if (!bcrypt.compareSync(password, test.dataValues.hashedPassword.toString())) {
         const err = new Error ('Invalid credentials');
         err.status = 401;
-        // return res.json({message: err.message, statusCode: err.status })
         return next(err)
       }
 
       const user = await User.login({ email, password });
-
-      // if (!user) {
-      //   const err = new Error('Login failed');
-      //   err.status = 401;
-      //   err.title = 'Login failed';
-      //   err.errors = ['The provided credentials were invalid.'];
-      //   return next(err);
-      // }
 
       const token = await setTokenCookie(res, user);
 

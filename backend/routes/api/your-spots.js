@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { Spot, User } = require('../../db/models');
+const { Spot } = require('../../db/models');
 const {  requireAuth } = require('../../utils/auth');
 
 
