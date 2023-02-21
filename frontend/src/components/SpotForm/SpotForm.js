@@ -19,8 +19,6 @@ export default function SpotForm({ spot, formType }) {
         })
     }
 
-    // console.log('OBJ', imagesObj)
-
     const [ address, setAddress ] = useState(spot?.address);
     const [ city, setCity ] = useState(spot?.city);
     const [ state, setState ] = useState(spot?.state);

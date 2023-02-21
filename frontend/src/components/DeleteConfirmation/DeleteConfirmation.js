@@ -6,8 +6,6 @@ import { deleteReviewThunk, loadReviewsThunk } from "../../store/reviews"
 import { deleteSpotThunk } from "../../store/spots"
 import './DeleteConfirmation.css'
 
-
-
 export default function DeleteConfirmation({ setShowDelete, bookingId, spotId, review }) {
     const dispatch = useDispatch()
     const history = useHistory()
