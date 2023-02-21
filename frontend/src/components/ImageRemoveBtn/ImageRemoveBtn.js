@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
 import xBtn from '../../images/image-remove-x.svg'
 import { deleteSpotImageThunk } from '../../store/spots'
-// import xBtn from '../../images/x-button.svg'
 
 export default function ImageRemoveBtn ({ spot, imgId, idx, images, previewImages, setImages, setPreviewImages, formType }) {
     const dispatch = useDispatch()
+
     const removeImg = () => {
         const imagesCopy = images.slice()
         const previewImagesCopy = previewImages.slice()
@@ -16,9 +16,7 @@ export default function ImageRemoveBtn ({ spot, imgId, idx, images, previewImage
     }
 
     const removeImgEditSpot = async () => {
-        // console.log('IMG ID', imgId)
         const data = await dispatch(deleteSpotImageThunk(imgId, spot))
-        // console.log('DATA', data)
         const imagesObj = []
 
         data.Images?.forEach(img => {

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import SpotReviews from '../SpotReviews/SpotReviews';
 import CreateReviewForm from '../CreateReviewForm/CreateReviewForm';
 import ReviewsModal from '../ReviewsModal/ReviewsModal';
-import { deleteSpotThunk } from '../../store/spots';
 import './SpotDetail.css';
 import smallBlackStar from '../../images/small-black-star.svg'
 import { HiStar } from 'react-icons/hi';
@@ -12,7 +11,6 @@ import './ReactCalendar.css'
 import { useEffect, useState } from 'react';
 import { format } from 'date-fns'
 import { createBookingThunk, loadBookingsThunk } from '../../store/bookings';
-import { loadReviewsThunk } from '../../store/reviews';
 import Footer from '../Footer/Footer';
 import { Modal } from '../../context/Modal';
 import DeleteConfirmation from '../DeleteConfirmation/DeleteConfirmation';
@@ -60,13 +58,6 @@ export default function SpotDetail() {
         avgRating = spotReviews.reduce((acc, review) => {
             return acc + review.stars
         }, 0) / numReviews
-    }
-
-    const handleDelete = async () => {
-        await dispatch(deleteSpotThunk(spotId));
-        await dispatch(loadBookingsThunk())
-        await dispatch(loadReviewsThunk())
-        history.push('/');
     }
 
     // const autoScroll = () => {
