@@ -1,61 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const { setTokenCookie, requireAuth, reviewPermission } = require('../../utils/auth');
-const { Spot, User, Review, Image, sequelize } = require('../../db/models');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-
-const validateReview = [
-    check('review')
-    .custom(value => {
-        if (!value) throw new Error('Review text is required')
-        else if (value.length < 5) throw new Error('Review must be at least 5 characters long')
-        else if (value.length > 500) throw new Error('Review cannot exceed 500 characters')
-        else return true
-    }),
-    check('stars')
-    .custom(value => {
-        if (value < 1 || value > 5 || isNaN(value)) throw new Error('Stars must be an integer from 1 to 5')
-        return true;
-    }),
-    handleValidationErrors
-];
-
-const existsReview = async (req, res, next) => {
-    const review = await Review.findByPk(req.params.reviewId);
-
-    if (!review) {
-        const err = new Error ("Review couldn't be found");
-        err.status = 404;
-        return next(err);
-    }
-    return next();
-}
-
-
-const reviewImagesCount = async (req, res, next) => {
-    const imageCount = await Image.count({
-        where: {
-            reviewId: req.params.reviewId
-        },
-        // include: {
-        //     model: Review,
-        //     where: {
-        //         reviewId: req.params.reviewId
-        //     }
-        // }
-    })
-
-    if (imageCount > 10) {
-        const err = new Error ('Maximum number of images for this resource was reached');
-        err.status = 400;
-        return next(err);
-    }
-
-    return next();
-}
-
+const { requireAuth, reviewPermission } = require('../../utils/auth');
+const { Spot, User, Review, Image } = require('../../db/models');
+const {validateReview, existsReview, reviewImagesCount} = require('../../utils/review-validations')
 
 // LOAD ALL REVIEWS
 router.get('/', async (req, res, next) => {
